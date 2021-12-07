@@ -7,7 +7,7 @@ import { CustomQuery } from '@vue-storefront/core';
 //   ProductsListQuery,
 //   ProductsListQueryVariables,
 // } from '../../types/GraphQL';
-import productsList from './productList';
+import productsQuery from './productsQuery';
 // import { Context } from '../../types/context';
 // import { GetProductSearchParams } from '../../types/API';
 
@@ -19,28 +19,38 @@ import productsList from './productList';
 //   sort?: ProductAttributeSortInput;
 // };
 
+type Variables = {
+  categoryId: number;
+};
+
 export default async (context, searchParams, customQuery) => {
-  const variables = {
-    categoryId: 227171
+  const variables: Variables = {
+    categoryId: 227187,
   };
 
   // if (defaultParams.search) variables.search = defaultParams.search;
-
+  console.log('FFWWEWEWEWE');
+  console.log(customQuery);
   const { products } = context.extendQuery(customQuery, {
     products: {
-      query: productsList,
-      variables
-    }
+      query: productsQuery,
+      variables,
+    },
   });
+
+  console.log('FFF');
+  console.log(products);
 
   try {
     return await context.client.query({
       query: gql`
         ${products.query}
       `,
-      variables: products.variables
+      variables: products.variables,
     });
   } catch (error) {
+    console.log('ERROR');
+    console.log(error);
     throw (
       error.graphQLErrors?.[0].message || error.networkError?.result || error
     );

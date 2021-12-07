@@ -14,13 +14,13 @@ const params: UseCategoryFactoryParams<Category, SearchParams> = {
     return [
       {
         id: 1,
-        name: 'Women',
+        name: 'Women2222',
         slug: 'women',
         items: [],
       },
       {
         id: 2,
-        name: 'Men',
+        name: 'Men3333',
         slug: 'men',
         items: [],
       },
