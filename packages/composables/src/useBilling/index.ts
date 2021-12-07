@@ -1,12 +1,10 @@
 import {
   Context,
   useBillingFactory,
-  UseBillingParams
+  UseBillingParams,
 } from '@vue-storefront/core';
-import type { BillingAddress } from '@vue-storefront/<% INTEGRATION %>-api';
-import type {
-  UseBillingAddParams as AddParams
-} from '../types';
+import type { BillingAddress } from '@vue-storefront/propellervsf-api';
+import type { UseBillingAddParams as AddParams } from '../types';
 
 const params: UseBillingParams<BillingAddress, AddParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,7 +17,7 @@ const params: UseBillingParams<BillingAddress, AddParams> = {
   save: async (context: Context, { params, billingDetails, customQuery }) => {
     console.log('Mocked: useBilling.save');
     return {};
-  }
+  },
 };
 
 export const useBilling = useBillingFactory<BillingAddress, AddParams>(params);

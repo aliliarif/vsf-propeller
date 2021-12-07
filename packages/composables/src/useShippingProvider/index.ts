@@ -1,5 +1,12 @@
-import { useShippingProviderFactory, UseShippingProviderParams, Context } from '@vue-storefront/core';
-import type { ShippingProvider, ShippingMethod } from '@vue-storefront/<% INTEGRATION %>-api';
+import {
+  useShippingProviderFactory,
+  UseShippingProviderParams,
+  Context,
+} from '@vue-storefront/core';
+import type {
+  ShippingProvider,
+  ShippingMethod,
+} from '@vue-storefront/propellervsf-api';
 
 const params: UseShippingProviderParams<ShippingProvider, ShippingMethod> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -12,7 +19,10 @@ const params: UseShippingProviderParams<ShippingProvider, ShippingMethod> = {
   save: async (context: Context, { shippingMethod, customQuery }) => {
     console.log('Mocked: saveShippingProvider');
     return {};
-  }
+  },
 };
 
-export const useShippingProvider = useShippingProviderFactory<ShippingProvider, ShippingMethod>(params);
+export const useShippingProvider = useShippingProviderFactory<
+  ShippingProvider,
+  ShippingMethod
+>(params);

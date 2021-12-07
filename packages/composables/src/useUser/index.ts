@@ -1,12 +1,12 @@
 import {
   Context,
   useUserFactory,
-  UseUserFactoryParams
+  UseUserFactoryParams,
 } from '@vue-storefront/core';
-import type { User } from '@vue-storefront/<% INTEGRATION %>-api';
+import type { User } from '@vue-storefront/propellervsf-api';
 import type {
   UseUserUpdateParams as UpdateParams,
-  UseUserRegisterParams as RegisterParams
+  UseUserRegisterParams as RegisterParams,
 } from '../types';
 
 const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
@@ -28,7 +28,10 @@ const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  register: async (context: Context, { email, password, firstName, lastName }) => {
+  register: async (
+    context: Context,
+    { email, password, firstName, lastName }
+  ) => {
     console.log('Mocked: useUser.register');
     return {};
   },
@@ -40,10 +43,15 @@ const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  changePassword: async (context: Context, { currentUser, currentPassword, newPassword }) => {
+  changePassword: async (
+    context: Context,
+    { currentUser, currentPassword, newPassword }
+  ) => {
     console.log('Mocked: useUser.changePassword');
     return {};
-  }
+  },
 };
 
-export const useUser = useUserFactory<User, UpdateParams, RegisterParams>(params);
+export const useUser = useUserFactory<User, UpdateParams, RegisterParams>(
+  params
+);

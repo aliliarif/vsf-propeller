@@ -1,12 +1,12 @@
 import {
   Context,
   useUserBillingFactory,
-  UseUserBillingFactoryParams
+  UseUserBillingFactoryParams,
 } from '@vue-storefront/core';
 import type {
   UserBillingAddress as Address,
-  UserBillingAddressItem as AddressItem
-} from '@vue-storefront/<% INTEGRATION %>-api';
+  UserBillingAddressItem as AddressItem,
+} from '@vue-storefront/propellervsf-api';
 
 const params: UseUserBillingFactoryParams<Address, AddressItem> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -37,7 +37,9 @@ const params: UseUserBillingFactoryParams<Address, AddressItem> = {
   setDefaultAddress: async (context: Context, params) => {
     console.log('Mocked: useUserBilling.setDefaultAddress');
     return {};
-  }
+  },
 };
 
-export const useUserBilling = useUserBillingFactory<Address, AddressItem>(params);
+export const useUserBilling = useUserBillingFactory<Address, AddressItem>(
+  params
+);

@@ -4,15 +4,13 @@ import {
   AgnosticTotals,
   AgnosticCoupon,
   AgnosticDiscount,
-  AgnosticAttribute
+  AgnosticAttribute,
 } from '@vue-storefront/core';
-import type { Cart, CartItem } from '@vue-storefront/<% INTEGRATION %>-api';
+import type { Cart, CartItem } from '@vue-storefront/propellervsf-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItems(cart: Cart): CartItem[] {
-  return [
-    {}
-  ];
+  return [{}];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,7 +27,7 @@ function getItemImage(item: CartItem): string {
 function getItemPrice(item: CartItem): AgnosticPrice {
   return {
     regular: 12,
-    special: 10
+    special: 10,
   };
 }
 
@@ -39,9 +37,12 @@ function getItemQty(item: CartItem): number {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemAttributes(item: CartItem, filterByAttributeName?: Array<string>): Record<string, AgnosticAttribute | string> {
+function getItemAttributes(
+  item: CartItem,
+  filterByAttributeName?: Array<string>
+): Record<string, AgnosticAttribute | string> {
   return {
-    color: 'red'
+    color: 'red',
   };
 }
 
@@ -55,7 +56,7 @@ function getTotals(cart: Cart): AgnosticTotals {
   return {
     total: 12,
     subtotal: 12,
-    special: 10
+    special: 10,
   };
 }
 
@@ -97,5 +98,5 @@ export const cartGetters: CartGetters<Cart, CartItem> = {
   getFormattedPrice,
   getTotalItems,
   getCoupons,
-  getDiscounts
+  getDiscounts,
 };

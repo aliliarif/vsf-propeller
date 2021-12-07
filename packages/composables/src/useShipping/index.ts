@@ -1,12 +1,10 @@
 import {
   Context,
   useShippingFactory,
-  UseShippingParams
+  UseShippingParams,
 } from '@vue-storefront/core';
-import type { ShippingAddress } from '@vue-storefront/<% INTEGRATION %>-api';
-import type {
-  UseShippingAddParams as AddParams
-} from '../types';
+import type { ShippingAddress } from '@vue-storefront/propellervsf-api';
+import type { UseShippingAddParams as AddParams } from '../types';
 
 const params: UseShippingParams<ShippingAddress, AddParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,7 +17,9 @@ const params: UseShippingParams<ShippingAddress, AddParams> = {
   save: async (context: Context, { shippingDetails, customQuery }) => {
     console.log('Mocked: useShipping.save');
     return {};
-  }
+  },
 };
 
-export const useShipping = useShippingFactory<ShippingAddress, AddParams>(params);
+export const useShipping = useShippingFactory<ShippingAddress, AddParams>(
+  params
+);

@@ -1,19 +1,17 @@
 import {
   Context,
   useUserOrderFactory,
-  UseUserOrderFactoryParams
+  UseUserOrderFactoryParams,
 } from '@vue-storefront/core';
-import type { Order } from '@vue-storefront/<% INTEGRATION %>-api';
-import type {
-  useUserOrderSearchParams as SearchParams
-} from '../types';
+import type { Order } from '@vue-storefront/propellervsf-api';
+import type { useUserOrderSearchParams as SearchParams } from '../types';
 
 const params: UseUserOrderFactoryParams<Order, SearchParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   searchOrders: async (context: Context, params) => {
     console.log('Mocked: searchOrders');
     return {};
-  }
+  },
 };
 
 export const useUserOrder = useUserOrderFactory<Order, SearchParams>(params);

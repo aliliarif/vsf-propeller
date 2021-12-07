@@ -1,12 +1,12 @@
 import {
   Context,
   useReviewFactory,
-  UseReviewFactoryParams
+  UseReviewFactoryParams,
 } from '@vue-storefront/core';
-import type { Review } from '@vue-storefront/<% INTEGRATION %>-api';
+import type { Review } from '@vue-storefront/propellervsf-api';
 import type {
   UseReviewSearchParams as SearchParams,
-  UseReviewAddParams as AddParams
+  UseReviewAddParams as AddParams,
 } from '../types';
 
 const params: UseReviewFactoryParams<Review, SearchParams, AddParams> = {
@@ -20,7 +20,9 @@ const params: UseReviewFactoryParams<Review, SearchParams, AddParams> = {
   addReview: async (context: Context, params) => {
     console.log('Mocked: useReview.addReview');
     return {};
-  }
+  },
 };
 
-export const useReview = useReviewFactory<Review, SearchParams, AddParams>(params);
+export const useReview = useReviewFactory<Review, SearchParams, AddParams>(
+  params
+);

@@ -2,9 +2,13 @@
 import {
   Context,
   useWishlistFactory,
-  UseWishlistFactoryParams
+  UseWishlistFactoryParams,
 } from '@vue-storefront/core';
-import type { Wishlist, WishlistItem, Product } from '@vue-storefront/<% INTEGRATION %>-api';
+import type {
+  Wishlist,
+  WishlistItem,
+  Product,
+} from '@vue-storefront/propellervsf-api';
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -35,7 +39,9 @@ const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   isInWishlist: (context: Context, { currentWishlist, product }) => {
     console.log('Mocked: useWishlist.isInWishlist');
     return false;
-  }
+  },
 };
 
-export const useWishlist = useWishlistFactory<Wishlist, WishlistItem, Product>(params);
+export const useWishlist = useWishlistFactory<Wishlist, WishlistItem, Product>(
+  params
+);

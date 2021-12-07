@@ -1,8 +1,8 @@
 module.exports = {
   integrations: {
-    <% INTEGRATION %>: {
-      location: '@vue-storefront/<% INTEGRATION %>-api/server',
-      configuration: {}
-    }
-  }
+    propellervsf: {
+      location: '@vue-storefront/propellervsf-api/server',
+      configuration: {},
+    },
+  },
 };

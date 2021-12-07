@@ -2,11 +2,14 @@ import { UserShippingGetters } from '@vue-storefront/core';
 import type {
   UserShippingAddress as Address,
   UserShippingAddressItem as AddressItem,
-  UserShippingAddressSearchCriteria
-} from '@vue-storefront/<% INTEGRATION %>-api';
+  UserShippingAddressSearchCriteria,
+} from '@vue-storefront/propellervsf-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAddresses(shipping: Address, criteria?: UserShippingAddressSearchCriteria): AddressItem[] {
+function getAddresses(
+  shipping: Address,
+  criteria?: UserShippingAddressSearchCriteria
+): AddressItem[] {
   return [];
 }
 
@@ -113,5 +116,5 @@ export const userShippingGetters: UserShippingGetters<Address, AddressItem> = {
   getTaxNumber,
   getId,
   getApartmentNumber,
-  isDefault
+  isDefault,
 };
