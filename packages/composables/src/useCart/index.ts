@@ -3,7 +3,7 @@ import {
   useCartFactory,
   UseCartFactoryParams,
 } from '@vue-storefront/core';
-import type { Cart, CartItem, Product } from '@vue-storefront/propellervsf-api';
+import type { Cart, CartItem, Product } from '@vue-storefront/propeller-api';
 
 const params: UseCartFactoryParams<Cart, CartItem, Product> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,5 +1,5 @@
 {
-  "name": "@vue-storefront/propellervsf-api",
+  "name": "@vue-storefront/propeller-api",
   "version": "0.0.1",
   "private": true,
   "sideEffects": false,

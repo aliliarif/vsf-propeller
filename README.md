@@ -3,7 +3,7 @@
 This is a template, to use it you must rename the project changing the `{YOUR INTEGRATION NAME}` to the name of the integration you are developing. The name must be in lowercase and without any special characters.
 
 ```sh
-grep -rl 'propellervsf' ./ | xargs sed -i '' 's/propellervsf/{YOUR INTEGRATION NAME}/g'
+grep -rl 'propeller' ./ | xargs sed -i '' 's/propeller/{YOUR INTEGRATION NAME}/g'
 ```
 
 ---
@@ -12,7 +12,7 @@ grep -rl 'propellervsf' ./ | xargs sed -i '' 's/propellervsf/{YOUR INTEGRATION N
   <img src="https://user-images.githubusercontent.com/1626923/137092657-fb398d20-b592-4661-a1f9-4135db0b61d5.png" alt="Vue Storefront" height="80px" />
 </div>
 
-## Vue Storefront 2 integration with propellervsf
+## Vue Storefront 2 integration with propeller
 
 To learn how to build your integration, see our [Integration guide](https://docs.vuestorefront.io/v2/integrate/integration-guide.html).
 
@@ -33,7 +33,7 @@ vsf init <project_name> && cd <project_name> && yarn && yarn dev
 
 ## How to start if you want to contribute?
 
-Want to contribute? Ping us on `propellervsf` channel on [our Discord](https://discord.vuestorefront.io)!
+Want to contribute? Ping us on `propeller` channel on [our Discord](https://discord.vuestorefront.io)!
 
 ### Requirements:
 
@@ -45,8 +45,8 @@ Want to contribute? Ping us on `propellervsf` channel on [our Discord](https://d
 2. Clone your fork of the repo
    ```
    example:
-   git clone https://github.com/vuestorefront/propellervsf.git
-   cd propellervsf
+   git clone https://github.com/vuestorefront/propeller.git
+   cd propeller
    ```
 3. Run `yarn` to install dependencies
 4. Build dependencies `yarn build:api-client && yarn build:composables`
@@ -57,12 +57,12 @@ Want to contribute? Ping us on `propellervsf` channel on [our Discord](https://d
 ## Resources
 
 - [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
-- [propellervsf integration Documentation](https://docs.vuestorefront.io/propellervsf)
+- [propeller integration Documentation](https://docs.vuestorefront.io/propeller)
 - [Community Chat](https://discord.vuestorefront.io)
 
 ## Support
 
-If you have any questions about this integration we will be happy to answer them on `propellervsf` channel on [our Discord](discord.vuestorefront.io).
+If you have any questions about this integration we will be happy to answer them on `propeller` channel on [our Discord](discord.vuestorefront.io).
 
 ## Contributors ✨
 

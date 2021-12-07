@@ -3,7 +3,7 @@ import {
   useBillingFactory,
   UseBillingParams,
 } from '@vue-storefront/core';
-import type { BillingAddress } from '@vue-storefront/propellervsf-api';
+import type { BillingAddress } from '@vue-storefront/propeller-api';
 import type { UseBillingAddParams as AddParams } from '../types';
 
 const params: UseBillingParams<BillingAddress, AddParams> = {

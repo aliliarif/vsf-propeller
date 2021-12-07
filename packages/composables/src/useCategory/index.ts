@@ -3,7 +3,7 @@ import {
   useCategoryFactory,
   UseCategoryFactoryParams,
 } from '@vue-storefront/core';
-import type { Category } from '@vue-storefront/propellervsf-api';
+import type { Category } from '@vue-storefront/propeller-api';
 import type { UseCategorySearchParams as SearchParams } from '../types';
 
 const params: UseCategoryFactoryParams<Category, SearchParams> = {

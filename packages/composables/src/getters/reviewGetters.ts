@@ -1,5 +1,5 @@
 import { ReviewGetters, AgnosticRateCount } from '@vue-storefront/core';
-import type { Review, ReviewItem } from '@vue-storefront/propellervsf-api';
+import type { Review, ReviewItem } from '@vue-storefront/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItems(review: Review): ReviewItem[] {

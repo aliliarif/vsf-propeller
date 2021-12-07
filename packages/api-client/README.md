@@ -2,7 +2,7 @@
 <img src="https://blog.vuestorefront.io/wp-content/uploads/2020/01/1QU9F6hQlFyHsJIbsdmt6FA.png" height="80px"/>  
 </div>
 
-## Vue Storefront 2 integration with propellervsf
+## Vue Storefront 2 integration with propeller
 
 ---
 
@@ -22,12 +22,12 @@ vsf init <project_name> && cd <project_name> && yarn && yarn dev
 ## Resources
 
 - [Vue Storefront Documentation](https://docs.vuestorefront.io/v2/)
-- [propellervsf integration Documentation](https://docs.vuestorefront.io/propellervsf)
+- [propeller integration Documentation](https://docs.vuestorefront.io/propeller)
 - [Community Chat](https://discord.vuestorefront.io)
 
 ## Support
 
-If you have any questions about this integration we will be happy to answer them on `propellervsf` channel on [our Discord](discord.vuestorefront.io).
+If you have any questions about this integration we will be happy to answer them on `propeller` channel on [our Discord](discord.vuestorefront.io).
 
 ## Contributors ✨
 

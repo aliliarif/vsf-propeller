@@ -4,7 +4,7 @@ import {
   AgnosticPrice,
   ProductGetters,
 } from '@vue-storefront/core';
-import type { Product, ProductFilter } from '@vue-storefront/propellervsf-api';
+import type { Product, ProductFilter } from '@vue-storefront/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // Product

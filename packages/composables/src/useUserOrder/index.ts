@@ -3,7 +3,7 @@ import {
   useUserOrderFactory,
   UseUserOrderFactoryParams,
 } from '@vue-storefront/core';
-import type { Order } from '@vue-storefront/propellervsf-api';
+import type { Order } from '@vue-storefront/propeller-api';
 import type { useUserOrderSearchParams as SearchParams } from '../types';
 
 const params: UseUserOrderFactoryParams<Order, SearchParams> = {

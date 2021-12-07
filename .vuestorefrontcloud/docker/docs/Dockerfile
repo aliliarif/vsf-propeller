@@ -10,10 +10,10 @@ RUN cd packages/composables && yarn build && yarn cache clean --all
 
 RUN cd docs \
   && npm install \
-  && sed -i "s/base: '\/',/base: '\/propellervsf\/',/g" ./.vuepress/config.js \
+  && sed -i "s/base: '\/',/base: '\/propeller\/',/g" ./.vuepress/config.js \
   && cat ./.vuepress/config.js \
   && npm run build
 
 FROM nginx
 
-COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/propellervsf
+COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/propeller

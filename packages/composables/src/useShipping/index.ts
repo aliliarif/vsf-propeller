@@ -3,7 +3,7 @@ import {
   useShippingFactory,
   UseShippingParams,
 } from '@vue-storefront/core';
-import type { ShippingAddress } from '@vue-storefront/propellervsf-api';
+import type { ShippingAddress } from '@vue-storefront/propeller-api';
 import type { UseShippingAddParams as AddParams } from '../types';
 
 const params: UseShippingParams<ShippingAddress, AddParams> = {

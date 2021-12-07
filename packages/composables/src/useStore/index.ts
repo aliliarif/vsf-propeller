@@ -1,4 +1,4 @@
-import { Store } from '@vue-storefront/propellervsf-api';
+import { Store } from '@vue-storefront/propeller-api';
 import { Context, useStoreFactory } from '@vue-storefront/core';
 
 export const useStore = useStoreFactory<Store>({

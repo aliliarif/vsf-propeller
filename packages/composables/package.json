@@ -1,5 +1,5 @@
 {
-  "name": "@vue-storefront/propellervsf",
+  "name": "@vue-storefront/propeller",
   "version": "0.0.1",
   "private": true,
   "sideEffects": false,
@@ -16,7 +16,7 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/propellervsf-api": "0.0.1",
+    "@vue-storefront/propeller-api": "0.0.1",
     "@vue-storefront/core": "~2.5.2"
   },
   "devDependencies": {

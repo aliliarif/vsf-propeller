@@ -3,7 +3,7 @@ import {
   useMakeOrderFactory,
   UseMakeOrderFactoryParams,
 } from '@vue-storefront/core';
-import type { Order } from '@vue-storefront/propellervsf-api';
+import type { Order } from '@vue-storefront/propeller-api';
 
 const factoryParams: UseMakeOrderFactoryParams<Order> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

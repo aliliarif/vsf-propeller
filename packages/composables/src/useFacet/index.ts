@@ -10,7 +10,7 @@ const factoryParams = {
   search: async (context: Context, params: FacetSearchResult<SearchParams>) => {
     console.log('Propeller: useFacet.search');
 
-    const { data } = await context.$propellervsf.api.products();
+    const { data } = await context.$propeller.api.products();
 
     console.log('[Result]:', { data });
 

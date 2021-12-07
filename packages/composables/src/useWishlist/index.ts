@@ -8,7 +8,7 @@ import type {
   Wishlist,
   WishlistItem,
   Product,
-} from '@vue-storefront/propellervsf-api';
+} from '@vue-storefront/propeller-api';
 
 const params: UseWishlistFactoryParams<Wishlist, WishlistItem, Product> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

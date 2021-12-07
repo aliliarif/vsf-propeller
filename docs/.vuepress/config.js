@@ -1,8 +1,7 @@
 module.exports = {
-  title: 'Vue Storefront 2 for propellervsf',
+  title: 'Vue Storefront 2 for propeller',
   base: '/',
-  description:
-    'Documentation for the propellervsf connector for Vue Storefront 2',
+  description: 'Documentation for the propeller connector for Vue Storefront 2',
   head: [['link', { rel: 'icon', href: '/favicon.png' }]],
   configureWebpack: (config) => {
     config.module.rules = config.module.rules.map((rule) => ({
@@ -35,7 +34,7 @@ module.exports = {
     '@vuepress/search',
   ],
   themeConfig: {
-    repo: 'https://github.com/vuestorefront/propellervsf',
+    repo: 'https://github.com/vuestorefront/propeller',
     editLinks: true,
     docsDir: 'docs',
     docsBranch: 'develop',
@@ -45,10 +44,10 @@ module.exports = {
       { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
       { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' },
       // { text: 'Demo', link: '' },
-      { text: 'GitHub', link: 'https://github.com/vuestorefront/propellervsf' },
+      { text: 'GitHub', link: 'https://github.com/vuestorefront/propeller' },
       {
         text: 'Roadmap',
-        link: 'https://github.com/vuestorefront/propellervsf',
+        link: 'https://github.com/vuestorefront/propeller',
       },
     ],
     sidebar: [

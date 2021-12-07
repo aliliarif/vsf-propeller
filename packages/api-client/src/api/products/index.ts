@@ -21,7 +21,7 @@ import productsList from './productList';
 
 export default async (context, searchParams, customQuery) => {
   const variables = {
-    categoryId: 227171,
+    categoryId: 227171
   };
 
   // if (defaultParams.search) variables.search = defaultParams.search;
@@ -29,8 +29,8 @@ export default async (context, searchParams, customQuery) => {
   const { products } = context.extendQuery(customQuery, {
     products: {
       query: productsList,
-      variables,
-    },
+      variables
+    }
   });
 
   try {
@@ -38,7 +38,7 @@ export default async (context, searchParams, customQuery) => {
       query: gql`
         ${products.query}
       `,
-      variables: products.variables,
+      variables: products.variables
     });
   } catch (error) {
     throw (

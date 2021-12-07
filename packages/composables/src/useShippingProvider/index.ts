@@ -6,7 +6,7 @@ import {
 import type {
   ShippingProvider,
   ShippingMethod,
-} from '@vue-storefront/propellervsf-api';
+} from '@vue-storefront/propeller-api';
 
 const params: UseShippingProviderParams<ShippingProvider, ShippingMethod> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

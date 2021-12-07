@@ -3,7 +3,7 @@ import {
   useReviewFactory,
   UseReviewFactoryParams,
 } from '@vue-storefront/core';
-import type { Review } from '@vue-storefront/propellervsf-api';
+import type { Review } from '@vue-storefront/propeller-api';
 import type {
   UseReviewSearchParams as SearchParams,
   UseReviewAddParams as AddParams,
