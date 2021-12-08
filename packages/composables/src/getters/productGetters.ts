@@ -26,13 +26,18 @@ function getPrice(product: Product): AgnosticPrice {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getGallery(product: Product): AgnosticMediaGalleryItem[] {
-  return [
-    {
-      small: product.images[0]?.url || '',
-      normal: product.images[0]?.url || '',
-      big: product.images[0]?.url || '',
-    },
-  ];
+  const images = [];
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const galleryItem of product.images) {
+    images.push({
+      small: galleryItem.url,
+      normal: galleryItem.url,
+      big: galleryItem.url,
+    });
+  }
+
+  return images;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

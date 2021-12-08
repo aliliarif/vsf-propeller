@@ -4,8 +4,8 @@ module.exports = {
       location: '@vue-storefront/propeller-api/server',
       configuration: {
         api: {
-          endpoint: 'https://api.helice.cloud/graphql',
-          apiKey: 'GXN81cNEfdTr75bWsDUUkuuZhq7k7jZGmhpQWponfX4l79hi',
+          endpoint: 'Propeller GraphQL API endpoint',
+          apiKey: 'Propeller API Key',
         },
       },
     },
