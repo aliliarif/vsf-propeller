@@ -6,17 +6,23 @@ import {
   AgnosticPagination,
   AgnosticSort,
   AgnosticBreadcrumb,
-  AgnosticFacet
+  AgnosticFacet,
 } from '@vue-storefront/core';
-import type { Facet, FacetSearchCriteria } from '@vue-storefront/<% INTEGRATION %>-api';
+import type { Facet, FacetSearchCriteria } from '@vue-storefront/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAll(params: FacetSearchResult<Facet>, criteria?: FacetSearchCriteria): AgnosticFacet[] {
+function getAll(
+  params: FacetSearchResult<Facet>,
+  criteria?: FacetSearchCriteria
+): AgnosticFacet[] {
   return [];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getGrouped(params: FacetSearchResult<Facet>, criteria?: FacetSearchCriteria): AgnosticGroupedFacet[] {
+function getGrouped(
+  params: FacetSearchResult<Facet>,
+  criteria?: FacetSearchCriteria
+): AgnosticGroupedFacet[] {
   return [];
 }
 
@@ -24,43 +30,29 @@ function getGrouped(params: FacetSearchResult<Facet>, criteria?: FacetSearchCrit
 function getSortOptions(params: FacetSearchResult<Facet>): AgnosticSort {
   return {
     options: [],
-    selected: ''
+    selected: '',
   };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getCategoryTree(params: FacetSearchResult<Facet>): AgnosticCategoryTree {
+function getCategoryTree(
+  params: FacetSearchResult<Facet>
+): AgnosticCategoryTree {
   return {
     label: '',
     slug: '',
     items: null,
     isCurrent: false,
-    count: 0
+    count: 0,
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getProducts(params: FacetSearchResult<Facet>): any {
-  return [
-    {
-      _id: 1,
-      _description: 'Some description',
-      _categoriesRef: [
-        '1',
-        '2'
-      ],
-      name: 'Black jacket',
-      sku: 'black-jacket',
-      images: [
-        'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg'
-      ],
-      price: {
-        original: 12.34,
-        current: 10.00
-      }
-    }
-  ];
-}
+const getProducts = (searchData): any => {
+  if (!searchData || !searchData.data || !searchData.data.items) {
+    return [];
+  }
+  return searchData.data.items;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getPagination(params: FacetSearchResult<Facet>): AgnosticPagination {
@@ -69,12 +61,14 @@ function getPagination(params: FacetSearchResult<Facet>): AgnosticPagination {
     totalPages: 1,
     totalItems: 1,
     itemsPerPage: 10,
-    pageOptions: []
+    pageOptions: [],
   };
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getBreadcrumbs(params: FacetSearchResult<Facet>): AgnosticBreadcrumb[] {
+function getBreadcrumbs(
+  params: FacetSearchResult<Facet>
+): AgnosticBreadcrumb[] {
   return [];
 }
 
@@ -85,5 +79,5 @@ export const facetGetters: FacetsGetters<Facet, FacetSearchCriteria> = {
   getProducts,
   getCategoryTree,
   getBreadcrumbs,
-  getPagination
+  getPagination,
 };

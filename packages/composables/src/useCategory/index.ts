@@ -1,39 +1,20 @@
 import {
   Context,
   useCategoryFactory,
-  UseCategoryFactoryParams
+  UseCategoryFactoryParams,
 } from '@vue-storefront/core';
-import type { Category } from '@vue-storefront/<% INTEGRATION %>-api';
-import type {
-  UseCategorySearchParams as SearchParams
-} from '../types';
+import type { Category } from '@vue-storefront/propeller-api';
+import type { UseCategorySearchParams as SearchParams } from '../types';
 
 const params: UseCategoryFactoryParams<Category, SearchParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  categorySearch: async (context: Context, { customQuery, ...params }) => {
-    console.log('Mocked: useCategory.categorySearch');
+  categorySearch: async (context: Context, params) => {
+    console.log('Propeller: useCategory.categorySearch', params);
 
-    return [
-      {
-        id: 1,
-        name: 'Women',
-        slug: 'women',
-        items: []
-      },
-      {
-        id: 2,
-        name: 'Men',
-        slug: 'men',
-        items: []
-      },
-      {
-        id: 3,
-        name: 'Kids',
-        slug: 'kids',
-        items: []
-      }
-    ];
-  }
+    const { data } = await context.$propeller.api.categories();
+
+    return data.category.categories || {};
+  },
 };
 
 export const useCategory = useCategoryFactory<Category, SearchParams>(params);

@@ -1,9 +1,12 @@
-import { Store } from '@vue-storefront/<% INTEGRATION %>-api';
+import { Store } from '@vue-storefront/propeller-api';
 import { AgnosticStore, UseStoreGetters } from '@vue-storefront/core';
 import { UseStoreFilterParams } from '../types';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItems(stores: Store, criteria: UseStoreFilterParams = {}): AgnosticStore[] {
+function getItems(
+  stores: Store,
+  criteria: UseStoreFilterParams = {}
+): AgnosticStore[] {
   return [];
 }
 
@@ -14,5 +17,5 @@ function getSelected(stores: Store): AgnosticStore | undefined {
 
 export const storeGetters: UseStoreGetters<Store, UseStoreFilterParams> = {
   getItems,
-  getSelected
+  getSelected,
 };

@@ -1,20 +1,36 @@
 import { apiClientFactory } from '@vue-storefront/core';
-import type { Setttings, Endpoints } from './types';
+import * as api from './api';
+import type { Endpoints } from './types';
+import type { Settings } from './types/settings';
+import ApolloClient from 'apollo-client';
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import fetch from 'cross-fetch';
 
-function onCreate(settings: Setttings) {
+function onCreate(settings: Settings) {
+  const link = new HttpLink({
+    uri: settings.api.endpoint,
+    fetch,
+    headers: {
+      apiKey: settings.api.apiKey,
+    },
+  });
+  const client = new ApolloClient({
+    link: link,
+    cache: new InMemoryCache({
+      addTypename: true,
+    }),
+  });
+
   return {
     config: settings,
-    client: {}
+    client,
   };
 }
 
-const { createApiClient } = apiClientFactory<Setttings, Endpoints>({
+const { createApiClient } = apiClientFactory<Settings, Endpoints>({
   onCreate,
-  api: {
-
-  }
+  api,
 });
 
-export {
-  createApiClient
-};
+export { createApiClient };

@@ -1,5 +1,5 @@
 import { UserOrderGetters } from '@vue-storefront/core';
-import type { Order, OrderItem } from '@vue-storefront/<% INTEGRATION %>-api';
+import type { Order, OrderItem } from '@vue-storefront/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getDate(order: Order): string {
@@ -67,5 +67,5 @@ export const orderGetters: UserOrderGetters<Order, OrderItem> = {
   getItemQty,
   getItemPrice,
   getFormattedPrice,
-  getOrdersTotal
+  getOrdersTotal,
 };

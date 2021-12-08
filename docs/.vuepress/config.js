@@ -1,39 +1,40 @@
 module.exports = {
-  title: 'Vue Storefront 2 for <% INTEGRATION %>',
+  title: 'Vue Storefront 2 for propeller',
   base: '/',
-  description: 'Documentation for the <% INTEGRATION %> connector for Vue Storefront 2',
-  head: [
-    ['link', { rel: 'icon', href: '/favicon.png' }]
-  ],
+  description: 'Documentation for the propeller connector for Vue Storefront 2',
+  head: [['link', { rel: 'icon', href: '/favicon.png' }]],
   configureWebpack: (config) => {
-    config.module.rules = config.module.rules.map(rule => ({
+    config.module.rules = config.module.rules.map((rule) => ({
       ...rule,
-      use: rule.use && rule.use.map(useRule => ({
-        ...useRule,
-        options: useRule.loader === 'url-loader' ?
-          /**
+      use:
+        rule.use &&
+        rule.use.map((useRule) => ({
+          ...useRule,
+          options:
+            useRule.loader === 'url-loader'
+              ? /**
             Hack for loading images properly.
             ref: https://github.com/vuejs/vue-loader/issues/1612#issuecomment-559366730
            */
-          {  ...useRule.options, esModule: false } :
-          useRule.options
-      }))
-    }))
+                { ...useRule.options, esModule: false }
+              : useRule.options,
+        })),
+    }));
   },
   plugins: [
-  '@vuepress/plugin-back-to-top',
-  [
-    '@vuepress/plugin-medium-zoom',
-    {
-      // This selector excludes images from the "Integrations" page
-      selector: 'main :not(.tile-image) > img'
-    }
+    '@vuepress/plugin-back-to-top',
+    [
+      '@vuepress/plugin-medium-zoom',
+      {
+        // This selector excludes images from the "Integrations" page
+        selector: 'main :not(.tile-image) > img',
+      },
+    ],
+    '@vuepress/active-header-links',
+    '@vuepress/search',
   ],
-  '@vuepress/active-header-links',
-  '@vuepress/search'
-],
   themeConfig: {
-    repo: 'https://github.com/vuestorefront/<% INTEGRATION %>',
+    repo: 'https://github.com/vuestorefront/propeller',
     editLinks: true,
     docsDir: 'docs',
     docsBranch: 'develop',
@@ -43,8 +44,11 @@ module.exports = {
       { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
       { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' },
       // { text: 'Demo', link: '' },
-      { text: 'GitHub', link: 'https://github.com/vuestorefront/<% INTEGRATION %>'},
-      { text: 'Roadmap', link: 'https://github.com/vuestorefront/<% INTEGRATION %>'}
+      { text: 'GitHub', link: 'https://github.com/vuestorefront/propeller' },
+      {
+        text: 'Roadmap',
+        link: 'https://github.com/vuestorefront/propeller',
+      },
     ],
     sidebar: [
       {
@@ -55,16 +59,16 @@ module.exports = {
           ['/guide/getting-started', 'Getting started'],
           ['/guide/configuration', 'Configuration'],
           ['/guide/about', 'About'],
-        ]
+        ],
       },
       {
         title: 'Composables',
-        path: '/composables/'
+        path: '/composables/',
       },
       {
         title: 'API Client',
-        path: '/api-client/'
+        path: '/api-client/',
       },
-    ]
-  }
-}
+    ],
+  },
+};

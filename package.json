@@ -1,5 +1,5 @@
 {
-  "name": "ecommerce-<% INTEGRATION %>-integration",
+  "name": "ecommerce-propeller-integration",
   "private": true,
   "license": "MIT",
   "engines": {

@@ -1,8 +1,13 @@
 module.exports = {
   integrations: {
-    <% INTEGRATION %>: {
-      location: '@vue-storefront/<% INTEGRATION %>-api/server',
-      configuration: {}
-    }
-  }
+    propeller: {
+      location: '@vue-storefront/propeller-api/server',
+      configuration: {
+        api: {
+          endpoint: 'https://api.helice.cloud/graphql',
+          apiKey: 'GXN81cNEfdTr75bWsDUUkuuZhq7k7jZGmhpQWponfX4l79hi',
+        },
+      },
+    },
+  },
 };

@@ -1,7 +1,5 @@
 export type TODO = unknown;
 
-export type Setttings = TODO;
-
 export type Endpoints = TODO;
 
 export type BillingAddress = TODO;
@@ -23,8 +21,6 @@ export type Order = TODO;
 export type OrderItem = TODO;
 
 export type PasswordResetResult = TODO;
-
-export type Product = TODO;
 
 export type ProductFilter = TODO;
 

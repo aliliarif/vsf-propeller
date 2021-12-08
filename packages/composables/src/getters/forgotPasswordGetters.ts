@@ -1,5 +1,5 @@
 import { ForgotPasswordGetters } from '@vue-storefront/core';
-import type { PasswordResetResult } from '@vue-storefront/<% INTEGRATION %>-api';
+import type { PasswordResetResult } from '@vue-storefront/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getResetPasswordToken(result: PasswordResetResult): string {
@@ -11,7 +11,8 @@ function isPasswordChanged(result: PasswordResetResult): boolean {
   return true;
 }
 
-export const forgotPasswordGetters: ForgotPasswordGetters<PasswordResetResult> = {
-  getResetPasswordToken,
-  isPasswordChanged
-};
+export const forgotPasswordGetters: ForgotPasswordGetters<PasswordResetResult> =
+  {
+    getResetPasswordToken,
+    isPasswordChanged,
+  };
