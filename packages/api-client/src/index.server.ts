@@ -9,7 +9,7 @@ import fetch from 'cross-fetch';
 // TODO add types here
 const getHeaders = () => {
   const headers: any = {};
-  // const token = window.localStorage.getItem('apollo-token');
+  // const token = window.localStorage.getItem('propeller-key');
   // if (token) {
   //   headers.authorization = `Bearer ${token}`;
   // }
@@ -23,24 +23,24 @@ function onCreate(settings: Setttings) {
   const link = new HttpLink({
     uri: 'https://dev.api.helice.cloud/graphql',
     fetch,
-    headers: getHeaders()
+    headers: getHeaders(),
   });
   const client = new ApolloClient({
     link: link,
     cache: new InMemoryCache({
-      addTypename: true
-    })
+      addTypename: true,
+    }),
   });
 
   return {
     config: settings,
-    client
+    client,
   };
 }
 
 const { createApiClient } = apiClientFactory<Setttings, Endpoints>({
   onCreate,
-  api
+  api,
 });
 
 export { createApiClient };
