@@ -7,22 +7,18 @@ import {
 import type { Product, ProductFilter } from '@vue-storefront/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// Product
-function getName(product): string {
-  console.log('get name');
-  console.log(product);
-  console.log('get name');
+function getName(product: Product): string {
   return product.name[0].value || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getSlug(product: Product): string {
-  return 'slug';
+  console.log('getSlug', product);
+  return 'slug-' + product.classId;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// Product
-function getPrice(product): AgnosticPrice {
+function getPrice(product: Product): AgnosticPrice {
   return {
     regular: product.price.value,
     // special: product.price.value,
@@ -38,8 +34,7 @@ function getPrice(product): AgnosticPrice {
 // }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// Product
-function getGallery(product): AgnosticMediaGalleryItem[] {
+function getGallery(product: Product): AgnosticMediaGalleryItem[] {
   return [
     {
       small: product.images[0].url,
@@ -50,8 +45,7 @@ function getGallery(product): AgnosticMediaGalleryItem[] {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// Product
-function getCoverImage(product): string {
+function getCoverImage(product: Product): string {
   return product.images[0].url;
   // return 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg';
 }
@@ -59,8 +53,11 @@ function getCoverImage(product): string {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // TODO: rethink this
 // this returns productDetails and should also return product bundles/upsells etc.
-function getFiltered(product) {
-  return product;
+// function getFiltered(product: Product) {
+function getFiltered(products: Product[], filters: ProductFilter): Product[] {
+  console.log('filtered', products, filters);
+
+  return products;
 
   // return [
   //   {
@@ -89,7 +86,7 @@ function getAttributes(
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getDescription(product): string {
+function getDescription(product: Product): string {
   return product.description[0].value;
 }
 
@@ -100,8 +97,8 @@ function getCategoryIds(product: Product): string[] {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // : Product
-function getId(product): string {
-  return product.classId;
+function getId(product: Product): string {
+  return `${product.classId}`;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
