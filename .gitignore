@@ -27,3 +27,4 @@ coverage
 .DS_STORE
 
 !scripts/lib
+/.env
