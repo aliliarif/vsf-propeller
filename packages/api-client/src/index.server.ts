@@ -1,29 +1,19 @@
 import { apiClientFactory } from '@vue-storefront/core';
 import * as api from './api';
-import type { Setttings, Endpoints } from './types';
+import type { Endpoints } from './types';
+import type { Settings } from './types/settings';
 import ApolloClient from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import fetch from 'cross-fetch';
 
-// TODO add types here
-const getHeaders = () => {
-  const headers: any = {};
-  // const token = window.localStorage.getItem('propeller-key');
-  // if (token) {
-  //   headers.authorization = `Bearer ${token}`;
-  // }
-  headers.tenant = 'cloud2-uj0zb';
-  return headers;
-};
-
-function onCreate(settings: Setttings) {
-  console.log('HELLO VSF AA');
-
+function onCreate(settings: Settings) {
   const link = new HttpLink({
-    uri: 'https://dev.api.helice.cloud/graphql',
+    uri: settings.api.endpoint,
     fetch,
-    headers: getHeaders(),
+    headers: {
+      apiKey: settings.api.apiKey,
+    },
   });
   const client = new ApolloClient({
     link: link,
@@ -38,7 +28,7 @@ function onCreate(settings: Setttings) {
   };
 }
 
-const { createApiClient } = apiClientFactory<Setttings, Endpoints>({
+const { createApiClient } = apiClientFactory<Settings, Endpoints>({
   onCreate,
   api,
 });

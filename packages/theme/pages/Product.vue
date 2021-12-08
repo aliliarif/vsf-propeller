@@ -44,9 +44,10 @@
           </div>
         </div>
         <div>
-          <p class="product__description desktop-only">
-            {{ productGetters.getDescription(product) }}
-          </p>
+          <p
+            class="product__description desktop-only"
+            v-html="productGetters.getDescription(product)"
+          ></p>
           <SfButton class="sf-button--text desktop-only product__guide">
             {{ $t('Size guide') }}
           </SfButton>
@@ -93,24 +94,7 @@
 
         <LazyHydrate when-idle>
           <SfTabs :open-tab="1" class="product__tabs">
-            <SfTab title="Description">
-              <!-- <div class="product__description">
-                {{ $t('Product description') }}
-              </div> -->
-              <!-- <SfProperty
-                v-for="(property, i) in product"
-                :key="i"
-                :name="property.name"
-                :value="property.value"
-                class="product__property"
-              >
-                <template v-if="property.name === 'Category'" #value>
-                  <SfButton class="product__property__button sf-button--text">
-                    {{ property.value }}
-                  </SfButton>
-                </template>
-              </SfProperty> -->
-            </SfTab>
+            <SfTab title="Description"> </SfTab>
             <SfTab title="Read reviews">
               <SfReview
                 v-for="review in reviews"
@@ -131,8 +115,6 @@
               class="product__additional-info"
             >
               <div class="product__additional-info">
-                <p class="product__additional-info__title">{{ $t('Brand') }}</p>
-                <p>{{ brand }}</p>
                 <p class="product__additional-info__title">
                   {{ $t('Instruction1') }}
                 </p>
@@ -142,7 +124,6 @@
                 <p class="product__additional-info__paragraph">
                   {{ $t('Instruction3') }}
                 </p>
-                <p>{{ careInstructions }}</p>
               </div>
             </SfTab>
           </SfTabs>
@@ -172,8 +153,6 @@ import {
   SfColor,
 } from '@storefront-ui/vue';
 
-import InstagramFeed from '~/components/InstagramFeed.vue';
-// import RelatedProducts from '~/components/RelatedProducts.vue';
 import { ref, computed, useRoute, useRouter } from '@nuxtjs/composition-api';
 import {
   useProduct,
@@ -198,11 +177,7 @@ export default {
     const route = useRoute();
     const router = useRouter();
     const { products, search } = useProduct('products');
-    // const {
-    //   products: relatedProducts,
-    //   search: searchRelatedProducts,
-    //   loading: relatedLoading,
-    // } = useProduct('relatedProducts');
+
     const { addItem, loading } = useCart();
     const { reviews: productReviews, search: searchReviews } =
       useReview('productReviews');
@@ -220,15 +195,11 @@ export default {
     const configuration = computed(() =>
       productGetters.getAttributes(product.value, ['color', 'size'])
     );
-    const categories = computed(() =>
-      productGetters.getCategoryIds(product.value)
-    );
     const reviews = computed(() =>
       reviewGetters.getItems(productReviews.value)
     );
 
     // TODO: Breadcrumbs are temporary disabled because productGetters return undefined. We have a mocks in data
-    // const breadcrumbs = computed(() => productGetters.getBreadcrumbs ? productGetters.getBreadcrumbs(product.value) : props.fallbackBreadcrumbs);
     const productGallery = computed(() =>
       productGetters.getGallery(product.value).map((img) => ({
         mobile: { url: img.small },
@@ -240,7 +211,6 @@ export default {
 
     onSSR(async () => {
       await search({ id: id.value });
-      // await searchRelatedProducts({ catId: [categories.value[0]], limit: 8 });
       await searchReviews({ productId: id.value });
     });
 
@@ -296,37 +266,11 @@ export default {
     SfReview,
     SfBreadcrumbs,
     SfButton,
-    InstagramFeed,
-    // RelatedProducts,
     LazyHydrate,
   },
   data() {
     return {
       stock: 5,
-      properties: [
-        {
-          name: 'Product Code',
-          value: '578902-00',
-        },
-        {
-          name: 'Category',
-          value: 'Pants',
-        },
-        {
-          name: 'Material',
-          value: 'Cotton',
-        },
-        {
-          name: 'Country',
-          value: 'Germany',
-        },
-      ],
-      description:
-        ' stunning women cocktail and party dresses. Stand out in lace and metallic cocktail dresses and party dresses from all your favorite brands.',
-      detailsIsActive: false,
-      brand:
-        'Brand name is the perfect pairing of quality and design. This label creates major everyday vibes with its collection of modern brooches, silver and gold jewellery, or clips it back with hair accessories in geo styles.',
-      careInstructions: 'Do not wash!',
       breadcrumbs: [
         {
           text: 'Home',

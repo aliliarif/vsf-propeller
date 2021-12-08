@@ -13,7 +13,6 @@ function getName(product: Product): string {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getSlug(product: Product): string {
-  console.log('getSlug', product);
   return 'slug-' + product.classId;
 }
 
@@ -25,56 +24,27 @@ function getPrice(product: Product): AgnosticPrice {
   };
 }
 
-// TODO: change product struct on product() graphql query
-// // function getProductPrice(product): AgnosticPrice {
-//   return {
-//     regular: product.originalPrice,
-//     // special: product.price.value,
-//   };
-// }
-
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getGallery(product: Product): AgnosticMediaGalleryItem[] {
   return [
     {
-      small: product.images[0].url,
-      normal: product.images[0].url,
-      big: product.images[0].url,
+      small: product.images[0]?.url || '',
+      normal: product.images[0]?.url || '',
+      big: product.images[0]?.url || '',
     },
   ];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCoverImage(product: Product): string {
-  return product.images[0].url;
-  // return 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg';
+  return product.images[0]?.url || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // TODO: rethink this
 // this returns productDetails and should also return product bundles/upsells etc.
-// function getFiltered(product: Product) {
 function getFiltered(products: Product[], filters: ProductFilter): Product[] {
-  console.log('filtered', products, filters);
-
   return products;
-
-  // return [
-  //   {
-  //     _id: 1,
-  //     description: 'Some description2',
-  //     _categoriesRef: ['1', '2'],
-  //     name: 'Black jacket',
-  //     sku: 'black-jacket',
-  //     images: [
-  //       'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg',
-  //     ],
-  //     price: {
-  //       original: 12.34,
-  //       current: 10.0,
-  //     },
-  //   },
-  // ];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -96,7 +66,6 @@ function getCategoryIds(product: Product): string[] {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// : Product
 function getId(product: Product): string {
   return `${product.classId}`;
 }
@@ -120,7 +89,6 @@ export const productGetters: ProductGetters<Product, ProductFilter> = {
   getName,
   getSlug,
   getPrice,
-  // getProductPrice,
   getGallery,
   getCoverImage,
   getFiltered,

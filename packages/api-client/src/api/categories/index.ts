@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { CustomQuery, Logger } from '@vue-storefront/core';
+import { Logger } from '@vue-storefront/core';
 import categoryQuery from './categoriesQuery';
 
 type Variables = {
@@ -17,9 +17,7 @@ export default async (context, searchParams, customQuery) => {
       variables,
     },
   });
-  console.log('category.query');
-  console.log(category.query);
-  console.log(category.variables);
+
   try {
     return await context.client.query({
       query: gql`
