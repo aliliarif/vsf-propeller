@@ -9,7 +9,9 @@ const factoryParams = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   search: async (context: Context, params: FacetSearchResult<SearchParams>) => {
     console.log('Propeller: useFacet.search');
-
+    console.log('params');
+    console.log(params);
+    console.log('params');
     const { data } = await context.$propeller.api.products();
 
     console.log('[Result]:', { data });

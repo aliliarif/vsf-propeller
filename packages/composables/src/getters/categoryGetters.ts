@@ -2,14 +2,18 @@ import { CategoryGetters, AgnosticCategoryTree } from '@vue-storefront/core';
 import type { Category } from '@vue-storefront/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTree(category: Category): AgnosticCategoryTree {
-  return {
-    label: '',
-    slug: '',
-    items: [],
-    isCurrent: false,
-  };
+function getTree(category): AgnosticCategoryTree {
+  return category;
 }
+
+// TODO: expand categoryGetters with these functions
+// function getLabel(category): string {
+//   return category.name[0].value || '';
+// }
+
+// function getSlug(category): string {
+//   return category.slug[0].value || '';
+// }
 
 export const categoryGetters: CategoryGetters<Category> = {
   getTree,

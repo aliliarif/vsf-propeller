@@ -9,9 +9,6 @@ import type { Product, ProductFilter } from '@vue-storefront/propeller-api';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 // Product
 function getName(product): string {
-  console.log('get name');
-  console.log(product);
-  console.log('get name');
   return product.name[0].value || '';
 }
 
@@ -61,23 +58,6 @@ function getCoverImage(product): string {
 // this returns productDetails and should also return product bundles/upsells etc.
 function getFiltered(product) {
   return product;
-
-  // return [
-  //   {
-  //     _id: 1,
-  //     description: 'Some description2',
-  //     _categoriesRef: ['1', '2'],
-  //     name: 'Black jacket',
-  //     sku: 'black-jacket',
-  //     images: [
-  //       'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg',
-  //     ],
-  //     price: {
-  //       original: 12.34,
-  //       current: 10.0,
-  //     },
-  //   },
-  // ];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

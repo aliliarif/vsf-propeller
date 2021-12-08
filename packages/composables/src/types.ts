@@ -1,6 +1,4 @@
-import {
-  ProductsSearchParams
-} from '@vue-storefront/core';
+import { ProductsSearchParams } from '@vue-storefront/core';
 
 export type TODO = any;
 
