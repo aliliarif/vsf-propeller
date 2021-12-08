@@ -1,9 +1,13 @@
-const useUiHelpers = () => {
-  const getFacetsFromURL = () => {
-    console.warn('[VSF] please implement useUiHelpers.getFacets.');
+import { useRoute, useRouter } from '@nuxtjs/composition-api';
 
+const useUiHelpers = () => {
+  const route = useRoute();
+  const router = useRouter();
+  const { query } = route.value;
+
+  const getFacetsFromURL = () => {
     return {
-      categorySlug: 'arif',
+      categorySlug: route.value.params.slug_1,
       page: 1,
     } as any;
   };

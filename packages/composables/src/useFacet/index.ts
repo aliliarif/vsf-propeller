@@ -10,17 +10,17 @@ const factoryParams = {
   search: async (context: Context, params: FacetSearchResult<SearchParams>) => {
     console.log('Propeller: useFacet.search');
     console.log('params');
-    console.log(params);    
-    
-    const { data } = await context.$propeller.api.products(params);
+    console.log(params);
+    console.log('params');
+    const { data } = await context.$propeller.api.products(params.input);
 
     console.log('[Result]:', { data });
 
     return {
       items: data?.category?.products?.items || [],
-      // total: data?.products?.total_count,
+      total: data?.category?.products?.itemsFound,
       // availableFilters: data?.products?.aggregations,
-      // category: { id: params.input.categoryId },
+      category: { id: data?.category?.categoryId },
       // availableSortingOptions,
       // perPageOptions: [10, 20, 50],
       // itemsPerPage,
