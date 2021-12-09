@@ -4,8 +4,8 @@ module.exports = {
       location: '@vue-storefront/propeller-api/server',
       configuration: {
         api: {
-          endpoint: 'Propeller GraphQL API endpoint',
-          apiKey: 'Propeller API Key',
+          endpoint: process.env.PROPELLER_ENDPOINT,
+          apiKey: process.env.PROPELLER_APIKEY,
         },
       },
     },
