@@ -10,7 +10,7 @@ const factoryParams = {
   search: async (context: Context, params: FacetSearchResult<SearchParams>) => {
     const { data } = await context.$propeller.api.products(params.input);
 
-    console.log('[Result]:', { data });
+    // console.log('[Result]:', { data });
 
     return {
       items: data?.category?.products?.items || [],
