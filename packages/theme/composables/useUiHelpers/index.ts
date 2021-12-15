@@ -1,16 +1,36 @@
 import { useRoute, useRouter } from '@nuxtjs/composition-api';
+import { AgnosticCategoryTree } from '@vue-storefront/core';
+
+const nonFilters = new Set(['page', 'sort', 'term', 'itemsPerPage']);
+
+const reduceFilters = (query) => (prev, curr) => {
+  const makeArray = Array.isArray(query[curr]) || nonFilters.has(curr);
+
+  return {
+    ...prev,
+    [curr]: makeArray ? query[curr] : [query[curr]],
+  };
+};
 
 const useUiHelpers = () => {
   const route = useRoute();
   const router = useRouter();
   const { query } = route.value;
 
-  const getFacetsFromURL = () => {
-    return {
-      categorySlug: route.value.params.slug_1,
-      page: 1,
-    } as any;
-  };
+  const getFiltersDataFromUrl = (onlyFilters) =>
+    Object.keys(query)
+      .filter((f) => (onlyFilters ? !nonFilters.has(f) : nonFilters.has(f)))
+      // eslint-disable-next-line unicorn/prefer-object-from-entries
+      .reduce(reduceFilters(query), {});
+
+  const getFacetsFromURL = () => ({
+    filters: getFiltersDataFromUrl(true),
+    categorySlug: route.value.params.slug_1,
+    itemsPerPage: Number.parseInt(query.itemsPerPage as string, 10) || 10,
+    page: Number.parseInt(query.page as string, 10) || 1,
+    sort: (query.sort as string) || '',
+    term: query.term as string,
+  });
 
   // eslint-disable-next-line
   const getCatLink = (category): string => {
@@ -27,8 +47,13 @@ const useUiHelpers = () => {
   };
 
   // eslint-disable-next-line
-  const changeFilters = (filters) => {
-    console.warn('[VSF] please implement useUiHelpers.changeFilters.');
+  const changeFilters = async (filters: any) => {
+    await router.push({
+      query: {
+        ...getFiltersDataFromUrl(false),
+        ...filters,
+      },
+    });
   };
 
   // eslint-disable-next-line
@@ -59,6 +84,9 @@ const useUiHelpers = () => {
     console.warn('[VSF] please implement useUiHelpers.getSearchTermFromUrl.');
   };
 
+  const getAgnosticCatLink = (category: AgnosticCategoryTree): string =>
+    `/c${category.slug}`;
+
   return {
     getFacetsFromURL,
     getCatLink,
@@ -69,6 +97,7 @@ const useUiHelpers = () => {
     isFacetColor,
     isFacetCheckbox,
     getSearchTermFromUrl,
+    getAgnosticCatLink,
   };
 };
 

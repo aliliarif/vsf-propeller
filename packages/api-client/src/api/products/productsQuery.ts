@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query category($slug: String) {
+  query category($slug: String, $textFilters: [TextFilterInput!]) {
     category(slug: $slug) {
       id
       categoryId
@@ -22,13 +22,31 @@ export default gql`
         language
       }
       defaultLanguage
-      products(offset: 10) {
+      products(offset: 10, textFilters: $textFilters) {
         itemsFound
         offset
         page
         pages
         start
         end
+        availableAttributes {
+          id
+          isSearchable
+          description
+          type
+          textFilter {
+            value
+            count
+          }
+          integerRangeFilter {
+            min
+            max
+          }
+          decimalRangeFilter {
+            min
+            max
+          }
+        }
         items {
           name {
             value
