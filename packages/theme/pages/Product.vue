@@ -48,6 +48,13 @@
             class="product__description desktop-only"
             v-html="productGetters.getDescription(product)"
           ></p>
+          {{ options }}
+          <ul id="example-1">
+            <li v-for="item in options" :key="item.name">
+              {{ item.label }} {{ item.value }}
+            </li>
+          </ul>
+
           <SfButton class="sf-button--text desktop-only product__guide">
             {{ $t('Size guide') }}
           </SfButton>
@@ -189,8 +196,8 @@ export default {
         attributes: route.value.query,
       })
     );
-    const options = computed(() =>
-      productGetters.getAttributes(products.value, ['color', 'size'])
+    const options = computed(
+      () => productGetters.getAttributes(products.value) // , ['color', 'size']
     );
     const configuration = computed(() =>
       productGetters.getAttributes(product.value, ['color', 'size'])

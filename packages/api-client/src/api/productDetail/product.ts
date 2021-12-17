@@ -52,7 +52,8 @@ export default gql`
         categoryId
         path
         shortName
-        manufacturerCode: eanCode
+        manufacturerCode
+        eanCode
         manufacturer
         supplier
         supplierCode

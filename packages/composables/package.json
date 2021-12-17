@@ -1,7 +1,7 @@
 {
-  "name": "@vue-storefront/propeller",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@propeller-commerce/propeller",
+  "version": "0.0.3",
+  "private": false,
   "sideEffects": false,
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -16,7 +16,7 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/propeller-api": "0.0.1",
+    "@propeller-commerce/propeller-api": "0.0.3",
     "@vue-storefront/core": "~2.5.2"
   },
   "devDependencies": {
@@ -30,6 +30,7 @@
     "lib/**/*"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

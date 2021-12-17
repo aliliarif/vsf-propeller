@@ -21,6 +21,7 @@ const constructTextFilterObject = (inputFilters: Object) => {
 const factoryParams = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   search: async (context: Context, params: FacetSearchResult<any>) => {
+    const offset = params.input.offset ? params.input.offset : 12;
     const inputFilters = params.input.filters ? params.input.filters : {};
     const categorySlug = params.input.categorySlug;
 
@@ -31,17 +32,14 @@ const factoryParams = {
         }),
       ],
       // perPage: itemsPerPage,
-      // offset: (params.input.page - 1) * itemsPerPage,
-      // page: params.input.page,
+      offset: offset,
+      page: params.input.page,
       // search: params.input.term ? params.input.term : '',
       // sort: constructSortObject(params.input.sort || ''),
     };
 
-    console.log('productParams');
-    console.log(productParams);
-
     const productSearchParams = {
-      // pageSize: productParams.perPage,
+      offset: productParams.offset,
       // search: productParams.search,
       categorySlug,
       textFilters: productParams.textFilters,

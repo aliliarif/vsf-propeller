@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { Logger } from '@vue-storefront/core';
-import productQuery from './productQuery';
+import productQuery from './product';
 
 type Variables = {
   productId: number;

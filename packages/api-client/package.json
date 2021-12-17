@@ -1,6 +1,6 @@
 {
-  "name": "@vue-storefront/propeller-api",
-  "version": "0.0.1",
+  "name": "@propeller-commerce/propeller-api",
+  "version": "0.0.3",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",
@@ -34,6 +34,7 @@
     "lib/**/*"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import categoriesQuery from './categoriesQuery';
+import categoriesQuery from './categories';
 
 type Variables = {
   categoryId: number;

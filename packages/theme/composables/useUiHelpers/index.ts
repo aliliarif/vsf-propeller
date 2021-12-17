@@ -26,7 +26,7 @@ const useUiHelpers = () => {
   const getFacetsFromURL = () => ({
     filters: getFiltersDataFromUrl(true),
     categorySlug: route.value.params.slug_1,
-    itemsPerPage: Number.parseInt(query.itemsPerPage as string, 10) || 10,
+    offset: Number.parseInt(query.offset as string, 10) || 12,
     page: Number.parseInt(query.page as string, 10) || 1,
     sort: (query.sort as string) || '',
     term: query.term as string,

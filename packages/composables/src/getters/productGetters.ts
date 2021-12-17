@@ -52,12 +52,32 @@ function getFiltered(products: Product[], filters: ProductFilter): Product[] {
   return products;
 }
 
+// TODO: add type : Product[] | Product,
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getAttributes(
-  products: Product[] | Product,
+  products,
   filterByAttributeName?: string[]
 ): Record<string, AgnosticAttribute | string> {
-  return {};
+  if (!products || !products?.attributes) {
+    return {};
+  }
+
+  const attributes = {};
+
+  for (const attribute of products.attributes) {
+    attributes[attribute.searchId] = {
+      name: attribute.searchId,
+      label: attribute.description[0]?.value || '',
+      // value: attribute.textValue.map((value) => {
+      //   const obj = {};
+      //   obj[value] = value;
+      //   return obj;
+      // }),
+      value: attribute.textValue[0]?.values.toString() || '', // TODO: support for different types of attributes
+    } as AgnosticAttribute;
+  }
+
+  return attributes;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

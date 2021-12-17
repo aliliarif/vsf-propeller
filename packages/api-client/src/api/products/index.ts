@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import productsQuery from './productsQuery';
+import productsQuery from './products';
 import { CustomQuery } from '@vue-storefront/core';
 
 // TODO: move this outside of this file
@@ -9,6 +9,9 @@ type TextFilterInput = {
   exclude?: boolean;
   type?: any;
 };
+// type SortOrder {
+//   asc:
+// }
 // type SortInput {
 //   field: SortableFields!
 //   order: SortOrder = "asc"
@@ -17,18 +20,29 @@ type TextFilterInput = {
 
 type Variables = {
   slug: string;
-  // sort: SortInput;
+  // sort: any;
   // term:
-  // offset:
-  // page:
+  offset?: number;
+  page: number;
   textFilters?: [TextFilterInput];
   // rangeFilters?: [RangeFilterInput];
 };
 
 export default async (context, searchParams, customQuery?: CustomQuery) => {
+  const defaultParams = {
+    offset: 12,
+    page: 1,
+    ...searchParams,
+  };
+
   const variables: Variables = {
+    offset: defaultParams.offset <= 0 ? 10 : defaultParams.offset,
+    page: defaultParams.page <= 0 ? 1 : defaultParams.page,
     slug: searchParams.categorySlug,
   };
+
+  console.log('variables');
+  console.log(variables);
 
   if (searchParams.textFilters)
     variables.textFilters = searchParams.textFilters;
@@ -48,7 +62,7 @@ export default async (context, searchParams, customQuery?: CustomQuery) => {
       variables: products.variables,
     });
   } catch (error) {
-    console.log('ERROR2');
+    console.log('ERROR');
     console.log(error);
     throw (
       error.graphQLErrors?.[0].message || error.networkError?.result || error

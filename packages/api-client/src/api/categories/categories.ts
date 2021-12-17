@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query categoriesQuery($categoryId: Float) {
+  query categories($categoryId: Float) {
     category(id: $categoryId) {
       name {
         value
