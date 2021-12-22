@@ -51,7 +51,7 @@
           {{ options }}
           <ul id="example-1">
             <li v-for="item in options" :key="item.name">
-              {{ item.label }} {{ item.value }}
+              {{ item.name }} {{ item.label }} - {{ item.value }}
             </li>
           </ul>
 
@@ -197,7 +197,11 @@ export default {
       })
     );
     const options = computed(
-      () => productGetters.getAttributes(products.value) // , ['color', 'size']
+      () =>
+        productGetters.getAttributes(products.value, [
+          'EXAMEN_UITGEVERIJ',
+          'EXAMEN_DRUK',
+        ]) // , ['color', 'size']
     );
     const configuration = computed(() =>
       productGetters.getAttributes(product.value, ['color', 'size'])

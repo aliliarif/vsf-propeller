@@ -1,7 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query productDetails($productId: Int!) {
+  query productDetails(
+    $productId: Int!
+    $attributeFilters: AttributeFilterInput
+  ) {
     product(id: $productId) {
       name {
         value
@@ -21,9 +24,9 @@ export default gql`
       shortName
       eanCode
       manufacturer
+      manufacturerCode
       supplier
       supplierCode
-      tag
       taxCode
       status
       originalPrice
@@ -36,35 +39,6 @@ export default gql`
       purchaseMinimumQuantity
       econommicOrderQuantity
       ... on Product {
-        name {
-          value
-          language
-        }
-        description {
-          value
-          language
-        }
-        shortDescription {
-          value
-          language
-        }
-        sku
-        categoryId
-        path
-        shortName
-        manufacturerCode
-        eanCode
-        manufacturer
-        supplier
-        supplierCode
-        originalPrice
-        costPrice
-        suggestedPrice
-        storePrice
-        creditPoints
-        minimumQuantity
-        unit
-        purchaseUnit
         id
         language
         class
@@ -93,21 +67,13 @@ export default gql`
           taxCode
           type
         }
-        attributes {
-          id
+        attributes(filter: $attributeFilters) {
           searchId
+          name
           description {
             value
             language
           }
-          type
-          isSearchable
-          isPublic
-          isHidden
-          enumValue
-          intValue
-          decimalValue
-          dateValue
           textValue {
             values
             language

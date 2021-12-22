@@ -1,6 +1,6 @@
 {
   "name": "@propeller-commerce/propeller-api",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",
@@ -31,7 +31,8 @@
     "rollup-plugin-typescript2": "^0.30.0"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "server/**/*"
   ],
   "publishConfig": {
     "access": "public",

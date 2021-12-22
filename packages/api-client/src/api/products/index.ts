@@ -9,6 +9,10 @@ type TextFilterInput = {
   exclude?: boolean;
   type?: any;
 };
+
+type AttributeFilterInput = {
+  name: [string];
+};
 // type SortOrder {
 //   asc:
 // }
@@ -26,6 +30,7 @@ type Variables = {
   page: number;
   textFilters?: [TextFilterInput];
   // rangeFilters?: [RangeFilterInput];
+  attributeFilters?: AttributeFilterInput;
 };
 
 export default async (context, searchParams, customQuery?: CustomQuery) => {
@@ -36,13 +41,15 @@ export default async (context, searchParams, customQuery?: CustomQuery) => {
   };
 
   const variables: Variables = {
+    slug: searchParams.categorySlug,
     offset: defaultParams.offset <= 0 ? 10 : defaultParams.offset,
     page: defaultParams.page <= 0 ? 1 : defaultParams.page,
-    slug: searchParams.categorySlug,
   };
 
-  console.log('variables');
-  console.log(variables);
+  if (context.config.productAttributes)
+    variables.attributeFilters = {
+      name: context.config.productAttributes,
+    };
 
   if (searchParams.textFilters)
     variables.textFilters = searchParams.textFilters;

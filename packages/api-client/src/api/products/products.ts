@@ -6,6 +6,7 @@ export default gql`
     $offset: Int = 12
     $page: Int = 1
     $textFilters: [TextFilterInput!]
+    $attributeFilters: AttributeFilterInput
   ) {
     category(slug: $slug) {
       id
@@ -42,14 +43,6 @@ export default gql`
           textFilter {
             value
             count
-          }
-          integerRangeFilter {
-            min
-            max
-          }
-          decimalRangeFilter {
-            min
-            max
           }
         }
         items {
@@ -125,6 +118,18 @@ export default gql`
               }
               taxCode
               type
+            }
+            attributes(filter: $attributeFilters) {
+              searchId
+              name
+              description {
+                value
+                language
+              }
+              textValue {
+                values
+                language
+              }
             }
           }
         }

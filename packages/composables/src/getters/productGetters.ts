@@ -58,27 +58,60 @@ function getAttributes(
   products,
   filterByAttributeName?: string[]
 ): Record<string, AgnosticAttribute | string> {
-  if (!products || !products?.attributes) {
-    return {};
+  const isSingleProduct = !Array.isArray(products);
+  const productList = isSingleProduct ? [products] : products; // TODO: add product type
+
+  if (!products || !products?.attributes || productList.length === 0) {
+    return {} as any;
   }
 
-  const attributes = {};
+  const formatAttributes = (product: any): AgnosticAttribute[] =>
+    formatAttributeList(product.attributes).filter((attribute) =>
+      filterByAttributeName
+        ? filterByAttributeName.includes(attribute.name)
+        : attribute
+    );
 
-  for (const attribute of products.attributes) {
-    attributes[attribute.searchId] = {
-      name: attribute.searchId,
-      label: attribute.description[0]?.value || '',
-      // value: attribute.textValue.map((value) => {
-      //   const obj = {};
-      //   obj[value] = value;
-      //   return obj;
-      // }),
-      value: attribute.textValue[0]?.values.toString() || '', // TODO: support for different types of attributes
-    } as AgnosticAttribute;
-  }
+  const reduceToUniques = (prev, curr) => {
+    const isAttributeExist = prev.some(
+      (el) => el.name === curr.name && el.value === curr.value
+    );
 
-  return attributes;
+    if (!isAttributeExist) {
+      return [...prev, curr];
+    }
+
+    return prev;
+  };
+
+  // const reduceByAttributeName = (prev, curr) => ({
+  //   ...prev,
+  //   [curr.name]: isSingleProduct
+  //     ? curr.value
+  //     : [
+  //         ...(prev[curr.name] || []),
+  //         {
+  //           value: curr.value,
+  //           label: curr.label,
+  //         },
+  //       ],
+  // });
+
+  return productList
+    .map((product) => formatAttributes(product))
+    .reduce((prev, curr) => [...prev, ...curr], [])
+    .reduce(reduceToUniques, []);
+  // .reduce(reduceByAttributeName, {});
 }
+
+const formatAttributeList = (attributes: Array<any>): AgnosticAttribute[] =>
+  attributes.map((attr) => {
+    return {
+      name: attr.name,
+      value: attr.textValue[0]?.values.toString() || '',
+      label: attr.description[0]?.value || '', // TODO: support for different types of attributes,
+    };
+  });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getDescription(product: Product): string {
