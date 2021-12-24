@@ -8,19 +8,22 @@ import {
 } from '@vue-storefront/core';
 import type { Cart, CartItem } from '@vue-storefront/propeller-api';
 
+// TODO: implement type CartItem[] for returnType and : Cart for variable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItems(cart: Cart): CartItem[] {
-  return [{}];
+function getItems(cart) {
+  return cart?.data.cart.items || [{}];
 }
 
+// TODO: implement CartItem type for item var
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemName(item: CartItem): string {
-  return 'Name';
+function getItemName(item): string {
+  return item.product.name[0].value;
 }
 
+// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemImage(item: CartItem): string {
-  return 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg';
+function getItemImage(item): string {
+  return item.product.images[0]?.url || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -65,9 +68,10 @@ function getShippingPrice(cart: Cart): number {
   return 0;
 }
 
+// TODO: add : Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotalItems(cart: Cart): number {
-  return 1;
+function getTotalItems(cart): number {
+  return cart?.data?.cart?.items.length || 0;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

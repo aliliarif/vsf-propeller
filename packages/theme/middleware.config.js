@@ -7,6 +7,10 @@ module.exports = {
           endpoint: process.env.PROPELLER_ENDPOINT,
           apiKey: process.env.PROPELLER_APIKEY,
         },
+        cookies: {
+          cartCookieName: 'propeller-vsf-cart',
+        },
+        siteId: 1,
         catalogueRoot: 100092,
         productAttributes: [
           'EXAMEN_BREEDTE_MM',

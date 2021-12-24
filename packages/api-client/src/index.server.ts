@@ -25,6 +25,7 @@ function onCreate(settings: Settings) {
   return {
     config: settings,
     client,
+    cookies: settings.cookies,
   };
 }
 

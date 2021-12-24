@@ -324,9 +324,9 @@ export default {
     };
 
     const addToCart = ({ product, quantity }) => {
-      const { id, sku } = product;
+      const { classId, sku } = product;
       addItemToCart({
-        product: { id, sku },
+        product: { classId, sku },
         quantity,
       });
     };

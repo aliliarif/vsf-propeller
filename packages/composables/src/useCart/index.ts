@@ -8,8 +8,18 @@ import type { Cart, CartItem, Product } from '@vue-storefront/propeller-api';
 const params: UseCartFactoryParams<Cart, CartItem, Product> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
-    console.log('Mocked: useCart.load');
-    return {};
+    console.log('Propeller: useCart.load');
+
+    // TODO: temp
+    // get this from settings
+    const cartCookieName = 'propeller-vsf-cart';
+
+    const existngCartId =
+      context.$propeller.config.app.cookies.get(cartCookieName);
+
+    if (!existngCartId) return {};
+
+    return context.$propeller.api.cart(existngCartId);
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -17,6 +27,42 @@ const params: UseCartFactoryParams<Cart, CartItem, Product> = {
     context: Context,
     { currentCart, product, quantity, customQuery }
   ) => {
+    // TODO: temp
+    // get this from settings
+    const cartCookieName = 'propeller-vsf-cart';
+
+    // check if cart is already initiated
+    let existngCartId =
+      context.$propeller.config.app.cookies.get(cartCookieName);
+
+    if (!existngCartId) {
+      // initiate cart
+      // existngCartId = await context.$propeller.api.cartStart().then((data) => {
+      //   return data.cartStart.cartId;
+      // });
+      const { data } = await context.$propeller.api.cartStart();
+      existngCartId = data.cartStart.cartId;
+      context.$propeller.config.app.cookies.set(cartCookieName, existngCartId, {
+        maxAge: 60 * 60 * 24 * 365,
+        path: '/',
+      });
+    }
+
+    const cartAddItemInput = {
+      cartId: existngCartId,
+      productId: product.classId,
+      quantity: quantity,
+    };
+
+    await context.$propeller.api.cartAddItem(cartAddItemInput);
+
+    // console.log('currentCart');
+    // console.log(currentCart);
+    // console.log('product');
+    // console.log(product);
+    // console.log('quantity');
+    // console.log(quantity);
+
     console.log('Mocked: useCart.addItem');
     return {};
   },
