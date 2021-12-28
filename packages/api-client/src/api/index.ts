@@ -3,4 +3,7 @@ export { default as productDetail } from './productDetail';
 export { default as categories } from './categories';
 export { default as cartStart } from './cartStart';
 export { default as cartAddItem } from './cartAddItem';
+export { default as cartUpdateItem } from './cartUpdateItem';
+export { default as cartSetUser } from './cartSetUser';
 export { default as cart } from './cart';
+export { default as cartProcess } from './cartProcess';

@@ -8,8 +8,20 @@ import type { Order } from '@vue-storefront/propeller-api';
 const factoryParams: UseMakeOrderFactoryParams<Order> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   make: async (context: Context, { customQuery }) => {
-    console.log('Mocked: useMakeOrder.make');
-    return {};
+    // TODO: temp
+    // get this from settings
+    const cartCookieName = 'propeller-vsf-cart';
+
+    const cartId = context.$propeller.config.app.cookies.get(cartCookieName);
+
+    if (!cartId) return {};
+
+    const { data } = await context.$propeller.api.cartProcess(
+      { cartId },
+      customQuery
+    );
+
+    return data.cartProcess.cartOrderId;
   },
 };
 

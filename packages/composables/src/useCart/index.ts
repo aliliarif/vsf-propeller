@@ -5,7 +5,11 @@ import {
 } from '@vue-storefront/core';
 import type { Cart, CartItem, Product } from '@vue-storefront/propeller-api';
 
-const params: UseCartFactoryParams<Cart, CartItem, Product> = {
+// !ASAP TODO: CHANGE THIS
+type CartItemTemp = any;
+type CartTemp = any;
+
+const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
     console.log('Propeller: useCart.load');
@@ -19,7 +23,9 @@ const params: UseCartFactoryParams<Cart, CartItem, Product> = {
 
     if (!existngCartId) return {};
 
-    return context.$propeller.api.cart(existngCartId);
+    const cart = await context.$propeller.api.cart(existngCartId);
+
+    return cart?.data?.cart;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,6 +52,13 @@ const params: UseCartFactoryParams<Cart, CartItem, Product> = {
         maxAge: 60 * 60 * 24 * 365,
         path: '/',
       });
+
+      // check if user is already loged in, if so, add user to cart
+      // TODO: TEMP hardcoded user
+      await context.$propeller.api.cartSetUser({
+        cartId: existngCartId,
+        userId: 14708,
+      });
     }
 
     const cartAddItemInput = {
@@ -54,17 +67,12 @@ const params: UseCartFactoryParams<Cart, CartItem, Product> = {
       quantity: quantity,
     };
 
-    await context.$propeller.api.cartAddItem(cartAddItemInput);
+    const simpleProduct = await context.$propeller.api.cartAddItem(
+      cartAddItemInput
+    );
 
-    // console.log('currentCart');
-    // console.log(currentCart);
-    // console.log('product');
-    // console.log(product);
-    // console.log('quantity');
-    // console.log(quantity);
-
-    console.log('Mocked: useCart.addItem');
-    return {};
+    // eslint-disable-next-line consistent-return
+    return simpleProduct.data.cartAddItem.cart as unknown as Cart;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -76,13 +84,25 @@ const params: UseCartFactoryParams<Cart, CartItem, Product> = {
     return {};
   },
 
+  // TODO: add type cartUpdateItemInput
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateItemQty: async (
     context: Context,
     { currentCart, product, quantity, customQuery }
   ) => {
-    console.log('Mocked: useCart.updateItemQty');
-    return {};
+    console.log('Propeller: useCart.updateItemQty');
+    console.log(currentCart);
+    const cartUpdateItemInput = {
+      cartId: currentCart.cartId,
+      productId: product.id,
+      quantity,
+    };
+
+    const { data } = await context.$propeller.api.cartUpdateItem(
+      cartUpdateItemInput
+    );
+
+    return data.cartUpdateItem.cart as unknown as Cart;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

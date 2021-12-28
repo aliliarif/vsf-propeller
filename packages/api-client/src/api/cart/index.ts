@@ -9,14 +9,14 @@ type Variables = {
 
 export default async (context, cartId, customQuery) => {
   const variables: Variables = {
-    cartId,
+    cartId
   };
 
   const { cart } = context.extendQuery(customQuery, {
     cart: {
       query: cartQuery,
-      variables,
-    },
+      variables
+    }
   });
 
   try {
@@ -24,19 +24,17 @@ export default async (context, cartId, customQuery) => {
       query: gql`
         ${cart.query}
       `,
-      variables: cart.variables,
+      variables: cart.variables
     });
   } catch (error) {
     // For error in data we don't throw 500, because it's not server error
     if (error.graphQLErrors) {
-      console.log('Error in product');
-      console.log(error);
       Logger.debug(error);
 
       return {
         ...error,
         errors: error.graphQLErrors,
-        data: null,
+        data: null
       };
     }
     Logger.error(error);

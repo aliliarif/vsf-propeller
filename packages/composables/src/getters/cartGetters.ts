@@ -11,7 +11,7 @@ import type { Cart, CartItem } from '@vue-storefront/propeller-api';
 // TODO: implement type CartItem[] for returnType and : Cart for variable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItems(cart) {
-  return cart?.data.cart.items || [{}];
+  return cart?.items || [{}];
 }
 
 // TODO: implement CartItem type for item var
@@ -26,11 +26,12 @@ function getItemImage(item): string {
   return item.product.images[0]?.url || '';
 }
 
+// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemPrice(item: CartItem): AgnosticPrice {
+function getItemPrice(item): AgnosticPrice {
   return {
-    regular: 12,
-    special: 10,
+    regular: item.product.price.value,
+    // special: 10,
   };
 }
 
@@ -54,12 +55,13 @@ function getItemSku(item: CartItem): string {
   return '';
 }
 
+// TODO: implement Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotals(cart: Cart): AgnosticTotals {
+function getTotals(cart): AgnosticTotals {
   return {
-    total: 12,
-    subtotal: 12,
-    special: 10,
+    total: cart.total.totalGross,
+    subtotal: cart.total.subTotal,
+    special: cart.total.subTotal,
   };
 }
 
@@ -71,7 +73,7 @@ function getShippingPrice(cart: Cart): number {
 // TODO: add : Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTotalItems(cart): number {
-  return cart?.data?.cart?.items.length || 0;
+  return cart?.items?.length || 0;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

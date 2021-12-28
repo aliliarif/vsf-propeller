@@ -1,11 +1,12 @@
 import gql from 'graphql-tag';
 import { Logger } from '@vue-storefront/core';
-import cartAddItemQuery from './cartAddItem';
+import cartUpdateItemQuery from './cartUpdateItem';
 
 type cartItemInput = {
-  cartId: number;
-  productId: number;
+  cartId: string;
   quantity: number;
+  notes?: string;
+  itemId: number;
 };
 type Variables = {
   input: cartItemInput;
@@ -16,31 +17,35 @@ export default async (context, params, customQuery) => {
   const variables: Variables = {
     input: {
       cartId: params.cartId,
-      productId: params.productId,
-      quantity: params.quantity
+      quantity: params.quantity,
+      // notes: params.notes,
+      itemId: params.productId
     }
   };
 
-  const { cartAddItem } = context.extendQuery(customQuery, {
-    cartAddItem: {
-      query: cartAddItemQuery,
+  const { cartUpdateItem } = context.extendQuery(customQuery, {
+    cartUpdateItem: {
+      query: cartUpdateItemQuery,
       variables
     }
   });
 
+  console.log(cartUpdateItem.query);
+  console.log(cartUpdateItem.variables);
+
   try {
     return context.client.mutate({
       mutation: gql`
-        ${cartAddItem.query}
+        ${cartUpdateItem.query}
       `,
-      variables: cartAddItem.variables
+      variables: cartUpdateItem.variables
     });
   } catch (error) {
-    console.log('Error adding item to cart');
+    console.log('Error updating cart item');
     console.log(error);
     // For error in data we don't throw 500, because it's not server error
     if (error.graphQLErrors) {
-      console.log('Error adding item to cart');
+      console.log('Error updating cart item');
       console.log(error);
       Logger.debug(error);
 
