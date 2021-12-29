@@ -80,8 +80,16 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
     context: Context,
     { currentCart, product, customQuery }
   ) => {
-    console.log('Mocked: useCart.removeItem');
-    return {};
+    const cartDeleteItemInput = {
+      cartId: currentCart.cartId,
+      itemId: product.id,
+    };
+
+    const { data } = await context.$propeller.api.cartDeleteItem(
+      cartDeleteItemInput
+    );
+
+    return data.cartDeleteItem.cart as unknown as Cart;
   },
 
   // TODO: add type cartUpdateItemInput
@@ -90,11 +98,9 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
     context: Context,
     { currentCart, product, quantity, customQuery }
   ) => {
-    console.log('Propeller: useCart.updateItemQty');
-    console.log(currentCart);
     const cartUpdateItemInput = {
       cartId: currentCart.cartId,
-      productId: product.id,
+      itemId: product.id,
       quantity,
     };
 

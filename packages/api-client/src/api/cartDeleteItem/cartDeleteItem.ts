@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation cartUpdateItem($input: CartUpdateItemInput!) {
-    cartUpdateItem(input: $input) {
+  mutation cartDeleteItem($input: CartDeleteItemInput!) {
+    cartDeleteItem(input: $input) {
       cart {
         cartId
         userId

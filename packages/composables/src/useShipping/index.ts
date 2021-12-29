@@ -16,6 +16,7 @@ const params: UseShippingParams<ShippingAddress, AddParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   save: async (context: Context, { shippingDetails, customQuery }) => {
     console.log('Mocked: useShipping.save');
+    console.log(shippingDetails);
     return {};
   },
 };

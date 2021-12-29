@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 export default gql`
   query cart($cartId: String!) {
     cart(cartId: $cartId) {
+      cartId
+      userId
       total {
         subTotal
         subTotalNet
@@ -15,6 +17,7 @@ export default gql`
       items {
         id
         productId
+        quantity
         product {
           name {
             language

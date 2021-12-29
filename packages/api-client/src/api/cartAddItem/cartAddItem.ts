@@ -18,6 +18,7 @@ export default gql`
         items {
           id
           productId
+          quantity
           product {
             name {
               language

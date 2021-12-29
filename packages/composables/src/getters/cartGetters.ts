@@ -35,9 +35,10 @@ function getItemPrice(item): AgnosticPrice {
   };
 }
 
+// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemQty(item: CartItem): number {
-  return 1;
+function getItemQty(item): number {
+  return item.quantity;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -52,7 +53,7 @@ function getItemAttributes(
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemSku(item: CartItem): string {
-  return '';
+  return 'TODO SKU';
 }
 
 // TODO: implement Cart type

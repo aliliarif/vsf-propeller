@@ -3,7 +3,7 @@ import { Logger } from '@vue-storefront/core';
 import cartAddItemQuery from './cartAddItem';
 
 type cartItemInput = {
-  cartId: number;
+  cartId: string;
   productId: number;
   quantity: number;
 };
@@ -17,15 +17,15 @@ export default async (context, params, customQuery) => {
     input: {
       cartId: params.cartId,
       productId: params.productId,
-      quantity: params.quantity
-    }
+      quantity: params.quantity,
+    },
   };
 
   const { cartAddItem } = context.extendQuery(customQuery, {
     cartAddItem: {
       query: cartAddItemQuery,
-      variables
-    }
+      variables,
+    },
   });
 
   try {
@@ -33,7 +33,7 @@ export default async (context, params, customQuery) => {
       mutation: gql`
         ${cartAddItem.query}
       `,
-      variables: cartAddItem.variables
+      variables: cartAddItem.variables,
     });
   } catch (error) {
     console.log('Error adding item to cart');
@@ -47,7 +47,7 @@ export default async (context, params, customQuery) => {
       return {
         ...error,
         errors: error.graphQLErrors,
-        data: null
+        data: null,
       };
     }
     Logger.error(error);
