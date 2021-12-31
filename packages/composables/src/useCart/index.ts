@@ -16,6 +16,7 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
 
     // TODO: temp
     // get this from settings
+    // TODO: store cart in store
     const cartCookieName = 'propeller-vsf-cart';
 
     const existngCartId =

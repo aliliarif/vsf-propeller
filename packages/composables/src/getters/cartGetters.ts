@@ -51,9 +51,10 @@ function getItemAttributes(
   };
 }
 
+// TODO: implement CartItem
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemSku(item: CartItem): string {
-  return 'TODO SKU';
+function getItemSku(item): string {
+  return item.product.sku;
 }
 
 // TODO: implement Cart type

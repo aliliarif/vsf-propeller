@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation cartUpdateAddress($cartUpdateAddressInput: CartUpdateAddressInput!) {
-    cartUpdateAddress(input: $cartUpdateAddressInput) {
+  mutation cartUpdateAddress($input: CartUpdateAddressInput!) {
+    cartUpdateAddress(input: $input) {
       # cartOrderId
       response {
         data

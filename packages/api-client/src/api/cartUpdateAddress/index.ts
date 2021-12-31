@@ -47,9 +47,19 @@ type Variables = {
 
 // TODO: add types
 export default async (context, input: CartUpdateAddressInput, customQuery) => {
+  const defaultParams = {
+    firstName: '',
+    lastName: '',
+    street: '',
+    number: '',
+    postalCode: '',
+    city: '',
+    ...input,
+  };
+
   const variables = {
     input: {
-      ...input,
+      ...defaultParams,
     },
   };
   // const variables: Variables = {
@@ -91,6 +101,9 @@ export default async (context, input: CartUpdateAddressInput, customQuery) => {
   // if (params.icp) variables.input.icp = params.icp;
 
   // if (params.notes) variables.input.notes = params.notes;
+
+  console.log(cartUpdateAddressQuery);
+  console.log(variables);
 
   const { cartAddItem } = context.extendQuery(customQuery, {
     cartAddItem: {

@@ -14,6 +14,32 @@ export default gql`
         discountNet
         discountGross
       }
+      deliveryAddress {
+        firstName
+        lastName
+        gender
+        number
+        postalCode
+        city
+        middleName
+        numberExtension
+        country
+        phone
+        email
+      }
+      invoiceAddress {
+        firstName
+        lastName
+        gender
+        number
+        postalCode
+        city
+        middleName
+        numberExtension
+        country
+        phone
+        email
+      }
       items {
         id
         productId
@@ -23,6 +49,7 @@ export default gql`
             language
             value
           }
+          sku
           ... on Product {
             price {
               value

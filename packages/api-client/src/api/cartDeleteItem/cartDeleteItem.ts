@@ -24,6 +24,7 @@ export default gql`
               language
               value
             }
+            sku
             ... on Product {
               price {
                 value
