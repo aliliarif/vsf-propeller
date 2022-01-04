@@ -6,7 +6,7 @@ import {
   AgnosticDiscount,
   AgnosticAttribute,
 } from '@vue-storefront/core';
-import type { Cart, CartItem } from '@vue-storefront/propeller-api';
+import type { Cart, CartItem } from '@propeller-commerce/propeller-api';
 
 // TODO: implement type CartItem[] for returnType and : Cart for variable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

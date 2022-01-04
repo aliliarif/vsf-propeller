@@ -62,21 +62,6 @@ export default gql`
           categoryId
           path
           ... on Product {
-            name {
-              value
-              language
-            }
-            description {
-              value
-              language
-            }
-            shortDescription {
-              value
-              language
-            }
-            sku
-            categoryId
-            path
             shortName
             manufacturerCode
             eanCode
@@ -87,7 +72,6 @@ export default gql`
             costPrice
             suggestedPrice
             storePrice
-            creditPoints
             minimumQuantity
             unit
             purchaseUnit

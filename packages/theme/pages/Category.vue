@@ -263,7 +263,7 @@ import {
   useFacet,
   facetGetters,
   wishlistGetters,
-} from '@vue-storefront/propeller';
+} from '@propeller-commerce/propeller';
 import { useUiHelpers, useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';

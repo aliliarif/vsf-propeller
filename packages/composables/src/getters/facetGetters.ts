@@ -8,7 +8,10 @@ import {
   AgnosticBreadcrumb,
   AgnosticFacet,
 } from '@vue-storefront/core';
-import type { Facet, FacetSearchCriteria } from '@vue-storefront/propeller-api';
+import type {
+  Facet,
+  FacetSearchCriteria,
+} from '@propeller-commerce/propeller-api';
 import {
   buildFacets,
   reduceForGroupedFacets,

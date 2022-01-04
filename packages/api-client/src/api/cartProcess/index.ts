@@ -15,26 +15,23 @@ export default async (context, params, customQuery) => {
   const variables: Variables = {
     input: {
       cartId: params.cartId,
-      orderStatus: 'NEW'
-    }
+      orderStatus: 'NEW',
+    },
   };
 
   const { cartProcess } = context.extendQuery(customQuery, {
     cartProcess: {
       query: cartProcessQuery,
-      variables
-    }
+      variables,
+    },
   });
-
-  console.log(cartProcess.query);
-  console.log(cartProcess.variables);
 
   try {
     return context.client.mutate({
       mutation: gql`
         ${cartProcess.query}
       `,
-      variables: cartProcess.variables
+      variables: cartProcess.variables,
     });
   } catch (error) {
     console.log('Error processing cart');
@@ -48,7 +45,7 @@ export default async (context, params, customQuery) => {
       return {
         ...error,
         errors: error.graphQLErrors,
-        data: null
+        data: null,
       };
     }
     Logger.error(error);

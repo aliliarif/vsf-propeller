@@ -3,7 +3,11 @@ import {
   useCartFactory,
   UseCartFactoryParams,
 } from '@vue-storefront/core';
-import type { Cart, CartItem, Product } from '@vue-storefront/propeller-api';
+import type {
+  Cart,
+  CartItem,
+  Product,
+} from '@propeller-commerce/propeller-api';
 
 // !ASAP TODO: CHANGE THIS
 type CartItemTemp = any;
@@ -12,8 +16,6 @@ type CartTemp = any;
 const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
-    console.log('Propeller: useCart.load');
-
     // TODO: temp
     // get this from settings
     // TODO: store cart in store
@@ -44,9 +46,6 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
 
     if (!existngCartId) {
       // initiate cart
-      // existngCartId = await context.$propeller.api.cartStart().then((data) => {
-      //   return data.cartStart.cartId;
-      // });
       const { data } = await context.$propeller.api.cartStart();
       existngCartId = data.cartStart.cartId;
       context.$propeller.config.app.cookies.set(cartCookieName, existngCartId, {
@@ -55,11 +54,6 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
       });
 
       // check if user is already loged in, if so, add user to cart
-      // TODO: TEMP hardcoded user
-      await context.$propeller.api.cartSetUser({
-        cartId: existngCartId,
-        userId: 14708,
-      });
     }
 
     const cartAddItemInput = {
@@ -142,10 +136,10 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  isInCart: (context: Context, { currentCart, product }) => {
-    console.log('Mocked: useCart.isInCart');
-    return false;
-  },
+  isInCart: (context: Context, { currentCart, product }) =>
+    !!currentCart?.items?.find(
+      (cartItem) => cartItem.productId === product.classId
+    ),
 };
 
 export const useCart = useCartFactory<Cart, CartItem, Product>(params);

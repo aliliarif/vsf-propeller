@@ -3,7 +3,7 @@ import {
   useShippingFactory,
   UseShippingParams,
 } from '@vue-storefront/core';
-import type { ShippingAddress } from '@vue-storefront/propeller-api';
+import type { ShippingAddress } from '@propeller-commerce/propeller-api';
 import type { UseShippingAddParams as AddParams } from '../types';
 
 // TODO: TEMP
@@ -14,7 +14,7 @@ type ShippingAddressTemp = any;
 const params: UseShippingParams<ShippingAddressTemp, AddParamsTemp> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
-    console.log('[Propeller] loadShipping', { customQuery });
+    // console.log('[Propeller] loadShipping', { customQuery });
 
     const cartCookieName = 'propeller-vsf-cart';
 

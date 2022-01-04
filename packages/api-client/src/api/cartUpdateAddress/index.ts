@@ -102,9 +102,6 @@ export default async (context, input: CartUpdateAddressInput, customQuery) => {
 
   // if (params.notes) variables.input.notes = params.notes;
 
-  console.log(cartUpdateAddressQuery);
-  console.log(variables);
-
   const { cartAddItem } = context.extendQuery(customQuery, {
     cartAddItem: {
       query: cartUpdateAddressQuery,

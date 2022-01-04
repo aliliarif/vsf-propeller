@@ -1,5 +1,5 @@
 import { CategoryGetters, AgnosticCategoryTree } from '@vue-storefront/core';
-import type { Category } from '@vue-storefront/propeller-api';
+import type { Category } from '@propeller-commerce/propeller-api';
 
 // TODO: Add category type
 const createAgnosticCategory = (category: any): AgnosticCategoryTree => {

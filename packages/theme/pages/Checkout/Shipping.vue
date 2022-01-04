@@ -195,7 +195,7 @@
 import { SfHeading, SfInput, SfButton, SfSelect } from '@storefront-ui/vue';
 import { ref, useRouter } from '@nuxtjs/composition-api';
 import { onSSR } from '@vue-storefront/core';
-import { useShipping } from '@vue-storefront/propeller';
+import { useShipping } from '@propeller-commerce/propeller';
 import { required, min, digits } from 'vee-validate/dist/rules';
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate';
 

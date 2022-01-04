@@ -55,8 +55,8 @@ export default {
         coreDevelopment: true,
         // @core-development-only-end
         useRawSource: {
-          dev: ['@vue-storefront/propeller', '@vue-storefront/core'],
-          prod: ['@vue-storefront/propeller', '@vue-storefront/core'],
+          dev: ['@propeller-commerce/propeller', '@vue-storefront/core'],
+          prod: ['@propeller-commerce/propeller', '@vue-storefront/core'],
         },
       },
     ],
@@ -66,8 +66,8 @@ export default {
       {
         generate: {
           replace: {
-            apiClient: '@vue-storefront/propeller-api',
-            composables: '@vue-storefront/propeller',
+            apiClient: '@propeller-commerce/propeller-api',
+            composables: '@propeller-commerce/propeller',
           },
         },
       },
@@ -76,7 +76,7 @@ export default {
     /* project-only-start
     ['@vue-storefront/nuxt-theme'],
     project-only-end */
-    ['@vue-storefront/propeller/nuxt', {}],
+    ['@propeller-commerce/propeller/nuxt', {}],
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

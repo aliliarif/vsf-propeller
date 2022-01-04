@@ -1,7 +1,7 @@
 module.exports = {
   integrations: {
     propeller: {
-      location: '@vue-storefront/propeller-api/server',
+      location: '@propeller-commerce/propeller-api/server',
       configuration: {
         api: {
           endpoint: process.env.PROPELLER_ENDPOINT,

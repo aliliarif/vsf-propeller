@@ -167,7 +167,7 @@ import {
   productGetters,
   useReview,
   reviewGetters,
-} from '@vue-storefront/propeller';
+} from '@propeller-commerce/propeller';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
 import cacheControl from './../helpers/cacheControl';

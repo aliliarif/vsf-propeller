@@ -32,7 +32,7 @@
 import { SfMenuItem, SfModal } from '@storefront-ui/vue';
 import { useUiState, useUiHelpers } from '~/composables';
 import { computed } from '@nuxtjs/composition-api';
-import { categoryGetters, useCategory } from '@vue-storefront/propeller';
+import { categoryGetters, useCategory } from '@propeller-commerce/propeller';
 import { onSSR } from '@vue-storefront/core';
 
 export default {

@@ -1,5 +1,5 @@
 import { integrationPlugin } from '@vue-storefront/core';
-import cookie from '@vue-storefront/propeller/nuxt/cookie';
+import cookie from '@propeller-commerce/propeller/nuxt/cookie';
 
 const moduleOptions = JSON.parse('<%= JSON.stringify(options) %>');
 
