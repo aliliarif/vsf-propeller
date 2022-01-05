@@ -14,7 +14,7 @@ type BillingAddressTemp = any;
 const params: UseBillingParams<BillingAddressTemp, AddParamsTemp> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
-    console.log('[Propeller] loadShipping', { customQuery });
+    console.log('[Propeller] loadBilling', { customQuery });
 
     const cartCookieName = 'propeller-vsf-cart';
 

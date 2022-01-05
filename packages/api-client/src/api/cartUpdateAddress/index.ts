@@ -62,48 +62,9 @@ export default async (context, input: CartUpdateAddressInput, customQuery) => {
       ...defaultParams,
     },
   };
-  // const variables: Variables = {
-  //   input: {
-  //     cartId: params.cartId,
-  //     type: params.type,
-  //     firstName: params.firstName,
-  //     lastName: params.lastName,
-  //     street: params.street,
-  //     number: params.number,
-  //     postalCode: params.postalCode,
-  //     city: params.city,
-  //   },
-  // };
 
-  // if (params.company) variables.input.company = params.company;
-
-  // if (params.gender) variables.input.gender = params.gender;
-
-  // if (params.middleName) variables.input.middleName = params.middleName;
-
-  // if (params.numberExtension)
-  //   variables.input.numberExtension = params.numberExtension;
-
-  // if (params.region) variables.input.region = params.region;
-
-  // if (params.country) variables.input.country = params.country;
-
-  // if (params.code) variables.input.code = params.code;
-
-  // if (params.email) variables.input.email = params.email;
-
-  // if (params.mobile) variables.input.mobile = params.mobile;
-
-  // if (params.phone) variables.input.phone = params.phone;
-
-  // if (params.url) variables.input.url = params.url;
-
-  // if (params.icp) variables.input.icp = params.icp;
-
-  // if (params.notes) variables.input.notes = params.notes;
-
-  const { cartAddItem } = context.extendQuery(customQuery, {
-    cartAddItem: {
+  const { cartUpdateAddress } = context.extendQuery(customQuery, {
+    cartUpdateAddress: {
       query: cartUpdateAddressQuery,
       variables,
     },
@@ -112,9 +73,9 @@ export default async (context, input: CartUpdateAddressInput, customQuery) => {
   try {
     return context.client.mutate({
       mutation: gql`
-        ${cartAddItem.query}
+        ${cartUpdateAddress.query}
       `,
-      variables: cartAddItem.variables,
+      variables: cartUpdateAddress.variables,
     });
   } catch (error) {
     console.log('Error adding item to cart');

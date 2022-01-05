@@ -15,28 +15,34 @@ export default gql`
         discountGross
       }
       deliveryAddress {
+        company
+        gender
         firstName
         lastName
-        gender
+        middleName
+        street
         number
+        numberExtension
         postalCode
         city
-        middleName
-        numberExtension
         country
+        region
         phone
         email
       }
       invoiceAddress {
+        company
+        gender
         firstName
         lastName
-        gender
+        middleName
+        street
         number
+        numberExtension
         postalCode
         city
-        middleName
-        numberExtension
         country
+        region
         phone
         email
       }

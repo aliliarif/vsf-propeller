@@ -8,6 +8,44 @@
     />
     <form @submit.prevent="handleSubmit(handleFormSubmit)">
       <div class="form">
+        <ValidationProvider name="company" rules="" v-slot="{ errors }" slim>
+          <SfInput
+            v-e2e="'shipping-company'"
+            v-model="form.company"
+            label="Company"
+            name="company"
+            class="form__element"
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
+          />
+        </ValidationProvider>
+
+        <ValidationProvider
+          name="gender"
+          rules="required"
+          v-slot="{ errors }"
+          slim
+        >
+          <SfSelect
+            v-e2e="'shipping-gender'"
+            v-model="form.gender"
+            label="Gender"
+            name="gender"
+            class="form__element form__select sf-select--underlined"
+            required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
+          >
+            <SfSelectOption
+              v-for="genderOptions in genders"
+              :key="genderOptions.key"
+              :value="genderOptions.key"
+            >
+              {{ genderOptions.label }}
+            </SfSelectOption>
+          </SfSelect>
+        </ValidationProvider>
+
         <ValidationProvider
           name="firstName"
           rules="required|min:2"
@@ -62,16 +100,16 @@
         </ValidationProvider>
 
         <ValidationProvider
-          name="postalCode"
+          name="street"
           rules="required"
           v-slot="{ errors }"
           slim
         >
           <SfInput
-            v-e2e="'shipping-postalCode'"
-            v-model="form.postalCode"
-            label="postalCode"
-            name="postalCode"
+            v-e2e="'shipping-street'"
+            v-model="form.street"
+            label="Street"
+            name="street"
             class="form__element"
             required
             :valid="!errors[0]"
@@ -104,6 +142,42 @@
             label="Number extension"
             name="numberExtension"
             class="form__element"
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
+          />
+        </ValidationProvider>
+
+        <ValidationProvider
+          name="postalCode"
+          rules="required"
+          v-slot="{ errors }"
+          slim
+        >
+          <SfInput
+            v-e2e="'shipping-postalCode'"
+            v-model="form.postalCode"
+            label="postalCode"
+            name="postalCode"
+            class="form__element"
+            required
+            :valid="!errors[0]"
+            :errorMessage="errors[0]"
+          />
+        </ValidationProvider>
+
+        <ValidationProvider
+          name="city"
+          rules="required"
+          v-slot="{ errors }"
+          slim
+        >
+          <SfInput
+            v-e2e="'shipping-city'"
+            v-model="form.city"
+            label="city"
+            name="city"
+            class="form__element"
+            required
             :valid="!errors[0]"
             :errorMessage="errors[0]"
           />
@@ -215,6 +289,12 @@ const COUNTRIES = [
   { key: 'PL', label: 'Poland' },
 ];
 
+const GENDERS = [
+  { key: 'M', label: 'Male' },
+  { key: 'F', label: 'Female' },
+  { key: 'U', label: 'Undefined' },
+];
+
 extend('required', {
   ...required,
   message: 'This field is required',
@@ -245,12 +325,15 @@ export default {
     const { load, save } = useBilling();
 
     const form = ref({
+      company: '',
       firstName: '',
       middleName: '',
       lastName: '',
-      postalCode: '',
+      street: '',
       number: '',
       numberExtension: '',
+      postalCode: '',
+      city: '',
       country: '',
       phone: null,
       email: '',
@@ -269,6 +352,7 @@ export default {
       router,
       form,
       countries: COUNTRIES,
+      genders: GENDERS,
       handleFormSubmit,
     };
   },
