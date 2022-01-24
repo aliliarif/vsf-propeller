@@ -13,21 +13,33 @@ type TextFilterInput = {
 type AttributeFilterInput = {
   name: [string];
 };
-// type SortOrder {
-//   asc:
-// }
-// type SortInput {
-//   field: SortableFields!
-//   order: SortOrder = "asc"
-//   }
-// *** //
+
+enum SortOrder {
+  asc,
+  desc,
+}
+
+enum SortableFields {
+  sku,
+  supplierCode,
+  dateCreated,
+  dateChanged,
+  name,
+  price,
+  relevance,
+}
+
+type SortInput = {
+  field: SortableFields;
+  order: SortOrder;
+};
 
 type Variables = {
   slug: string;
-  // sort: any;
-  // term:
   offset?: number;
-  page: number;
+  page?: number;
+  sort?: SortInput;
+  // term:
   textFilters?: [TextFilterInput];
   // rangeFilters?: [RangeFilterInput];
   attributeFilters?: AttributeFilterInput;
@@ -42,7 +54,7 @@ export default async (context, searchParams, customQuery?: CustomQuery) => {
 
   const variables: Variables = {
     slug: searchParams.categorySlug,
-    offset: defaultParams.offset <= 0 ? 10 : defaultParams.offset,
+    offset: defaultParams.offset <= 0 ? 12 : defaultParams.offset,
     page: defaultParams.page <= 0 ? 1 : defaultParams.page,
   };
 
@@ -53,6 +65,8 @@ export default async (context, searchParams, customQuery?: CustomQuery) => {
 
   if (searchParams.textFilters)
     variables.textFilters = searchParams.textFilters;
+
+  if (searchParams.sort) variables.sort = searchParams.sort;
 
   const { products } = context.extendQuery(customQuery, {
     products: {

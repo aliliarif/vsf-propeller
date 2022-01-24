@@ -70,14 +70,18 @@ const getProducts = (searchData): any => {
   return searchData.data.items;
 };
 
+// TODO: searchData : FacetSearchResult<Facet>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getPagination(params: FacetSearchResult<Facet>): AgnosticPagination {
+function getPagination(searchData): AgnosticPagination {
+  const totalPages = searchData?.data?.pages;
+
   return {
-    currentPage: 1,
-    totalPages: 1,
-    totalItems: 1,
-    itemsPerPage: 10,
-    pageOptions: [],
+    currentPage:
+      (searchData?.input?.page > totalPages ? 1 : searchData?.input?.page) || 1,
+    totalPages,
+    totalItems: searchData?.data?.total ? searchData.data.total : 0,
+    itemsPerPage: searchData?.input?.itemsPerPage || 12,
+    pageOptions: [12, 36, 108],
   };
 }
 

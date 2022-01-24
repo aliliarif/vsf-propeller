@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query cart($cartId: String!) {
+  query cart($cartId: String!, $attributeFilters: AttributeFilterInput) {
     cart(cartId: $cartId) {
       cartId
       userId
@@ -55,6 +55,10 @@ export default gql`
             language
             value
           }
+          slug {
+            language
+            value
+          }
           sku
           ... on Product {
             price {
@@ -71,6 +75,18 @@ export default gql`
               }
               taxCode
               type
+            }
+            attributes(filter: $attributeFilters) {
+              searchId
+              name
+              description {
+                value
+                language
+              }
+              textValue {
+                values
+                language
+              }
             }
             images(siteId: 1) {
               id

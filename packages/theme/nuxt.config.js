@@ -40,7 +40,11 @@ export default {
   loading: { color: '#fff' },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  // plugins: ['~/plugins/mollie.js'],
+
+  // serverMiddleware: [
+  //   { path: '/propeller_mollie', handler: '~/middleware/index.js' },
+  // ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -90,6 +94,16 @@ export default {
     'cookie-universal-nuxt',
     'vue-scrollto/nuxt',
     '@vue-storefront/middleware/nuxt',
+    [
+      '@propeller-commerce/propeller-mollie/nuxt',
+      {
+        propellerKey: 'GXN81cNEfdTr75bWsDUUkuuZhq7k7jZGmhpQWponfX4l79hi',
+        propellerApiUrl: 'https://api.helice.cloud/graphql',
+        mollieKey: 'test_HKCexffVcErTV8jggVdWah7eH25xHq',
+        mollieIsTest: true,
+        mollieRedirectUrl: '/checkout/thank-you',
+      },
+    ],
   ],
 
   i18n: {
@@ -158,6 +172,20 @@ export default {
         }),
       }),
     ],
+    // needed for payment fs error
+    // extend(config, { isDev, isClient }) {
+    //   if (isClient) {
+    //     config.node = {
+    //       fs: 'empty',
+    //       net: 'empty',
+    //       target: true,
+    //     };
+    //   } else {
+    //     config.node = {
+    //       target: false,
+    //     };
+    //   }
+    // },
   },
 
   router: {

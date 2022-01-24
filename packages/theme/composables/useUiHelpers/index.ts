@@ -1,7 +1,7 @@
 import { useRoute, useRouter } from '@nuxtjs/composition-api';
 import { AgnosticCategoryTree } from '@vue-storefront/core';
 
-const nonFilters = new Set(['page', 'sort', 'term', 'itemsPerPage']);
+const nonFilters = new Set(['offset', 'page', 'sort', 'term']);
 
 const reduceFilters = (query) => (prev, curr) => {
   const makeArray = Array.isArray(query[curr]) || nonFilters.has(curr);

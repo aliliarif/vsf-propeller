@@ -8,12 +8,13 @@ import type { Product, ProductFilter } from '@propeller-commerce/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getName(product: Product): string {
-  return product.name[0].value || '';
+  return product?.name?.[0].value || '';
 }
 
+// TODO add product:Product
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getSlug(product: Product): string {
-  return 'slug-' + product.classId;
+function getSlug(product): string {
+  return product?.slug?.[0].value || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -42,7 +43,7 @@ function getGallery(product: Product): AgnosticMediaGalleryItem[] {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCoverImage(product: Product): string {
-  return product.images[0]?.url || '';
+  return product.images?.[0].url || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -108,14 +109,14 @@ const formatAttributeList = (attributes: Array<any>): AgnosticAttribute[] =>
   attributes.map((attr) => {
     return {
       name: attr.name,
-      value: attr.textValue[0]?.values.toString() || '',
-      label: attr.description[0]?.value || '', // TODO: support for different types of attributes,
+      value: attr.textValue?.[0].values.toString() || '',
+      label: attr.description?.[0].value || '', // TODO: support for different types of attributes,
     };
   });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getDescription(product: Product): string {
-  return product.description[0].value;
+  return product?.description?.[0].value || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

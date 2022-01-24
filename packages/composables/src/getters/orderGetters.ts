@@ -7,8 +7,9 @@ function getDate(order: Order): string {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getId(order: Order): string {
-  return '1';
+// : Order
+function getId(order): string {
+  return order;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

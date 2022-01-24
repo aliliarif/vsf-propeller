@@ -5,6 +5,7 @@ export default gql`
     $slug: String
     $offset: Int = 12
     $page: Int = 1
+    $sort: [SortInput!]
     $textFilters: [TextFilterInput!]
     $attributeFilters: AttributeFilterInput
   ) {
@@ -28,7 +29,12 @@ export default gql`
         language
       }
       defaultLanguage
-      products(offset: $offset, page: $page, textFilters: $textFilters) {
+      products(
+        offset: $offset
+        page: $page
+        sort: $sort
+        textFilters: $textFilters
+      ) {
         itemsFound
         offset
         page
@@ -57,6 +63,10 @@ export default gql`
           shortDescription {
             value
             language
+          }
+          slug {
+            language
+            value
           }
           sku
           categoryId
