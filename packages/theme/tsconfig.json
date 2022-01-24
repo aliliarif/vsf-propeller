@@ -4,11 +4,7 @@
     "target": "ES2018",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "lib": [
-      "ESNext",
-      "ESNext.AsyncIterable",
-      "DOM"
-    ],
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
     "esModuleInterop": true,
     "allowJs": true,
     "sourceMap": true,
@@ -16,28 +12,15 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@/*": [
-        "./*"
-      ]
+      "~/*": ["./*"],
+      "@/*": ["./*"]
     },
-    "types": [
-      "@types/node",
-      "@nuxt/types",
-      "nuxt-i18n"
-    ],
+    "types": ["@types/node", "@nuxt/types", "~/mollie-propeller", "nuxt-i18n"],
     "resolveJsonModule": true,
     "rootDir": "./",
     "declarationDir": "./lib",
     "importHelpers": true,
     "allowSyntheticDefaultImports": true
   },
-  "exclude": [
-    "node_modules",
-    ".nuxt",
-    "dist",
-    "_theme"
-  ]
+  "exclude": ["node_modules", ".nuxt", "dist", "_theme"]
 }

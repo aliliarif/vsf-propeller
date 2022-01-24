@@ -3,7 +3,7 @@ import type {
   UserBillingAddress as Address,
   UserBillingAddressItem as AddressItem,
   UserBillingAddressSearchCriteria,
-} from '@vue-storefront/propeller-api';
+} from '@propeller-commerce/propeller-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getAddresses(

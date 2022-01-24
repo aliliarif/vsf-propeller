@@ -1,7 +1,7 @@
 {
-  "name": "@vue-storefront/propeller-api",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@propeller-commerce/propeller-api",
+  "version": "0.0.9",
+  "private": false,
   "sideEffects": false,
   "server": "server/index.js",
   "main": "lib/index.cjs.js",
@@ -31,9 +31,11 @@
     "rollup-plugin-typescript2": "^0.30.0"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "server/**/*"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

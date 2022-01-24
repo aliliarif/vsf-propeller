@@ -1,4 +1,4 @@
-import { Store } from '@vue-storefront/propeller-api';
+import { Store } from '@propeller-commerce/propeller-api';
 import { AgnosticStore, UseStoreGetters } from '@vue-storefront/core';
 import { UseStoreFilterParams } from '../types';
 

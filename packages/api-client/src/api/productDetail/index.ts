@@ -1,15 +1,26 @@
 import gql from 'graphql-tag';
 import { Logger } from '@vue-storefront/core';
-import productQuery from './productQuery';
+import productQuery from './product';
+
+// TODO: move this outside of this file (same type is used on products)
+type AttributeFilterInput = {
+  name: [string];
+};
 
 type Variables = {
   productId: number;
+  attributeFilters?: AttributeFilterInput;
 };
 
 export default async (context, searchParams, customQuery) => {
   const variables: Variables = {
     productId: parseInt(searchParams.id),
   };
+
+  if (context.config.productAttributes)
+    variables.attributeFilters = {
+      name: context.config.productAttributes,
+    };
 
   const { product } = context.extendQuery(customQuery, {
     product: {

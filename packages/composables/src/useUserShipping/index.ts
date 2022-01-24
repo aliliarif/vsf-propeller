@@ -6,7 +6,7 @@ import {
 import type {
   UserShippingAddress as Address,
   UserShippingAddressItem as AddressItem,
-} from '@vue-storefront/propeller-api';
+} from '@propeller-commerce/propeller-api';
 
 const params: UseUserShippingFactoryParams<Address, AddressItem> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -48,6 +48,13 @@
             class="product__description desktop-only"
             v-html="productGetters.getDescription(product)"
           ></p>
+          {{ options }}
+          <ul id="example-1">
+            <li v-for="item in options" :key="item.name">
+              {{ item.name }} {{ item.label }} - {{ item.value }}
+            </li>
+          </ul>
+
           <SfButton class="sf-button--text desktop-only product__guide">
             {{ $t('Size guide') }}
           </SfButton>
@@ -160,7 +167,7 @@ import {
   productGetters,
   useReview,
   reviewGetters,
-} from '@vue-storefront/propeller';
+} from '@propeller-commerce/propeller';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
 import cacheControl from './../helpers/cacheControl';
@@ -189,8 +196,12 @@ export default {
         attributes: route.value.query,
       })
     );
-    const options = computed(() =>
-      productGetters.getAttributes(products.value, ['color', 'size'])
+    const options = computed(
+      () =>
+        productGetters.getAttributes(products.value, [
+          'EXAMEN_UITGEVERIJ',
+          'EXAMEN_DRUK',
+        ]) // , ['color', 'size']
     );
     const configuration = computed(() =>
       productGetters.getAttributes(product.value, ['color', 'size'])

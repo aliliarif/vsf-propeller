@@ -1,7 +1,7 @@
 {
-  "name": "@vue-storefront/propeller",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@propeller-commerce/propeller",
+  "version": "0.0.10",
+  "private": false,
   "sideEffects": false,
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
@@ -16,10 +16,12 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/propeller-api": "0.0.1",
-    "@vue-storefront/core": "~2.5.2"
+    "@propeller-commerce/propeller-api": "0.0.9",
+    "@vue-storefront/core": "~2.5.2",
+    "cookie-universal": "^2.1.5"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.1",
     "@rollup/plugin-node-resolve": "^13.0.6",
     "rollup-plugin-typescript2": "^0.30.0"
   },
@@ -27,9 +29,11 @@
     "@nuxtjs/composition-api": "^0.29.3"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "nuxt/**/*"
   ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }

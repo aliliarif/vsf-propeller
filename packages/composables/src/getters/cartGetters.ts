@@ -6,34 +6,39 @@ import {
   AgnosticDiscount,
   AgnosticAttribute,
 } from '@vue-storefront/core';
-import type { Cart, CartItem } from '@vue-storefront/propeller-api';
+import type { Cart, CartItem } from '@propeller-commerce/propeller-api';
 
+// TODO: implement type CartItem[] for returnType and : Cart for variable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItems(cart: Cart): CartItem[] {
-  return [{}];
+function getItems(cart) {
+  return cart?.items || [{}];
 }
 
+// TODO: implement CartItem type for item var
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemName(item: CartItem): string {
-  return 'Name';
+function getItemName(item): string {
+  return item.product.name[0].value;
 }
 
+// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemImage(item: CartItem): string {
-  return 'https://s3-eu-west-1.amazonaws.com/commercetools-maximilian/products/081223_1_large.jpg';
+function getItemImage(item): string {
+  return item.product.images[0]?.url || '';
 }
 
+// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemPrice(item: CartItem): AgnosticPrice {
+function getItemPrice(item): AgnosticPrice {
   return {
-    regular: 12,
-    special: 10,
+    regular: item.product.price.value,
+    // special: 10,
   };
 }
 
+// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemQty(item: CartItem): number {
-  return 1;
+function getItemQty(item): number {
+  return item.quantity;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,17 +51,19 @@ function getItemAttributes(
   };
 }
 
+// TODO: implement CartItem
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemSku(item: CartItem): string {
-  return '';
+function getItemSku(item): string {
+  return item.product.sku;
 }
 
+// TODO: implement Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotals(cart: Cart): AgnosticTotals {
+function getTotals(cart): AgnosticTotals {
   return {
-    total: 12,
-    subtotal: 12,
-    special: 10,
+    total: cart.total.totalGross,
+    subtotal: cart.total.subTotal,
+    special: cart.total.subTotal,
   };
 }
 
@@ -65,9 +72,10 @@ function getShippingPrice(cart: Cart): number {
   return 0;
 }
 
+// TODO: add : Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotalItems(cart: Cart): number {
-  return 1;
+function getTotalItems(cart): number {
+  return cart?.items?.length || 0;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

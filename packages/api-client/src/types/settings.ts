@@ -3,6 +3,11 @@ type apiSettings = {
   apiKey: string;
 };
 
+type cookies = {
+  cartCookieName: string;
+};
+
 export type Settings = {
   api: apiSettings;
+  cookies: cookies;
 };

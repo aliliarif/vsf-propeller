@@ -1,7 +1,14 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query category($slug: String) {
+  query products(
+    $slug: String
+    $offset: Int = 12
+    $page: Int = 1
+    $sort: [SortInput!]
+    $textFilters: [TextFilterInput!]
+    $attributeFilters: AttributeFilterInput
+  ) {
     category(slug: $slug) {
       id
       categoryId
@@ -22,13 +29,28 @@ export default gql`
         language
       }
       defaultLanguage
-      products(offset: 10) {
+      products(
+        offset: $offset
+        page: $page
+        sort: $sort
+        textFilters: $textFilters
+      ) {
         itemsFound
         offset
         page
         pages
         start
         end
+        availableAttributes {
+          id
+          isSearchable
+          description
+          type
+          textFilter {
+            value
+            count
+          }
+        }
         items {
           name {
             value
@@ -42,25 +64,14 @@ export default gql`
             value
             language
           }
+          slug {
+            language
+            value
+          }
           sku
           categoryId
           path
           ... on Product {
-            name {
-              value
-              language
-            }
-            description {
-              value
-              language
-            }
-            shortDescription {
-              value
-              language
-            }
-            sku
-            categoryId
-            path
             shortName
             manufacturerCode
             eanCode
@@ -71,7 +82,6 @@ export default gql`
             costPrice
             suggestedPrice
             storePrice
-            creditPoints
             minimumQuantity
             unit
             purchaseUnit
@@ -102,6 +112,18 @@ export default gql`
               }
               taxCode
               type
+            }
+            attributes(filter: $attributeFilters) {
+              searchId
+              name
+              description {
+                value
+                language
+              }
+              textValue {
+                values
+                language
+              }
             }
           }
         }
