@@ -6,8 +6,14 @@ type cartDeleteItemInput = {
   cartId: string;
   itemId: number;
 };
+
+type AttributeFilterInput = {
+  name: [string];
+};
+
 type Variables = {
   input: cartDeleteItemInput;
+  attributeFilters?: AttributeFilterInput;
 };
 
 // TODO: add types
@@ -18,6 +24,11 @@ export default async (context, params, customQuery) => {
       itemId: params.itemId,
     },
   };
+
+  if (context.config.productAttributes)
+    variables.attributeFilters = {
+      name: context.config.productAttributes,
+    };
 
   const { cartDeleteItem } = context.extendQuery(customQuery, {
     cartDeleteItem: {

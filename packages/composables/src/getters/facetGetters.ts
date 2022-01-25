@@ -43,10 +43,21 @@ const getGrouped = (searchData, criteria?: string[]): AgnosticGroupedFacet[] =>
   );
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getSortOptions(params: FacetSearchResult<Facet>): AgnosticSort {
+function getSortOptions(searchData): AgnosticSort {
+  if (
+    !searchData ||
+    !searchData.data ||
+    !searchData.data.availableSortingOptions
+  ) {
+    return {
+      options: [],
+      selected: '',
+    } as AgnosticSort;
+  }
+
   return {
-    options: [],
-    selected: '',
+    options: searchData.data.availableSortingOptions,
+    selected: searchData.input.sort,
   };
 }
 

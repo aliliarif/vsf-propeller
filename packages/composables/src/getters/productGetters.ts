@@ -43,7 +43,7 @@ function getGallery(product: Product): AgnosticMediaGalleryItem[] {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCoverImage(product: Product): string {
-  return product.images?.[0].url || '';
+  return product?.images?.[0]?.url || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -120,13 +120,19 @@ function getDescription(product: Product): string {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getShortDescription(product: Product): string {
+  return product?.shortDescription?.[0].value || '';
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCategoryIds(product: Product): string[] {
   return [];
 }
 
+// TODO: add type product: Product
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getId(product: Product): string {
-  return `${product.classId}`;
+function getId(product): string {
+  return product.classId;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -144,6 +150,12 @@ function getAverageRating(product: Product): number {
   return 0;
 }
 
+// TODO: add type product: Product
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getStatus(product): string {
+  return product?.status || '';
+}
+
 export const productGetters: ProductGetters<Product, ProductFilter> = {
   getName,
   getSlug,
@@ -153,9 +165,11 @@ export const productGetters: ProductGetters<Product, ProductFilter> = {
   getFiltered,
   getAttributes,
   getDescription,
+  getShortDescription,
   getCategoryIds,
   getId,
   getFormattedPrice,
   getTotalReviews,
   getAverageRating,
+  getStatus,
 };

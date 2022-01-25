@@ -40,10 +40,8 @@ const useUiHelpers = () => {
   };
 
   // eslint-disable-next-line
-  const changeSorting = (sort) => {
-    console.warn('[VSF] please implement useUiHelpers.changeSorting.');
-
-    return 'latest';
+  const changeSorting = async (sort: string) => {
+    await router.push({ query: { ...query, sort } });
   };
 
   // eslint-disable-next-line

@@ -5,15 +5,6 @@ export default gql`
     cart(cartId: $cartId) {
       cartId
       userId
-      total {
-        subTotal
-        subTotalNet
-        discountPercentage
-        totalNet
-        totalGross
-        discountNet
-        discountGross
-      }
       deliveryAddress {
         company
         gender
@@ -45,6 +36,21 @@ export default gql`
         region
         phone
         email
+      }
+      total {
+        subTotal
+        subTotalNet
+        discountPercentage
+        totalNet
+        totalGross
+        discountNet
+        discountGross
+      }
+      postageData {
+        shippingMethod
+        postageTaxPercentage
+        postage
+        postageNet
       }
       items {
         id

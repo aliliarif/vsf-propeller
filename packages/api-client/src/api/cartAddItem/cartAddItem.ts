@@ -1,7 +1,10 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation cartAddItem($input: CartAddItemInput!) {
+  mutation cartAddItem(
+    $input: CartAddItemInput!
+    $attributeFilters: AttributeFilterInput
+  ) {
     cartAddItem(input: $input) {
       cart {
         cartId
@@ -15,12 +18,22 @@ export default gql`
           discountNet
           discountGross
         }
+        postageData {
+          shippingMethod
+          postageTaxPercentage
+          postage
+          postageNet
+        }
         items {
           id
           productId
           quantity
           product {
             name {
+              language
+              value
+            }
+            slug {
               language
               value
             }
@@ -40,6 +53,18 @@ export default gql`
                 }
                 taxCode
                 type
+              }
+              attributes(filter: $attributeFilters) {
+                searchId
+                name
+                description {
+                  value
+                  language
+                }
+                textValue {
+                  values
+                  language
+                }
               }
               images(siteId: 1) {
                 id

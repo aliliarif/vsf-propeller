@@ -15,12 +15,22 @@ export default gql`
           discountNet
           discountGross
         }
+        postageData {
+          shippingMethod
+          postageTaxPercentage
+          postage
+          postageNet
+        }
         items {
           id
           productId
           quantity
           product {
             name {
+              language
+              value
+            }
+            slug {
               language
               value
             }
