@@ -44,6 +44,17 @@
           </div>
         </div>
         <div>
+          <b>Status:</b>
+          <p
+            class="product__description desktop-only"
+            v-html="productGetters.getStatus(product)"
+          ></p>
+          <b>Short description:</b>
+          <p
+            class="product__description desktop-only"
+            v-html="productGetters.getShortDescription(product)"
+          ></p>
+          <b>Description:</b>
           <p
             class="product__description desktop-only"
             v-html="productGetters.getDescription(product)"

@@ -106,6 +106,32 @@
                 />
               </template>
             </SfProperty>
+            <SfProperty
+              name="Shipping price"
+              class="sf-property--full-width sf-property--large my-cart__total-price"
+            >
+              <template #value>
+                <SfPrice :regular="$n(shippingPrice, 'currency')" />
+              </template>
+            </SfProperty>
+
+            <SfProperty
+              name="Discount"
+              class="sf-property--full-width sf-property--large my-cart__total-price"
+            >
+              <template #value>
+                <SfPrice :regular="$n(discounts[0].value, 'currency')" />
+              </template>
+            </SfProperty>
+
+            <SfProperty
+              name="Total"
+              class="sf-property--full-width sf-property--large my-cart__total-price"
+            >
+              <template #value>
+                <SfPrice :regular="$n(totals.total, 'currency')" />
+              </template>
+            </SfProperty>
             <nuxt-link :to="localePath({ name: 'shipping' })">
               <SfButton
                 class="sf-button--full-width color-secondary"
@@ -167,6 +193,10 @@ export default {
     const products = computed(() => cartGetters.getItems(cart.value));
     const totals = computed(() => cartGetters.getTotals(cart.value));
     const totalItems = computed(() => cartGetters.getTotalItems(cart.value));
+    const shippingPrice = computed(() =>
+      cartGetters.getShippingPrice(cart.value)
+    );
+    const discounts = computed(() => cartGetters.getDiscounts(cart.value));
 
     const updateQuantity = debounce(async ({ product, quantity }) => {
       await updateItemQty({ product, quantity });
@@ -182,6 +212,8 @@ export default {
       totals,
       totalItems,
       cartGetters,
+      shippingPrice,
+      discounts,
       productGetters,
     };
   },

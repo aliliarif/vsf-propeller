@@ -67,9 +67,10 @@ function getTotals(cart): AgnosticTotals {
   };
 }
 
+// TODO: implement cart:Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getShippingPrice(cart: Cart): number {
-  return 0;
+function getShippingPrice(cart): number {
+  return cart?.postageData?.postage || 0;
 }
 
 // TODO: add : Cart type
@@ -88,9 +89,18 @@ function getCoupons(cart: Cart): AgnosticCoupon[] {
   return [];
 }
 
+// TODO: add : Cart type
+// TODO: implement description/name of discount
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getDiscounts(cart: Cart): AgnosticDiscount[] {
-  return [];
+function getDiscounts(cart): AgnosticDiscount[] {
+  return [
+    {
+      id: 'discount',
+      name: 'discount',
+      description: 'discount',
+      value: cart.total.discountGross,
+    },
+  ];
 }
 
 export const cartGetters: CartGetters<Cart, CartItem> = {

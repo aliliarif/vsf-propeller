@@ -8,8 +8,14 @@ type cartItemInput = {
   notes?: string;
   itemId: number;
 };
+
+type AttributeFilterInput = {
+  name: [string];
+};
+
 type Variables = {
   input: cartItemInput;
+  attributeFilters?: AttributeFilterInput;
 };
 
 // TODO: add types
@@ -23,6 +29,11 @@ export default async (context, params, customQuery) => {
   };
 
   if (params.notes) variables.input.notes = params.notes;
+
+  if (context.config.productAttributes)
+    variables.attributeFilters = {
+      name: context.config.productAttributes,
+    };
 
   const { cartUpdateItem } = context.extendQuery(customQuery, {
     cartUpdateItem: {
