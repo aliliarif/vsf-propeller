@@ -28,7 +28,6 @@ export default gql`
         value
         language
       }
-      defaultLanguage
       products(
         offset: $offset
         page: $page
@@ -52,6 +51,8 @@ export default gql`
           }
         }
         items {
+          sku
+          path
           name {
             value
             language
@@ -68,27 +69,20 @@ export default gql`
             language
             value
           }
-          sku
-          categoryId
-          path
           ... on Product {
+            id
+            classId
             shortName
             manufacturerCode
             eanCode
             manufacturer
             supplier
             supplierCode
-            originalPrice
-            costPrice
-            suggestedPrice
-            storePrice
-            minimumQuantity
-            unit
-            purchaseUnit
-            id
-            language
             class
-            classId
+            status
+            isOrderable
+            orderableFrom
+            orderableTo
             images(siteId: 1) {
               id
               imageId

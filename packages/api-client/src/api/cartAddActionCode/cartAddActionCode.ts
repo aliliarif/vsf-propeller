@@ -1,11 +1,12 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  mutation cartUpdateItem(
-    $input: CartUpdateItemInput!
+  mutation cartAddActionCode(
+    $cartId: String!
+    $actionCode: String!
     $attributeFilters: AttributeFilterInput
   ) {
-    cartUpdateItem(input: $input) {
+    cartAddActionCode(cartId: $cartId, actionCode: $actionCode) {
       cart {
         cartId
         userId
@@ -80,6 +81,9 @@ export default gql`
             }
           }
         }
+      }
+      response {
+        data
       }
     }
   }

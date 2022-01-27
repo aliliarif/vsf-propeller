@@ -7,5 +7,6 @@ export { default as cartUpdateItem } from './cartUpdateItem';
 export { default as cartDeleteItem } from './cartDeleteItem';
 export { default as cartSetUser } from './cartSetUser';
 export { default as cartUpdateAddress } from './cartUpdateAddress';
+export { default as cartAddActionCode } from './cartAddActionCode';
 export { default as cart } from './cart';
 export { default as cartProcess } from './cartProcess';
