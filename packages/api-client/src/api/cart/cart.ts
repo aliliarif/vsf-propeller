@@ -5,6 +5,7 @@ export default gql`
     cart(cartId: $cartId) {
       cartId
       userId
+      actionCode
       deliveryAddress {
         company
         gender
@@ -57,6 +58,11 @@ export default gql`
         productId
         quantity
         product {
+          sku
+          status
+          isOrderable
+          orderableFrom
+          orderableTo
           name {
             language
             value
@@ -65,42 +71,39 @@ export default gql`
             language
             value
           }
-          sku
-          ... on Product {
-            price {
-              value
+          price {
+            value
+            quantity
+            discount {
+              discountId
+              formula
+              type
               quantity
-              discount {
-                discountId
-                formula
-                type
-                quantity
-                value
-                validFrom
-                validTo
-              }
-              taxCode
-              type
+              value
+              validFrom
+              validTo
             }
-            attributes(filter: $attributeFilters) {
-              searchId
-              name
-              description {
-                value
-                language
-              }
-              textValue {
-                values
-                language
-              }
+            taxCode
+            type
+          }
+          images(siteId: 1) {
+            id
+            imageId
+            name
+            url(fillColor: "white", method: fill, height: 800, width: 800)
+            type
+            order
+          }
+          attributes(filter: $attributeFilters) {
+            searchId
+            name
+            description {
+              value
+              language
             }
-            images(siteId: 1) {
-              id
-              imageId
-              name
-              url(fillColor: "white", method: fill, height: 800, width: 800)
-              type
-              order
+            textValue {
+              values
+              language
             }
           }
         }

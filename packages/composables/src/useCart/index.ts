@@ -117,10 +117,18 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
     context: Context,
     { currentCart, couponCode, customQuery }
   ) => {
-    console.log('Mocked: useCart.applyCoupon');
+    const cartAddActionCodeInput = {
+      cartId: currentCart.cartId,
+      actionCode: couponCode,
+    };
+
+    const { data } = await context.$propeller.api.cartAddActionCode(
+      cartAddActionCodeInput
+    );
+
     return {
-      updatedCart: {},
-      updatedCoupon: {},
+      updatedCart: data.cartAddActionCode.cart as unknown as Cart,
+      updatedCoupon: { code: couponCode },
     };
   },
 

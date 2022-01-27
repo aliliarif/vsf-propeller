@@ -132,6 +132,9 @@
                 <SfPrice :regular="$n(totals.total, 'currency')" />
               </template>
             </SfProperty>
+
+            <CouponCode class="highlighted" />
+
             <nuxt-link :to="localePath({ name: 'shipping' })">
               <SfButton
                 class="sf-button--full-width color-secondary"
@@ -173,6 +176,7 @@ import {
 } from '@propeller-commerce/propeller';
 import { useUiState } from '~/composables';
 import debounce from 'lodash.debounce';
+import CouponCode from './CouponCode.vue';
 
 export default {
   name: 'Cart',
@@ -186,6 +190,7 @@ export default {
     SfCollectedProduct,
     SfImage,
     SfQuantitySelector,
+    CouponCode,
   },
   setup() {
     const { isCartSidebarOpen, toggleCartSidebar } = useUiState();

@@ -89,10 +89,22 @@ function getCoupons(cart: Cart): AgnosticCoupon[] {
   return [];
 }
 
+// TODO: implement cart : Cart
+function getAppliedCoupon(cart): AgnosticCoupon | null {
+  return cart?.actionCode
+    ? {
+        id: cart.actionCode,
+        name: cart.actionCode,
+        value: 0,
+        code: cart.actionCode,
+      }
+    : null;
+}
+
 // TODO: add : Cart type
-// TODO: implement description/name of discount
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getDiscounts(cart): AgnosticDiscount[] {
+  console.log(cart);
   return [
     {
       id: 'discount',
@@ -116,5 +128,6 @@ export const cartGetters: CartGetters<Cart, CartItem> = {
   getFormattedPrice,
   getTotalItems,
   getCoupons,
+  getAppliedCoupon,
   getDiscounts,
 };

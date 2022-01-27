@@ -1,6 +1,6 @@
 {
   "name": "@propeller-commerce/propeller-api",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",

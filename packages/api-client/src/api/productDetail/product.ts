@@ -6,6 +6,22 @@ export default gql`
     $attributeFilters: AttributeFilterInput
   ) {
     product(id: $productId) {
+      id
+      classId
+      categoryId
+      sku
+      shortName
+      eanCode
+      manufacturer
+      manufacturerCode
+      supplier
+      supplierCode
+      taxCode
+      status
+      isOrderable
+      orderableFrom
+      orderableTo
+      unit
       name {
         value
         language
@@ -18,66 +34,40 @@ export default gql`
         value
         language
       }
-      sku
-      categoryId
-      path
-      shortName
-      eanCode
-      manufacturer
-      manufacturerCode
-      supplier
-      supplierCode
-      taxCode
-      status
-      originalPrice
-      costPrice
-      suggestedPrice
-      storePrice
-      minimumQuantity
-      unit
-      purchaseUnit
-      purchaseMinimumQuantity
-      econommicOrderQuantity
-      ... on Product {
+      images(siteId: 1) {
         id
-        language
-        class
-        classId
-        images(siteId: 1) {
-          id
-          imageId
-          name
-          url(fillColor: "white", method: fill, height: 800, width: 800)
+        imageId
+        name
+        url(fillColor: "white", method: fill, height: 800, width: 800)
+        type
+        order
+      }
+      price {
+        value
+        quantity
+        discount {
+          discountId
+          formula
           type
-          order
-        }
-        price {
-          value
           quantity
-          discount {
-            discountId
-            formula
-            type
-            quantity
-            value
-            validFrom
-            validTo
-            hops
-          }
-          taxCode
-          type
+          value
+          validFrom
+          validTo
+          hops
         }
-        attributes(filter: $attributeFilters) {
-          searchId
-          name
-          description {
-            value
-            language
-          }
-          textValue {
-            values
-            language
-          }
+        taxCode
+        type
+      }
+      attributes(filter: $attributeFilters) {
+        searchId
+        name
+        description {
+          value
+          language
+        }
+        textValue {
+          values
+          language
         }
       }
     }
