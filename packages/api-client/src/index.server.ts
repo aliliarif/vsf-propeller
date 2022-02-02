@@ -20,6 +20,7 @@ function onCreate(settings: Settings) {
     cache: new InMemoryCache({
       addTypename: true,
     }),
+    ssrMode: true,
   });
 
   return {
