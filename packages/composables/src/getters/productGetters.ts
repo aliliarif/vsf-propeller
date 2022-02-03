@@ -156,6 +156,12 @@ function getStatus(product): string {
   return product?.status || '';
 }
 
+// TODO: add type product: Product and return type BundleProducts
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getBundleProducts(product) {
+  return product?.bundles || [];
+}
+
 export const productGetters: ProductGetters<Product, ProductFilter> = {
   getName,
   getSlug,
@@ -172,4 +178,5 @@ export const productGetters: ProductGetters<Product, ProductFilter> = {
   getTotalReviews,
   getAverageRating,
   getStatus,
+  getBundleProducts,
 };

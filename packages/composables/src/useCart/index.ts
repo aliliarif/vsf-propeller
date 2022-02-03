@@ -62,12 +62,10 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
       quantity: quantity,
     };
 
-    const simpleProduct = await context.$propeller.api.cartAddItem(
-      cartAddItemInput
-    );
+    const cart = await context.$propeller.api.cartAddItem(cartAddItemInput);
 
     // eslint-disable-next-line consistent-return
-    return simpleProduct.data.cartAddItem.cart as unknown as Cart;
+    return cart.data.cartAddItem.cart as unknown as Cart;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

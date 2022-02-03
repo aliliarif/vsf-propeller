@@ -110,6 +110,14 @@
           />
         </div>
 
+        <div>
+          <b>Bundles:</b>
+          <p
+            class="product__description desktop-only"
+            v-html="productGetters.getBundleProducts(product)"
+          ></p>
+        </div>
+
         <LazyHydrate when-idle>
           <SfTabs :open-tab="1" class="product__tabs">
             <SfTab title="Description"> </SfTab>
