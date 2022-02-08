@@ -1,6 +1,6 @@
 {
   "name": "@propeller-commerce/propeller",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "private": false,
   "license": "MIT",
   "sideEffects": false,
@@ -17,7 +17,7 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@propeller-commerce/propeller-api": "0.0.15",
+    "@propeller-commerce/propeller-api": "0.0.16",
     "@vue-storefront/core": "~2.5.2",
     "cookie-universal": "^2.1.5"
   },

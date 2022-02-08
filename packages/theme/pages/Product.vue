@@ -116,6 +116,17 @@
             class="product__description desktop-only"
             v-html="productGetters.getBundleProducts(product)"
           ></p>
+          <SfAddToCart
+            v-e2e="'product_add-to-cart'"
+            :stock="stock"
+            v-model="qty"
+            :disabled="loading"
+            :canAddToCart="stock > 0"
+            class="product__add-to-cart"
+            @click="
+              addItem({ product: { bundleId: 33 }, quantity: parseInt(qty) })
+            "
+          />
         </div>
 
         <LazyHydrate when-idle>

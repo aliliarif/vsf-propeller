@@ -98,6 +98,18 @@ export default gql`
               type
               order
             }
+            attributes(filter: $attributeFilters) {
+              searchId
+              name
+              description {
+                value
+                language
+              }
+              textValue {
+                values
+                language
+              }
+            }
           }
         }
       }

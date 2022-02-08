@@ -1,30 +1,26 @@
 import gql from 'graphql-tag';
 import { Logger } from '@vue-storefront/core';
-import cartAddBundleQuery from './cartAddBundle';
-
-type cartBundleInput = {
-  cartId: string;
-  bundleId: number;
-  quantity: number;
-};
+import cartRemoveActionCodeQuery from './cartRemoveActionCode';
 
 type AttributeFilterInput = {
   name: [string];
 };
 
-type Variables = {
-  input: cartBundleInput;
+type cartRemoveActionCodeInput = {
+  cartId: string;
+  actionCode: string;
   attributeFilters?: AttributeFilterInput;
 };
 
 // TODO: add types
-export default async (context, params, customQuery) => {
-  const variables: Variables = {
-    input: {
-      cartId: params.cartId,
-      bundleId: params.bundleId,
-      quantity: params.quantity,
-    },
+export default async (
+  context,
+  input: cartRemoveActionCodeInput,
+  customQuery
+) => {
+  const variables: cartRemoveActionCodeInput = {
+    cartId: input.cartId,
+    actionCode: input.actionCode,
   };
 
   if (context.config.productAttributes)
@@ -32,9 +28,9 @@ export default async (context, params, customQuery) => {
       name: context.config.productAttributes,
     };
 
-  const { cartAddBundle } = context.extendQuery(customQuery, {
-    cartAddBundle: {
-      query: cartAddBundleQuery,
+  const { cartRemoveActionCode } = context.extendQuery(customQuery, {
+    cartRemoveActionCode: {
+      query: cartRemoveActionCodeQuery,
       variables,
     },
   });
@@ -42,12 +38,12 @@ export default async (context, params, customQuery) => {
   try {
     return context.client.mutate({
       mutation: gql`
-        ${cartAddBundle.query}
+        ${cartRemoveActionCode.query}
       `,
-      variables: cartAddBundle.variables,
+      variables: cartRemoveActionCode.variables,
     });
   } catch (error) {
-    console.log('Error adding bundle to cart');
+    console.log('Error adding item to cart');
     console.log(error);
     // For error in data we don't throw 500, because it's not server error
     if (error.graphQLErrors) {

@@ -12,8 +12,9 @@ import type {
 // !ASAP TODO: CHANGE THIS
 type CartItemTemp = any;
 type CartTemp = any;
+type ProductTemp = any;
 
-const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
+const params: UseCartFactoryParams<CartTemp, CartItemTemp, ProductTemp> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
     // TODO: temp
@@ -56,16 +57,31 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
       // check if user is already loged in, if so, add user to cart
     }
 
-    const cartAddItemInput = {
-      cartId: existngCartId,
-      productId: product.classId,
-      quantity: quantity,
-    };
+    if (product.bundleId) {
+      const cartAddBundleInput = {
+        cartId: existngCartId,
+        bundleId: product.bundleId,
+        quantity: quantity,
+      };
 
-    const cart = await context.$propeller.api.cartAddItem(cartAddItemInput);
+      const cart = await context.$propeller.api.cartAddBundle(
+        cartAddBundleInput
+      );
 
-    // eslint-disable-next-line consistent-return
-    return cart.data.cartAddItem.cart as unknown as Cart;
+      // eslint-disable-next-line consistent-return
+      return cart.data.cartAddBundle.cart as unknown as Cart;
+    } else {
+      const cartAddItemInput = {
+        cartId: existngCartId,
+        productId: product.classId,
+        quantity: quantity,
+      };
+
+      const cart = await context.$propeller.api.cartAddItem(cartAddItemInput);
+
+      // eslint-disable-next-line consistent-return
+      return cart.data.cartAddItem.cart as unknown as Cart;
+    }
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -135,9 +151,18 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, Product> = {
     context: Context,
     { currentCart, couponCode, customQuery }
   ) => {
-    console.log('Mocked: useCart.removeCoupon');
+    const cartRemoveActionCodeInput = {
+      cartId: currentCart.cartId,
+      actionCode: currentCart.actionCode,
+    };
+
+    const { data } = await context.$propeller.api.cartRemoveActionCode(
+      cartRemoveActionCodeInput
+    );
+
     return {
-      updatedCart: {},
+      updatedCart: data.cartRemoveActionCode.cart as unknown as Cart,
+      updatedCoupon: { code: '' },
     };
   },
 
