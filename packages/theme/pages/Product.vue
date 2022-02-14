@@ -111,6 +111,7 @@
         </div>
 
         <div>
+          <b>Slug: </b> {{ productGetters.getSlug(product) }} <br />
           <b>Bundles:</b>
           <p
             class="product__description desktop-only"

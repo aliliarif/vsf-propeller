@@ -26,6 +26,10 @@ export default gql`
         value
         language
       }
+      slug {
+        value
+        language
+      }
       description {
         value
         language

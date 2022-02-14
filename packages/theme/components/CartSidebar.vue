@@ -39,6 +39,8 @@
                 <template #configuration>
                   <div class="collected-product__properties">
                     <b>Slug: </b> {{ productGetters.getSlug(product.product) }}
+                    <b>Bundle: </b>
+                    {{ product.bundle }}
                     <SfProperty
                       v-for="(attribute, key) in productGetters.getAttributes(
                         product.product,
