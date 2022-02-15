@@ -168,6 +168,12 @@
         </LazyHydrate>
       </div>
     </div>
+    <LazyHydrate when-visible>
+      <RelatedProducts
+        :crossupsells="crossupsellProducts"
+        title="Match it with"
+      />
+    </LazyHydrate>
   </div>
 </template>
 <script>
@@ -190,7 +196,7 @@ import {
   SfButton,
   SfColor,
 } from '@storefront-ui/vue';
-
+import RelatedProducts from '~/components/RelatedProducts.vue';
 import { ref, computed, useRoute, useRouter } from '@nuxtjs/composition-api';
 import {
   useProduct,
@@ -240,6 +246,9 @@ export default {
     const reviews = computed(() =>
       reviewGetters.getItems(productReviews.value)
     );
+    const crossupsellProducts = computed(() =>
+      productGetters.getCrossupsellProducts(product.value, ['color', 'size'])
+    );
 
     // TODO: Breadcrumbs are temporary disabled because productGetters return undefined. We have a mocks in data
     const productGallery = computed(() =>
@@ -288,6 +297,7 @@ export default {
       loading,
       productGetters,
       productGallery,
+      crossupsellProducts,
     };
   },
   components: {
@@ -308,6 +318,7 @@ export default {
     SfReview,
     SfBreadcrumbs,
     SfButton,
+    RelatedProducts,
     LazyHydrate,
   },
   data() {

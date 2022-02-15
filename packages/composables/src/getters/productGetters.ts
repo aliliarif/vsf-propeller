@@ -85,24 +85,10 @@ function getAttributes(
     return prev;
   };
 
-  // const reduceByAttributeName = (prev, curr) => ({
-  //   ...prev,
-  //   [curr.name]: isSingleProduct
-  //     ? curr.value
-  //     : [
-  //         ...(prev[curr.name] || []),
-  //         {
-  //           value: curr.value,
-  //           label: curr.label,
-  //         },
-  //       ],
-  // });
-
   return productList
     .map((product) => formatAttributes(product))
     .reduce((prev, curr) => [...prev, ...curr], [])
     .reduce(reduceToUniques, []);
-  // .reduce(reduceByAttributeName, {});
 }
 
 const formatAttributeList = (attributes: Array<any>): AgnosticAttribute[] =>
@@ -162,6 +148,12 @@ function getBundleProducts(product) {
   return product?.bundles || [];
 }
 
+// TODO: add type product: Product and return type Crossupsells[]
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getCrossupsellProducts(product) {
+  return product?.crossupsells || [];
+}
+
 export const productGetters: ProductGetters<Product, ProductFilter> = {
   getName,
   getSlug,
@@ -179,4 +171,5 @@ export const productGetters: ProductGetters<Product, ProductFilter> = {
   getAverageRating,
   getStatus,
   getBundleProducts,
+  getCrossupsellProducts,
 };

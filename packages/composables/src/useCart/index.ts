@@ -57,6 +57,7 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, ProductTemp> = {
       // check if user is already loged in, if so, add user to cart
     }
 
+    // add bundle to cart
     if (product.bundleId) {
       const cartAddBundleInput = {
         cartId: existngCartId,
