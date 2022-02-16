@@ -148,10 +148,14 @@ function getBundleProducts(product) {
   return product?.bundles || [];
 }
 
-// TODO: add type product: Product and return type Crossupsells[]
+// TODO: add type product: Product, types: CrossupsellTypes and return type Crossupsells[]
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getCrossupsellProducts(product) {
-  return product?.crossupsells || [];
+function getCrossupsellProducts(product, types) {
+  return (
+    product?.crossupsells.filter((crossupsell) =>
+      types ? types.includes(crossupsell.type) : crossupsell
+    ) || []
+  );
 }
 
 export const productGetters: ProductGetters<Product, ProductFilter> = {

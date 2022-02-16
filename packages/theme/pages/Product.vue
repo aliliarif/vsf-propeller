@@ -169,9 +169,15 @@
       </div>
     </div>
     <LazyHydrate when-visible>
+      <RelatedProducts :crossupsells="accessoryProducts" title="Accessories" />
+    </LazyHydrate>
+    <LazyHydrate when-visible>
+      <RelatedProducts :crossupsells="relatedProducts" title="Related" />
+    </LazyHydrate>
+    <LazyHydrate when-visible>
       <RelatedProducts
-        :crossupsells="crossupsellProducts"
-        title="Match it with"
+        :crossupsells="alternativeProducts"
+        title="Alternatives"
       />
     </LazyHydrate>
   </div>
@@ -246,8 +252,14 @@ export default {
     const reviews = computed(() =>
       reviewGetters.getItems(productReviews.value)
     );
-    const crossupsellProducts = computed(() =>
-      productGetters.getCrossupsellProducts(product.value, ['color', 'size'])
+    const accessoryProducts = computed(() =>
+      productGetters.getCrossupsellProducts(product.value, ['ACCESSORIES'])
+    );
+    const relatedProducts = computed(() =>
+      productGetters.getCrossupsellProducts(product.value, ['RELATED'])
+    );
+    const alternativeProducts = computed(() =>
+      productGetters.getCrossupsellProducts(product.value, ['ALTERNATIVES'])
     );
 
     // TODO: Breadcrumbs are temporary disabled because productGetters return undefined. We have a mocks in data
@@ -297,7 +309,9 @@ export default {
       loading,
       productGetters,
       productGallery,
-      crossupsellProducts,
+      accessoryProducts,
+      relatedProducts,
+      alternativeProducts,
     };
   },
   components: {

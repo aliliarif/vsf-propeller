@@ -4,6 +4,7 @@ export default gql`
   query productDetails(
     $productId: Int!
     $attributeFilters: AttributeFilterInput
+    $crossupsellTypesInput: CrossupsellTypesInput
   ) {
     product(id: $productId) {
       id
@@ -117,7 +118,7 @@ export default gql`
           }
         }
       }
-      crossupsells(input: { types: [ACCESSORIES, RELATED] }) {
+      crossupsells(input: $crossupsellTypesInput) {
         type
         subtype
         product {

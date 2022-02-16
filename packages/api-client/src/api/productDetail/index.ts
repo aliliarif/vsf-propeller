@@ -7,9 +7,27 @@ type AttributeFilterInput = {
   name: [string];
 };
 
+enum CrossupsellTypes {
+  ACCESSORIES,
+  ALTERNATIVES,
+  OPTIONS,
+  PARTS,
+  RELATED,
+}
+
+type CrossUpsellTypesInput = {
+  types?: [CrossupsellTypes];
+  subTypes?: [string];
+};
+
+type CrossUpsellInput = {
+  input: CrossUpsellTypesInput;
+};
+
 type Variables = {
   productId: number;
   attributeFilters?: AttributeFilterInput;
+  crossupsellTypesInput?: CrossUpsellInput;
 };
 
 export default async (context, searchParams, customQuery) => {
@@ -20,6 +38,11 @@ export default async (context, searchParams, customQuery) => {
   if (context.config.productAttributes)
     variables.attributeFilters = {
       name: context.config.productAttributes,
+    };
+
+  if (context.config.crossupsellTypes)
+    variables.crossupsellTypesInput = {
+      input: { types: context.config.crossupsellTypes },
     };
 
   const { product } = context.extendQuery(customQuery, {
@@ -39,10 +62,6 @@ export default async (context, searchParams, customQuery) => {
   } catch (error) {
     // For error in data we don't throw 500, because it's not server error
     if (error.graphQLErrors) {
-      console.log('Error in product');
-      console.log(error);
-      Logger.debug(error);
-
       return {
         ...error,
         errors: error.graphQLErrors,

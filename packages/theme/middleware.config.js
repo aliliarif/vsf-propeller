@@ -30,6 +30,7 @@ module.exports = {
           'EXAMEN_TECHNISCHE_BINDWIJZE',
           'EXAMEN_UITGEVERIJ',
         ],
+        // crossupsellTypes: [ACCESSORIES, RELATED],
       },
     },
   },
