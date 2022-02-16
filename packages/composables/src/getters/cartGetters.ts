@@ -104,7 +104,6 @@ function getAppliedCoupon(cart): AgnosticCoupon | null {
 // TODO: add : Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getDiscounts(cart): AgnosticDiscount[] {
-  console.log(cart);
   return [
     {
       id: 'discount',

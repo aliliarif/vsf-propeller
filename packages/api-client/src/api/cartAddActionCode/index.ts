@@ -39,21 +39,14 @@ export default async (context, input: cartAddActionCodeInput, customQuery) => {
       variables: cartAddActionCode.variables,
     });
   } catch (error) {
-    console.log('Error adding item to cart');
-    console.log(error);
     // For error in data we don't throw 500, because it's not server error
     if (error.graphQLErrors) {
-      console.log('Error adding item to cart');
-      console.log(error);
-      Logger.debug(error);
-
       return {
         ...error,
         errors: error.graphQLErrors,
         data: null,
       };
     }
-    Logger.error(error);
     throw error.networkError?.result || error;
   }
 };
