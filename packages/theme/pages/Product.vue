@@ -44,6 +44,12 @@
           </div>
         </div>
         <div>
+          <b>Inventory:</b>
+          <p
+            class="product__description desktop-only"
+            v-html="productGetters.getInventory(product)"
+          ></p>
+
           <b>Status:</b>
           <p
             class="product__description desktop-only"

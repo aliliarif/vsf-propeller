@@ -38,6 +38,8 @@
               >
                 <template #configuration>
                   <div class="collected-product__properties">
+                    <b>Inventory: </b>
+                    {{ productGetters.getInventory(product.product) }}
                     <b>Slug: </b> {{ productGetters.getSlug(product.product) }}
                     <b>Bundle: </b>
                     {{ product.bundle }}

@@ -119,6 +119,9 @@ export default gql`
                 language
               }
             }
+            inventory {
+              totalQuantity
+            }
           }
         }
       }

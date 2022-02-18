@@ -1,6 +1,6 @@
 {
   "name": "@propeller-commerce/propeller-api",
-  "version": "0.0.17",
+  "version": "0.0.19",
   "private": false,
   "license": "MIT",
   "sideEffects": false,

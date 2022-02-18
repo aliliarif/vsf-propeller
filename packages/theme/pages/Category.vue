@@ -93,7 +93,7 @@
               :key="productGetters.getSlug(product)"
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
-              :badgeLabel="productGetters.getAttributes(product)[0].label"
+              :badgeLabel="'Inventory: ' + productGetters.getInventory(product)"
               :image="productGetters.getCoverImage(product)"
               :regular-price="
                 $n(productGetters.getPrice(product).regular, 'currency')

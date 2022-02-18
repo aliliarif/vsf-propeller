@@ -158,6 +158,12 @@ function getCrossupsellProducts(product, types) {
   );
 }
 
+// TODO: add type product: Product and return type Inventory
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getInventory(product) {
+  return product?.inventory?.totalQuantity || 0;
+}
+
 export const productGetters: ProductGetters<Product, ProductFilter> = {
   getName,
   getSlug,
@@ -176,4 +182,5 @@ export const productGetters: ProductGetters<Product, ProductFilter> = {
   getStatus,
   getBundleProducts,
   getCrossupsellProducts,
+  getInventory,
 };

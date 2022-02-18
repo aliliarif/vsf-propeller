@@ -73,6 +73,9 @@ export const CART_FIELDS = gql`
             language
           }
         }
+        inventory {
+          totalQuantity
+        }
       }
       bundle {
         id

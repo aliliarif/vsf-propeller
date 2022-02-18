@@ -20,8 +20,6 @@ export default gql`
       taxCode
       status
       isOrderable
-      orderableFrom
-      orderableTo
       unit
       name {
         value
@@ -132,11 +130,8 @@ export default gql`
           manufacturerCode
           supplier
           supplierCode
-          taxCode
           status
           isOrderable
-          orderableFrom
-          orderableTo
           unit
           name {
             value
@@ -191,6 +186,9 @@ export default gql`
             }
           }
         }
+      }
+      inventory {
+        totalQuantity
       }
     }
   }
