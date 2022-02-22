@@ -30,7 +30,7 @@ function getItemImage(item): string {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemPrice(item): AgnosticPrice {
   return {
-    regular: item.product.price.value,
+    regular: item.priceNet,
     // special: 10,
   };
 }
@@ -61,16 +61,22 @@ function getItemSku(item): string {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getTotals(cart): AgnosticTotals {
   return {
-    total: cart.total.totalGross,
-    subtotal: cart.total.subTotal,
-    special: cart.total.subTotal,
+    total: cart.total.totalNet,
+    subtotal: cart.total.subTotalNet,
+    special: cart.total.subTotalNet,
   };
+}
+
+// TODO: implement Cart type and TaxLevels
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getAppliedTaxLevels(cart) {
+  return cart?.taxLevels;
 }
 
 // TODO: implement cart:Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getShippingPrice(cart): number {
-  return cart?.postageData?.postage || 0;
+  return cart?.postageData?.postageNet || 0;
 }
 
 // TODO: add : Cart type
@@ -116,6 +122,7 @@ function getDiscounts(cart): AgnosticDiscount[] {
 
 export const cartGetters: CartGetters<Cart, CartItem> = {
   getTotals,
+  getAppliedTaxLevels,
   getShippingPrice,
   getItems,
   getItemName,

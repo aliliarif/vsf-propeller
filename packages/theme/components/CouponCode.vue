@@ -27,13 +27,13 @@ import {
   onMounted,
   watch,
   ref,
-  defineComponent
+  defineComponent,
 } from '@nuxtjs/composition-api';
 export default defineComponent({
   name: 'CouponCode',
   components: {
     SfButton,
-    SfInput
+    SfInput,
   },
   setup() {
     const { cart, applyCoupon, removeCoupon } = useCart();
@@ -47,18 +47,19 @@ export default defineComponent({
       promoCode.value = promoIsApplied.value;
     };
     const handleCoupon = async () => {
-      await (promoIsApplied.value
+      const t = await (promoIsApplied.value
         ? removeCoupon({ currentCart: cart.value })
         : applyCoupon({ couponCode: promoCode.value }));
+      console.log(t);
     };
     onMounted(setCartCoupon);
     watch(promoIsApplied, setCartCoupon);
     return {
       handleCoupon,
       promoIsApplied,
-      promoCode
+      promoCode,
     };
-  }
+  },
 });
 </script>
 <style lang="scss" scoped>

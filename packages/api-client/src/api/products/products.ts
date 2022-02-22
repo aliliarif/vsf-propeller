@@ -92,7 +92,8 @@ export default gql`
               order
             }
             price {
-              value
+              gross
+              net
               quantity
               discount {
                 discountId

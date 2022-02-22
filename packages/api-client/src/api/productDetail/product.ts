@@ -46,7 +46,8 @@ export default gql`
         order
       }
       price {
-        value
+        gross
+        net
         quantity
         discount {
           discountId
@@ -56,7 +57,6 @@ export default gql`
           value
           validFrom
           validTo
-          hops
         }
         taxCode
         type

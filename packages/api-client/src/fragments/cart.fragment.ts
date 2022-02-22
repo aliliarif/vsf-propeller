@@ -14,6 +14,10 @@ export const CART_FIELDS = gql`
       discountNet
       discountGross
     }
+    taxLevels {
+      price
+      taxCode
+    }
     postageData {
       shippingMethod
       postageTaxPercentage
@@ -23,13 +27,15 @@ export const CART_FIELDS = gql`
     items {
       id
       productId
+      price
+      priceNet
+      totalPrice
+      totalPriceNet
       quantity
       product {
         sku
         status
         isOrderable
-        orderableFrom
-        orderableTo
         name {
           language
           value
@@ -37,21 +43,6 @@ export const CART_FIELDS = gql`
         slug {
           language
           value
-        }
-        price {
-          value
-          quantity
-          discount {
-            discountId
-            formula
-            type
-            quantity
-            value
-            validFrom
-            validTo
-          }
-          taxCode
-          type
         }
         images(siteId: 1) {
           id

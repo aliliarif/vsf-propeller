@@ -20,7 +20,7 @@ function getSlug(product): string {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getPrice(product: Product): AgnosticPrice {
   return {
-    regular: product.price.value,
+    regular: product.price.net,
     // special: product.price.value,
   };
 }
