@@ -77,6 +77,7 @@ const factoryParams = {
     const page = params.input.page ? params.input.page : 1;
     const inputFilters = params.input.filters ? params.input.filters : {};
     const categorySlug = params.input.categorySlug;
+    const hasBundle = params.input.hasBundle || null;
 
     const productParams = {
       textFilters: [
@@ -87,7 +88,6 @@ const factoryParams = {
       offset,
       page,
       sort: constructSortObject(params.input.sort || ''),
-      // search: params.input.term ? params.input.term : '',
     };
 
     const productSearchParams = {
@@ -96,7 +96,7 @@ const factoryParams = {
       categorySlug,
       textFilters: productParams.textFilters,
       sort: productParams.sort,
-      // search: productParams.search,
+      hasBundle,
     };
 
     const { data } = await context.$propeller.api.products(productSearchParams);

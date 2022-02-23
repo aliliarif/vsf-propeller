@@ -47,10 +47,9 @@ export default defineComponent({
       promoCode.value = promoIsApplied.value;
     };
     const handleCoupon = async () => {
-      const t = await (promoIsApplied.value
+      await (promoIsApplied.value
         ? removeCoupon({ currentCart: cart.value })
         : applyCoupon({ couponCode: promoCode.value }));
-      console.log(t);
     };
     onMounted(setCartCoupon);
     watch(promoIsApplied, setCartCoupon);

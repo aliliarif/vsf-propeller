@@ -1,5 +1,6 @@
 export { default as products } from './products';
 export { default as productDetail } from './productDetail';
+export { default as bundleDetail } from './bundleDetail';
 export { default as categories } from './categories';
 export { default as cartStart } from './cartStart';
 export { default as cartAddItem } from './cartAddItem';

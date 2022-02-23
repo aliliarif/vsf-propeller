@@ -29,6 +29,11 @@ enum SortableFields {
   relevance,
 }
 
+enum YesNoEnum {
+  Y = 'Y',
+  N = 'N',
+}
+
 type SortInput = {
   field: SortableFields;
   order: SortOrder;
@@ -43,6 +48,8 @@ type Variables = {
   textFilters?: [TextFilterInput];
   // rangeFilters?: [RangeFilterInput];
   attributeFilters?: AttributeFilterInput;
+  hasBundle?: YesNoEnum;
+  isBundleLeader?: YesNoEnum;
 };
 
 export default async (context, searchParams, customQuery?: CustomQuery) => {
@@ -67,6 +74,11 @@ export default async (context, searchParams, customQuery?: CustomQuery) => {
     variables.textFilters = searchParams.textFilters;
 
   if (searchParams.sort) variables.sort = searchParams.sort;
+
+  if (searchParams.hasBundle) {
+    variables.hasBundle = YesNoEnum['Y'];
+    variables.isBundleLeader = YesNoEnum['Y'];
+  }
 
   const { products } = context.extendQuery(customQuery, {
     products: {

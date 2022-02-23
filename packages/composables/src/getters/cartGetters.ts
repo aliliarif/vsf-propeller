@@ -115,7 +115,7 @@ function getDiscounts(cart): AgnosticDiscount[] {
       id: 'discount',
       name: 'discount',
       description: 'discount',
-      value: cart.total.discountGross,
+      value: cart.total.discountNet,
     },
   ];
 }
