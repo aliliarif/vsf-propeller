@@ -12,35 +12,43 @@ const availableSortingOptions = [
   },
   {
     label: 'Relevance A-Z',
-    value: 'RELEVANCE_ASC',
+    value: 'relevance_asc',
   },
   {
     label: 'Relevance Z-A',
-    value: 'RELEVANCE_DESC',
+    value: 'relevance_desc',
   },
   {
     label: 'Name A-Z',
-    value: 'NAME_ASC',
+    value: 'name_asc',
   },
   {
     label: 'Name Z-A',
-    value: 'NAME_DESC',
+    value: 'name_desc',
+  },
+  {
+    label: 'Short name A-Z',
+    value: 'shortName_asc',
+  },
+  {
+    label: 'Short name Z-A',
+    value: 'shortName_desc',
   },
   {
     label: 'Product SKU A-Z',
-    value: 'SKU_ASC',
+    value: 'sku_asc',
   },
   {
     label: 'Product SKU Z-A',
-    value: 'SKU_DESC',
+    value: 'sku_desc',
   },
   {
     label: 'Price from low to high',
-    value: 'PRICE_ASC',
+    value: 'price_asc',
   },
   {
     label: 'Price from high to low',
-    value: 'PRICE_DESC',
+    value: 'price_desc',
   },
 ];
 
@@ -61,11 +69,12 @@ const constructSortObject = (sortData: string) => {
   const baseData = sortData.split(/_/gi);
   let data = null;
 
-  if (baseData.length == 2)
+  if (baseData.length == 2) {
     data = {
-      field: baseData[0].toLowerCase(),
-      order: baseData[1].toLowerCase(),
+      field: baseData[0],
+      order: baseData[1],
     };
+  }
 
   return data;
 };

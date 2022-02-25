@@ -11,6 +11,11 @@ function getName(product: Product): string {
   return product?.name?.[0].value || '';
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getShortName(product: Product): string {
+  return product?.shortName || '';
+}
+
 // TODO add product:Product
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getSlug(product): string {
@@ -166,6 +171,7 @@ function getInventory(product) {
 
 export const productGetters: ProductGetters<Product, ProductFilter> = {
   getName,
+  getShortName,
   getSlug,
   getPrice,
   getGallery,

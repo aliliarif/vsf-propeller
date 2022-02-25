@@ -25,6 +25,7 @@ enum SortableFields {
   dateCreated,
   dateChanged,
   name,
+  shortName,
   price,
   relevance,
 }
