@@ -131,7 +131,7 @@
             :canAddToCart="stock > 0"
             class="product__add-to-cart"
             @click="
-              addItem({ product: { bundleId: 33 }, quantity: parseInt(qty) })
+              addItem({ product: { bundleId: 52 }, quantity: parseInt(qty) })
             "
           />
         </div>
@@ -246,11 +246,7 @@ export default {
       })
     );
     const options = computed(
-      () =>
-        productGetters.getAttributes(products.value, [
-          'EXAMEN_UITGEVERIJ',
-          'EXAMEN_DRUK',
-        ]) // , ['color', 'size']
+      () => productGetters.getAttributes(products.value) // , ['color', 'size']
     );
     const configuration = computed(() =>
       productGetters.getAttributes(product.value, ['color', 'size'])

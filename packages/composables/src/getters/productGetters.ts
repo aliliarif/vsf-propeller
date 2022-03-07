@@ -157,7 +157,7 @@ function getBundleProducts(product) {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCrossupsellProducts(product, types) {
   return (
-    product?.crossupsells.filter((crossupsell) =>
+    product?.crossupsells?.filter((crossupsell) =>
       types ? types.includes(crossupsell.type) : crossupsell
     ) || []
   );

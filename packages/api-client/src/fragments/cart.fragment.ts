@@ -92,9 +92,13 @@ export const CART_FIELDS = gql`
             originalGross
           }
           product {
+            isOrderable
             name {
               language
               value
+            }
+            inventory {
+              totalQuantity
             }
             images(siteId: 1) {
               id
