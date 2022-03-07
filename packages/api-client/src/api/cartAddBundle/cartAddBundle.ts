@@ -3,11 +3,11 @@ import { CART_FIELDS } from '../../fragments/cart.fragment';
 
 export default gql`
   ${CART_FIELDS}
-  mutation cartDeleteItem(
-    $input: CartDeleteItemInput!
+  mutation cartAddBundle(
+    $input: CartAddBundleInput!
     $attributeFilters: AttributeFilterInput
   ) {
-    cartDeleteItem(input: $input) {
+    cartAddBundle(input: $input) {
       cart {
         ...CartFields
       }

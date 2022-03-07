@@ -1,22 +1,20 @@
 import gql from 'graphql-tag';
 import { Logger } from '@vue-storefront/core';
-import cartAddActionCodeQuery from './cartAddActionCode';
+import bundleQuery from './bundle';
 
+// TODO: move this outside of this file (same type is used on products)
 type AttributeFilterInput = {
   name: [string];
 };
 
-type cartAddActionCodeInput = {
-  cartId: string;
-  actionCode: string;
+type Variables = {
+  bundleId: number;
   attributeFilters?: AttributeFilterInput;
 };
 
-// TODO: add types
-export default async (context, input: cartAddActionCodeInput, customQuery) => {
-  const variables: cartAddActionCodeInput = {
-    cartId: input.cartId,
-    actionCode: input.actionCode,
+export default async (context, searchParams, customQuery) => {
+  const variables: Variables = {
+    bundleId: parseInt(searchParams.bundleId),
   };
 
   if (context.config.productAttributes)
@@ -24,19 +22,19 @@ export default async (context, input: cartAddActionCodeInput, customQuery) => {
       name: context.config.productAttributes,
     };
 
-  const { cartAddActionCode } = context.extendQuery(customQuery, {
-    cartAddActionCode: {
-      query: cartAddActionCodeQuery,
+  const { bundle } = context.extendQuery(customQuery, {
+    bundle: {
+      query: bundleQuery,
       variables,
     },
   });
 
   try {
-    return context.client.mutate({
-      mutation: gql`
-        ${cartAddActionCode.query}
+    return context.client.query({
+      query: gql`
+        ${bundle.query}
       `,
-      variables: cartAddActionCode.variables,
+      variables: bundle.variables,
     });
   } catch (error) {
     // For error in data we don't throw 500, because it's not server error
@@ -47,6 +45,7 @@ export default async (context, input: cartAddActionCodeInput, customQuery) => {
         data: null,
       };
     }
+    Logger.error(error);
     throw error.networkError?.result || error;
   }
 };

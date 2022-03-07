@@ -1,20 +1,24 @@
 import gql from 'graphql-tag';
 import { Logger } from '@vue-storefront/core';
-import cartAddActionCodeQuery from './cartAddActionCode';
+import cartRemoveActionCodeQuery from './cartRemoveActionCode';
 
 type AttributeFilterInput = {
   name: [string];
 };
 
-type cartAddActionCodeInput = {
+type cartRemoveActionCodeInput = {
   cartId: string;
   actionCode: string;
   attributeFilters?: AttributeFilterInput;
 };
 
 // TODO: add types
-export default async (context, input: cartAddActionCodeInput, customQuery) => {
-  const variables: cartAddActionCodeInput = {
+export default async (
+  context,
+  input: cartRemoveActionCodeInput,
+  customQuery
+) => {
+  const variables: cartRemoveActionCodeInput = {
     cartId: input.cartId,
     actionCode: input.actionCode,
   };
@@ -24,9 +28,9 @@ export default async (context, input: cartAddActionCodeInput, customQuery) => {
       name: context.config.productAttributes,
     };
 
-  const { cartAddActionCode } = context.extendQuery(customQuery, {
-    cartAddActionCode: {
-      query: cartAddActionCodeQuery,
+  const { cartRemoveActionCode } = context.extendQuery(customQuery, {
+    cartRemoveActionCode: {
+      query: cartRemoveActionCodeQuery,
       variables,
     },
   });
@@ -34,19 +38,26 @@ export default async (context, input: cartAddActionCodeInput, customQuery) => {
   try {
     return context.client.mutate({
       mutation: gql`
-        ${cartAddActionCode.query}
+        ${cartRemoveActionCode.query}
       `,
-      variables: cartAddActionCode.variables,
+      variables: cartRemoveActionCode.variables,
     });
   } catch (error) {
+    console.log('Error adding item to cart');
+    console.log(error);
     // For error in data we don't throw 500, because it's not server error
     if (error.graphQLErrors) {
+      console.log('Error adding item to cart');
+      console.log(error);
+      Logger.debug(error);
+
       return {
         ...error,
         errors: error.graphQLErrors,
         data: null,
       };
     }
+    Logger.error(error);
     throw error.networkError?.result || error;
   }
 };

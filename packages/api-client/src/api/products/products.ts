@@ -8,6 +8,8 @@ export default gql`
     $sort: [SortInput!]
     $textFilters: [TextFilterInput!]
     $attributeFilters: AttributeFilterInput
+    $hasBundle: YesNo
+    $isBundleLeader: YesNo
   ) {
     category(slug: $slug) {
       id
@@ -33,6 +35,8 @@ export default gql`
         page: $page
         sort: $sort
         textFilters: $textFilters
+        hasBundle: $hasBundle
+        isBundleLeader: $isBundleLeader
       ) {
         itemsFound
         offset
@@ -92,7 +96,8 @@ export default gql`
               order
             }
             price {
-              value
+              gross
+              net
               quantity
               discount {
                 discountId
@@ -117,6 +122,64 @@ export default gql`
               textValue {
                 values
                 language
+              }
+            }
+            inventory {
+              totalQuantity
+            }
+            bundles {
+              id
+              comboId
+              name
+              description
+              condition
+              discount
+              price {
+                net
+                gross
+                originalNet
+                originalGross
+              }
+              items {
+                isLeader
+                productId
+                price {
+                  net
+                  gross
+                  originalNet
+                  originalGross
+                }
+                product {
+                  name {
+                    language
+                    value
+                  }
+                  images(siteId: 1) {
+                    id
+                    imageId
+                    name
+                    url(
+                      fillColor: "white"
+                      method: fill
+                      height: 800
+                      width: 800
+                    )
+                    type
+                    order
+                  }
+                  attributes(filter: $attributeFilters) {
+                    searchId
+                    name
+                    description {
+                      value
+                      language
+                    }
+                    textValue {
+                      values
+                      language
+                    }
+                  }
+                }
               }
             }
           }

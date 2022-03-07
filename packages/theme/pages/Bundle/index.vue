@@ -1,5 +1,5 @@
 <template>
-  <div id="category">
+  <div id="bundle">
     <SfBreadcrumbs
       class="breadcrumbs desktop-only"
       :breadcrumbs="breadcrumbs"
@@ -93,7 +93,12 @@
               :key="productGetters.getSlug(product)"
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
-              :badgeLabel="'Inventory: ' + productGetters.getShortName(product)"
+              :badgeLabel="
+                'Inventory: ' +
+                productGetters.getBundleProducts(product)[0].comboId +
+                '-' +
+                productGetters.getBundleProducts(product)[0].name
+              "
               :image="productGetters.getCoverImage(product)"
               :regular-price="
                 $n(productGetters.getPrice(product).regular, 'currency')
@@ -267,7 +272,7 @@ import {
 import { useUiHelpers, useUiState } from '~/composables';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
-import cacheControl from './../helpers/cacheControl';
+import cacheControl from './../../helpers/cacheControl';
 import CategoryPageHeader from '~/components/CategoryPageHeader';
 
 // TODO(addToCart qty, horizontal): https://github.com/vuestorefront/storefront-ui/issues/1606
@@ -332,7 +337,11 @@ export default {
     };
 
     onSSR(async () => {
-      await search(th.getFacetsFromURL());
+      await search({
+        ...th.getFacetsFromURL(),
+        categorySlug: 'examenbundel',
+        hasBundle: true,
+      });
       if (error?.value?.search) context.root.$nuxt.error({ statusCode: 404 });
     });
 

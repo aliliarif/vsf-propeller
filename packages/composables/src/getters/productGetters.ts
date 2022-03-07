@@ -11,6 +11,11 @@ function getName(product: Product): string {
   return product?.name?.[0].value || '';
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getShortName(product: Product): string {
+  return product?.shortName || '';
+}
+
 // TODO add product:Product
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getSlug(product): string {
@@ -20,7 +25,7 @@ function getSlug(product): string {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getPrice(product: Product): AgnosticPrice {
   return {
-    regular: product.price.value,
+    regular: product.price.net,
     // special: product.price.value,
   };
 }
@@ -85,24 +90,10 @@ function getAttributes(
     return prev;
   };
 
-  // const reduceByAttributeName = (prev, curr) => ({
-  //   ...prev,
-  //   [curr.name]: isSingleProduct
-  //     ? curr.value
-  //     : [
-  //         ...(prev[curr.name] || []),
-  //         {
-  //           value: curr.value,
-  //           label: curr.label,
-  //         },
-  //       ],
-  // });
-
   return productList
     .map((product) => formatAttributes(product))
     .reduce((prev, curr) => [...prev, ...curr], [])
     .reduce(reduceToUniques, []);
-  // .reduce(reduceByAttributeName, {});
 }
 
 const formatAttributeList = (attributes: Array<any>): AgnosticAttribute[] =>
@@ -156,8 +147,31 @@ function getStatus(product): string {
   return product?.status || '';
 }
 
+// TODO: add type product: Product and return type BundleProducts
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getBundleProducts(product) {
+  return product?.bundles || [];
+}
+
+// TODO: add type product: Product, types: CrossupsellTypes and return type Crossupsells[]
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getCrossupsellProducts(product, types) {
+  return (
+    product?.crossupsells.filter((crossupsell) =>
+      types ? types.includes(crossupsell.type) : crossupsell
+    ) || []
+  );
+}
+
+// TODO: add type product: Product and return type Inventory
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getInventory(product) {
+  return product?.inventory?.totalQuantity || 0;
+}
+
 export const productGetters: ProductGetters<Product, ProductFilter> = {
   getName,
+  getShortName,
   getSlug,
   getPrice,
   getGallery,
@@ -172,4 +186,7 @@ export const productGetters: ProductGetters<Product, ProductFilter> = {
   getTotalReviews,
   getAverageRating,
   getStatus,
+  getBundleProducts,
+  getCrossupsellProducts,
+  getInventory,
 };

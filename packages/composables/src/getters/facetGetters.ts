@@ -23,12 +23,13 @@ function getAll(
   params: FacetSearchResult<Facet>,
   criteria?: FacetSearchCriteria
 ): AgnosticFacet[] {
+  console.log('Mocked: facetGetters.getAll');
   return [
     {
       type: 'string',
-      id: '123',
-      value: 'AA',
-      attrName: 'fff',
+      id: '1',
+      value: 'mocked',
+      attrName: '',
       count: 3,
       selected: false,
       metadata: 'any',
@@ -65,6 +66,7 @@ function getSortOptions(searchData): AgnosticSort {
 function getCategoryTree(
   params: FacetSearchResult<Facet>
 ): AgnosticCategoryTree {
+  console.log('Mocked: facetGetters.getCategoryTree');
   return {
     label: '',
     slug: '',
@@ -100,6 +102,7 @@ function getPagination(searchData): AgnosticPagination {
 function getBreadcrumbs(
   params: FacetSearchResult<Facet>
 ): AgnosticBreadcrumb[] {
+  console.log('Mocked: facetGetters.getBreadcrumbs');
   return [];
 }
 

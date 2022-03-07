@@ -3,11 +3,12 @@ import { CART_FIELDS } from '../../fragments/cart.fragment';
 
 export default gql`
   ${CART_FIELDS}
-  mutation cartDeleteItem(
-    $input: CartDeleteItemInput!
+  mutation cartRemoveActionCode(
+    $cartId: String!
+    $actionCode: String!
     $attributeFilters: AttributeFilterInput
   ) {
-    cartDeleteItem(input: $input) {
+    cartRemoveActionCode(cartId: $cartId, actionCode: $actionCode) {
       cart {
         ...CartFields
       }

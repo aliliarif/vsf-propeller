@@ -44,6 +44,12 @@
           </div>
         </div>
         <div>
+          <b>Inventory:</b>
+          <p
+            class="product__description desktop-only"
+            v-html="productGetters.getInventory(product)"
+          ></p>
+
           <b>Status:</b>
           <p
             class="product__description desktop-only"
@@ -110,6 +116,26 @@
           />
         </div>
 
+        <div>
+          <b>Slug: </b> {{ productGetters.getSlug(product) }} <br />
+          <b>Bundles:</b>
+          <p
+            class="product__description desktop-only"
+            v-html="productGetters.getBundleProducts(product)"
+          ></p>
+          <SfAddToCart
+            v-e2e="'product_add-to-cart'"
+            :stock="stock"
+            v-model="qty"
+            :disabled="loading"
+            :canAddToCart="stock > 0"
+            class="product__add-to-cart"
+            @click="
+              addItem({ product: { bundleId: 33 }, quantity: parseInt(qty) })
+            "
+          />
+        </div>
+
         <LazyHydrate when-idle>
           <SfTabs :open-tab="1" class="product__tabs">
             <SfTab title="Description"> </SfTab>
@@ -148,6 +174,18 @@
         </LazyHydrate>
       </div>
     </div>
+    <LazyHydrate when-visible>
+      <RelatedProducts :crossupsells="accessoryProducts" title="Accessories" />
+    </LazyHydrate>
+    <LazyHydrate when-visible>
+      <RelatedProducts :crossupsells="relatedProducts" title="Related" />
+    </LazyHydrate>
+    <LazyHydrate when-visible>
+      <RelatedProducts
+        :crossupsells="alternativeProducts"
+        title="Alternatives"
+      />
+    </LazyHydrate>
   </div>
 </template>
 <script>
@@ -170,7 +208,7 @@ import {
   SfButton,
   SfColor,
 } from '@storefront-ui/vue';
-
+import RelatedProducts from '~/components/RelatedProducts.vue';
 import { ref, computed, useRoute, useRouter } from '@nuxtjs/composition-api';
 import {
   useProduct,
@@ -220,6 +258,15 @@ export default {
     const reviews = computed(() =>
       reviewGetters.getItems(productReviews.value)
     );
+    const accessoryProducts = computed(() =>
+      productGetters.getCrossupsellProducts(product.value, ['ACCESSORIES'])
+    );
+    const relatedProducts = computed(() =>
+      productGetters.getCrossupsellProducts(product.value, ['RELATED'])
+    );
+    const alternativeProducts = computed(() =>
+      productGetters.getCrossupsellProducts(product.value, ['ALTERNATIVES'])
+    );
 
     // TODO: Breadcrumbs are temporary disabled because productGetters return undefined. We have a mocks in data
     const productGallery = computed(() =>
@@ -268,6 +315,9 @@ export default {
       loading,
       productGetters,
       productGallery,
+      accessoryProducts,
+      relatedProducts,
+      alternativeProducts,
     };
   },
   components: {
@@ -288,6 +338,7 @@ export default {
     SfReview,
     SfBreadcrumbs,
     SfButton,
+    RelatedProducts,
     LazyHydrate,
   },
   data() {

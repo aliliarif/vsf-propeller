@@ -38,7 +38,13 @@
               >
                 <template #configuration>
                   <div class="collected-product__properties">
+                    <b>ShortName: </b>
+                    {{ productGetters.getShortName(product.product) }}
+                    <b>Inventory: </b>
+                    {{ productGetters.getInventory(product.product) }}
                     <b>Slug: </b> {{ productGetters.getSlug(product.product) }}
+                    <b>Bundle: </b>
+                    {{ product.bundle }}
                     <SfProperty
                       v-for="(attribute, key) in productGetters.getAttributes(
                         product.product,
@@ -125,6 +131,15 @@
             </SfProperty>
 
             <SfProperty
+              name="Tax"
+              class="sf-property--full-width sf-property--large my-cart__total-price"
+            >
+              <template #value>
+                <SfPrice :regular="taxLevels" />
+              </template>
+            </SfProperty>
+
+            <SfProperty
               name="Total"
               class="sf-property--full-width sf-property--large my-cart__total-price"
             >
@@ -202,6 +217,9 @@ export default {
       cartGetters.getShippingPrice(cart.value)
     );
     const discounts = computed(() => cartGetters.getDiscounts(cart.value));
+    const taxLevels = computed(() =>
+      cartGetters.getAppliedTaxLevels(cart.value)
+    );
 
     const updateQuantity = debounce(async ({ product, quantity }) => {
       await updateItemQty({ product, quantity });
@@ -219,6 +237,7 @@ export default {
       cartGetters,
       shippingPrice,
       discounts,
+      taxLevels,
       productGetters,
     };
   },

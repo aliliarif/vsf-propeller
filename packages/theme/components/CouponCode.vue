@@ -42,8 +42,7 @@ export default defineComponent({
     const promoIsApplied = computed(
       () => cartGetters.getAppliedCoupon(cart.value)?.code
     );
-    console.log('asd');
-    console.log(promoIsApplied);
+
     const setCartCoupon = () => {
       promoCode.value = promoIsApplied.value;
     };
