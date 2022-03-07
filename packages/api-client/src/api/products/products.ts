@@ -133,15 +133,22 @@ export default gql`
               name
               description
               condition
-              price
-              originalPrice
-              discountPrice
               discount
+              price {
+                net
+                gross
+                originalNet
+                originalGross
+              }
               items {
                 isLeader
                 productId
-                originalPrice
-                discountPrice
+                price {
+                  net
+                  gross
+                  originalNet
+                  originalGross
+                }
                 product {
                   name {
                     language

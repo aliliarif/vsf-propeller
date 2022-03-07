@@ -7,16 +7,23 @@ export default gql`
       comboId
       name
       description
-      condition
-      price
-      originalPrice
-      discountPrice
       discount
+      condition
+      price {
+        net
+        gross
+        originalNet
+        originalGross
+      }
       items {
         isLeader
         productId
-        originalPrice
-        discountPrice
+        price {
+          net
+          gross
+          originalNet
+          originalGross
+        }
         product {
           name {
             language

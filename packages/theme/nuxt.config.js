@@ -102,6 +102,8 @@ export default {
         mollieKey: 'test_HKCexffVcErTV8jggVdWah7eH25xHq',
         mollieIsTest: true,
         mollieRedirectUrl: '/checkout/thank-you',
+        mollieWebhookUrl:
+          'https://6c4b-78-157-31-8.ngrok.io/mollie/notifications',
       },
     ],
   ],

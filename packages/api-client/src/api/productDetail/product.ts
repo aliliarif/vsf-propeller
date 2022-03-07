@@ -79,15 +79,22 @@ export default gql`
         name
         description
         condition
-        price
-        originalPrice
-        discountPrice
         discount
+        price {
+          net
+          gross
+          originalNet
+          originalGross
+        }
         items {
           isLeader
           productId
-          originalPrice
-          discountPrice
+          price {
+            net
+            gross
+            originalNet
+            originalGross
+          }
           product {
             name {
               language
@@ -150,7 +157,8 @@ export default gql`
             language
           }
           price {
-            value
+            gross
+            net
             quantity
             discount {
               discountId
@@ -160,7 +168,6 @@ export default gql`
               value
               validFrom
               validTo
-              hops
             }
             taxCode
             type
