@@ -94,8 +94,9 @@
               :style="{ '--index': i }"
               :title="productGetters.getName(product)"
               :badgeLabel="
-                'Inventory: ' +
-                productGetters.getBundleProducts(product)[0].comboId +
+                'Inventory2: ' +
+                productGetters.getBundleProducts(product)[0].items[0].product
+                  .inventory.totalQuantity +
                 '-' +
                 productGetters.getBundleProducts(product)[0].name
               "

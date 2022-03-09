@@ -4,7 +4,8 @@ import productQuery from './product';
 
 // TODO: move this outside of this file (same type is used on products)
 type AttributeFilterInput = {
-  name: [string];
+  name?: [string?];
+  isPublic?: boolean;
 };
 
 enum CrossupsellTypes {
@@ -33,12 +34,14 @@ type Variables = {
 export default async (context, searchParams, customQuery) => {
   const variables: Variables = {
     productId: parseInt(searchParams.id),
+    attributeFilters: {
+      name: [],
+      isPublic: true,
+    },
   };
 
   if (context.config.productAttributes)
-    variables.attributeFilters = {
-      name: context.config.productAttributes,
-    };
+    variables.attributeFilters.name = context.config.productAttributes;
 
   if (context.config.crossupsellTypes)
     variables.crossupsellTypesInput = {
