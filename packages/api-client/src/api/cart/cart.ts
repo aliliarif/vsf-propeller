@@ -1,43 +1,28 @@
 import gql from 'graphql-tag';
-import { CART_FIELDS } from '../../fragments/cart.fragment';
+import {
+  CartFragment,
+  DeliveryAddressFragment,
+  InvoiceAddressFragment,
+} from '../../fragments';
 
 export default gql`
-  ${CART_FIELDS}
-  query cart($cartId: String!, $attributeFilters: AttributeFilterInput) {
+  ${CartFragment}
+  ${DeliveryAddressFragment}
+  ${InvoiceAddressFragment}
+  query cart(
+    $cartId: String!
+    $attributeFilters: AttributeFilterInput
+    $siteId: Int!
+    $language: String
+  ) {
     cart(cartId: $cartId) {
       deliveryAddress {
-        company
-        gender
-        firstName
-        lastName
-        middleName
-        street
-        number
-        numberExtension
-        postalCode
-        city
-        country
-        region
-        phone
-        email
+        ...DeliveryAddress
       }
       invoiceAddress {
-        company
-        gender
-        firstName
-        lastName
-        middleName
-        street
-        number
-        numberExtension
-        postalCode
-        city
-        country
-        region
-        phone
-        email
+        ...InvoiceAddress
       }
-      ...CartFields
+      ...Cart
     }
   }
 `;

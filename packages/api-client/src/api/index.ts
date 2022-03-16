@@ -1,4 +1,5 @@
 export { default as products } from './products';
+export { default as bundles } from './bundles';
 export { default as productDetail } from './productDetail';
 export { default as bundleDetail } from './bundleDetail';
 export { default as categories } from './categories';

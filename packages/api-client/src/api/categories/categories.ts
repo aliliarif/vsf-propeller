@@ -1,31 +1,31 @@
 import gql from 'graphql-tag';
 
 export default gql`
-  query categories($categoryId: Float) {
+  query categories($categoryId: Float, $language: String) {
     category(id: $categoryId) {
-      name {
+      name(language: $language) {
         value
         language
       }
-      slug {
+      slug(language: $language) {
         value
         language
       }
       categories {
-        name {
+        name(language: $language) {
           value
           language
         }
-        slug {
+        slug(language: $language) {
           value
           language
         }
         categories {
-          name {
+          name(language: $language) {
             value
             language
           }
-          slug {
+          slug(language: $language) {
             value
             language
           }

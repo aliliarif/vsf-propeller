@@ -1,18 +1,15 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartProcessQuery from './cartProcess';
+import { CartProcessInput } from '../../types/GraphQL';
+import { CartProcessArguments } from '../../types/API';
 
-type processCartInput = {
-  cartId: string;
-  orderStatus: string;
-};
-type Variables = {
-  input: processCartInput;
-};
-
-// TODO: add types
-export default async (context, params, customQuery) => {
-  const variables: Variables = {
+export default async (
+  context,
+  params: CartProcessArguments,
+  customQuery?: CustomQuery
+) => {
+  const variables: CartProcessInput = {
     input: {
       cartId: params.cartId,
       orderStatus: 'NEW',

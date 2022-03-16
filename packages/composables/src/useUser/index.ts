@@ -12,14 +12,11 @@ import type {
 const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context) => {
-    console.log('Mocked: useUser.load');
     return {};
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  logOut: async (context: Context) => {
-    console.log('Mocked: useUser.logOut');
-  },
+  logOut: async (context: Context) => {},
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateUser: async (context: Context, { currentUser, updatedUserData }) => {

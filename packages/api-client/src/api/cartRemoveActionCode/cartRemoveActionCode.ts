@@ -1,16 +1,18 @@
 import gql from 'graphql-tag';
-import { CART_FIELDS } from '../../fragments/cart.fragment';
+import { CartFragment } from '../../fragments';
 
 export default gql`
-  ${CART_FIELDS}
+  ${CartFragment}
   mutation cartRemoveActionCode(
     $cartId: String!
     $actionCode: String!
     $attributeFilters: AttributeFilterInput
+    $siteId: Int!
+    $language: String
   ) {
     cartRemoveActionCode(cartId: $cartId, actionCode: $actionCode) {
       cart {
-        ...CartFields
+        ...Cart
       }
     }
   }

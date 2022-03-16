@@ -1,43 +1,22 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import productQuery from './product';
+import { ProductInput } from '../../types/GraphQL';
+import { ProductDetailArguments } from '../../types/API';
 
-// TODO: move this outside of this file (same type is used on products)
-type AttributeFilterInput = {
-  name?: [string?];
-  isPublic?: boolean;
-};
-
-enum CrossupsellTypes {
-  ACCESSORIES,
-  ALTERNATIVES,
-  OPTIONS,
-  PARTS,
-  RELATED,
-}
-
-type CrossUpsellTypesInput = {
-  types?: [CrossupsellTypes];
-  subTypes?: [string];
-};
-
-type CrossUpsellInput = {
-  input: CrossUpsellTypesInput;
-};
-
-type Variables = {
-  productId: number;
-  attributeFilters?: AttributeFilterInput;
-  crossupsellTypesInput?: CrossUpsellInput;
-};
-
-export default async (context, searchParams, customQuery) => {
-  const variables: Variables = {
-    productId: parseInt(searchParams.id),
+export default async (
+  context,
+  params: ProductDetailArguments,
+  customQuery?: CustomQuery
+) => {
+  const variables: ProductInput = {
+    productId: parseInt(params.id),
     attributeFilters: {
       name: [],
       isPublic: true,
     },
+    siteId: context.config?.siteId || 1,
+    language: context.config?.siteLanguage || 'NL',
   };
 
   if (context.config.productAttributes)

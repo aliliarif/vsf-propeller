@@ -1,38 +1,20 @@
 import gql from 'graphql-tag';
+import {
+  DeliveryAddressFragment,
+  InvoiceAddressFragment,
+} from '../../fragments';
 
 export default gql`
+  ${DeliveryAddressFragment}
+  ${InvoiceAddressFragment}
   mutation cartUpdateAddress($input: CartUpdateAddressInput!) {
     cartUpdateAddress(input: $input) {
       cart {
         deliveryAddress {
-          gender
-          firstName
-          lastName
-          middleName
-          street
-          number
-          numberExtension
-          postalCode
-          city
-          country
-          region
-          phone
-          email
+          ...DeliveryAddress
         }
         invoiceAddress {
-          gender
-          firstName
-          lastName
-          middleName
-          street
-          number
-          numberExtension
-          postalCode
-          city
-          country
-          region
-          phone
-          email
+          ...InvoiceAddress
         }
       }
     }

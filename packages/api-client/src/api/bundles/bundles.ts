@@ -3,14 +3,12 @@ import {
   ImageFragment,
   AttributeFragment,
   InventoryFragment,
-  ProductPriceFragment,
 } from '../../fragments';
 
 export default gql`
   ${ImageFragment}
   ${AttributeFragment}
   ${InventoryFragment}
-  ${ProductPriceFragment}
   query products(
     $slug: String
     $offset: Int = 12
@@ -18,6 +16,8 @@ export default gql`
     $sort: [SortInput!]
     $textFilters: [TextFilterInput!]
     $attributeFilters: AttributeFilterInput
+    $hasBundle: YesNo
+    $isBundleLeader: YesNo
     $siteId: Int!
     $language: String
   ) {
@@ -45,6 +45,8 @@ export default gql`
         page: $page
         sort: $sort
         textFilters: $textFilters
+        hasBundle: $hasBundle
+        isBundleLeader: $isBundleLeader
       ) {
         itemsFound
         offset
@@ -63,47 +65,46 @@ export default gql`
           }
         }
         items {
-          sku
-          path
-          name(language: $language) {
-            value
-            language
-          }
-          description(language: $language) {
-            value
-            language
-          }
-          shortDescription(language: $language) {
-            value
-            language
-          }
-          slug(language: $language) {
-            language
-            value
-          }
           ... on Product {
-            id
-            classId
-            shortName
-            manufacturerCode
-            eanCode
-            manufacturer
-            supplier
-            supplierCode
-            class
-            status
-            isOrderable
-            images(siteId: $siteId) {
-              ...Image
-            }
-            price {
-              ...ProductPrice
-            }
-            attributes(filter: $attributeFilters) {
-              ...Attribute
-            }
-            inventory {
-              ...Inventory
+            bundles {
+              id
+              comboId
+              name
+              description
+              condition
+              discount
+              price {
+                net
+                gross
+                originalNet
+                originalGross
+              }
+              items {
+                isLeader
+                productId
+                price {
+                  net
+                  gross
+                  originalNet
+                  originalGross
+                }
+                product {
+                  isOrderable
+                  name(language: $language) {
+                    language
+                    value
+                  }
+                  inventory {
+                    ...Inventory
+                  }
+                  images(siteId: $siteId) {
+                    ...Image
+                  }
+                  attributes(filter: $attributeFilters) {
+                    ...Attribute
+                  }
+                }
+              }
             }
           }
         }

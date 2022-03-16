@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
-import productsQuery from './products';
+import bundlesQuery from './bundles';
 import { CustomQuery } from '@vue-storefront/core';
-import { ProductsInput } from '../../types/GraphQL';
+import { ProductsInput, YesNo } from '../../types/GraphQL';
 import { ProductsArguments } from '../../types/API';
 
 export default async (
@@ -26,23 +26,25 @@ export default async (
 
   if (params.sort) variables.sort = params.sort;
 
-  const { products } = context.extendQuery(customQuery, {
-    products: {
-      query: productsQuery,
+  variables.hasBundle = YesNo['Y'];
+  variables.isBundleLeader = YesNo['Y'];
+
+  const { bundles } = context.extendQuery(customQuery, {
+    bundles: {
+      query: bundlesQuery,
       variables,
     },
   });
-
+  console.log('FFWWE');
+  console.log(bundles);
   try {
     return await context.client.query({
       query: gql`
-        ${products.query}
+        ${bundles.query}
       `,
-      variables: products.variables,
+      variables: bundles.variables,
     });
   } catch (error) {
-    console.log('ERROR');
-    console.log(error);
     throw (
       error.graphQLErrors?.[0].message || error.networkError?.result || error
     );

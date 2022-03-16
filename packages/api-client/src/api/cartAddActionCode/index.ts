@@ -1,22 +1,19 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartAddActionCodeQuery from './cartAddActionCode';
+import { CartAddActionCodeInput } from '../../types/GraphQL';
+import { CartAddActionCodeArguments } from '../../types/API';
 
-type AttributeFilterInput = {
-  name: [string];
-};
-
-type cartAddActionCodeInput = {
-  cartId: string;
-  actionCode: string;
-  attributeFilters?: AttributeFilterInput;
-};
-
-// TODO: add types
-export default async (context, input: cartAddActionCodeInput, customQuery) => {
-  const variables: cartAddActionCodeInput = {
+export default async (
+  context,
+  input: CartAddActionCodeArguments,
+  customQuery?: CustomQuery
+) => {
+  const variables: CartAddActionCodeInput = {
     cartId: input.cartId,
     actionCode: input.actionCode,
+    siteId: context.config?.siteId || 1,
+    language: context.config?.siteLanguage || 'NL',
   };
 
   if (context.config.productAttributes)
@@ -47,6 +44,7 @@ export default async (context, input: cartAddActionCodeInput, customQuery) => {
         data: null,
       };
     }
+    Logger.error(error);
     throw error.networkError?.result || error;
   }
 };

@@ -11,6 +11,7 @@ module.exports = {
           cartCookieName: 'propeller-vsf-cart',
         },
         siteId: 1,
+        siteLanguage: 'NL',
         catalogueRoot: 100092,
         productAttributes: [
           'EXAMEN_BREEDTE_MM',

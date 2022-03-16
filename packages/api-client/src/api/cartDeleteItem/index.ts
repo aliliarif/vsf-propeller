@@ -1,28 +1,21 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartDeleteItemQuery from './cartDeleteItem';
+import { CartDeleteItemInput } from '../../types/GraphQL';
+import { CartDeleteItemArguments } from '../../types/API';
 
-type cartDeleteItemInput = {
-  cartId: string;
-  itemId: number;
-};
-
-type AttributeFilterInput = {
-  name: [string];
-};
-
-type Variables = {
-  input: cartDeleteItemInput;
-  attributeFilters?: AttributeFilterInput;
-};
-
-// TODO: add types
-export default async (context, params, customQuery) => {
-  const variables: Variables = {
+export default async (
+  context,
+  params: CartDeleteItemArguments,
+  customQuery?: CustomQuery
+) => {
+  const variables: CartDeleteItemInput = {
     input: {
       cartId: params.cartId,
       itemId: params.itemId,
     },
+    siteId: context.config?.siteId || 1,
+    language: context.config?.siteLanguage || 'NL',
   };
 
   if (context.config.productAttributes)

@@ -1,10 +1,22 @@
 import gql from 'graphql-tag';
+import {
+  ImageFragment,
+  AttributeFragment,
+  InventoryFragment,
+  ProductPriceFragment,
+} from '../../fragments';
 
 export default gql`
+  ${ImageFragment}
+  ${AttributeFragment}
+  ${InventoryFragment}
+  ${ProductPriceFragment}
   query productDetails(
     $productId: Int!
     $attributeFilters: AttributeFilterInput
     $crossupsellTypesInput: CrossupsellTypesInput
+    $siteId: Int!
+    $language: String
   ) {
     product(id: $productId) {
       id
@@ -21,57 +33,30 @@ export default gql`
       status
       isOrderable
       unit
-      name {
+      name(language: $language) {
         value
         language
       }
-      slug {
+      slug(language: $language) {
         value
         language
       }
-      description {
+      description(language: $language) {
         value
         language
       }
-      shortDescription {
+      shortDescription(language: $language) {
         value
         language
       }
-      images(siteId: 1) {
-        id
-        imageId
-        name
-        url(fillColor: "white", method: fill, height: 800, width: 800)
-        type
-        order
+      images(siteId: $siteId) {
+        ...Image
       }
       price {
-        gross
-        net
-        quantity
-        discount {
-          discountId
-          formula
-          type
-          quantity
-          value
-          validFrom
-          validTo
-        }
-        taxCode
-        type
+        ...ProductPrice
       }
       attributes(filter: $attributeFilters) {
-        searchId
-        name
-        description {
-          value
-          language
-        }
-        textValue {
-          values
-          language
-        }
+        ...Attribute
       }
       bundles {
         id
@@ -104,25 +89,11 @@ export default gql`
             inventory {
               totalQuantity
             }
-            images(siteId: 1) {
-              id
-              imageId
-              name
-              url(fillColor: "white", method: fill, height: 800, width: 800)
-              type
-              order
+            images(siteId: $siteId) {
+              ...Image
             }
             attributes(filter: $attributeFilters) {
-              searchId
-              name
-              description {
-                value
-                language
-              }
-              textValue {
-                values
-                language
-              }
+              ...Attribute
             }
           }
         }
@@ -144,62 +115,35 @@ export default gql`
           status
           isOrderable
           unit
-          name {
+          name(language: $language) {
             value
             language
           }
-          slug {
+          slug(language: $language) {
             value
             language
           }
-          description {
+          description(language: $language) {
             value
             language
           }
-          shortDescription {
+          shortDescription(language: $language) {
             value
             language
           }
           price {
-            gross
-            net
-            quantity
-            discount {
-              discountId
-              formula
-              type
-              quantity
-              value
-              validFrom
-              validTo
-            }
-            taxCode
-            type
+            ...ProductPrice
           }
-          images(siteId: 1) {
-            id
-            imageId
-            name
-            url(fillColor: "white", method: fill, height: 800, width: 800)
-            type
-            order
+          images(siteId: $siteId) {
+            ...Image
           }
           attributes(filter: $attributeFilters) {
-            searchId
-            name
-            description {
-              value
-              language
-            }
-            textValue {
-              values
-              language
-            }
+            ...Attribute
           }
         }
       }
       inventory {
-        totalQuantity
+        ...Inventory
       }
     }
   }

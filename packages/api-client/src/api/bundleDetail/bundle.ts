@@ -1,7 +1,20 @@
 import gql from 'graphql-tag';
+import {
+  ImageFragment,
+  AttributeFragment,
+  InventoryFragment,
+} from '../../fragments';
 
 export default gql`
-  query bundle($bundleId: Float!, $attributeFilters: AttributeFilterInput) {
+  ${ImageFragment}
+  ${AttributeFragment}
+  ${InventoryFragment}
+  query bundle(
+    $bundleId: Float!
+    $attributeFilters: AttributeFilterInput
+    $siteId: Int!
+    $language: String
+  ) {
     bundle(bundleId: $bundleId) {
       id
       comboId
@@ -31,27 +44,13 @@ export default gql`
             value
           }
           inventory {
-            totalQuantity
+            ...Inventory
           }
-          images(siteId: 1) {
-            id
-            imageId
-            name
-            url(fillColor: "white", method: fill, height: 800, width: 800)
-            type
-            order
+          images(siteId: $siteId) {
+            ...Image
           }
           attributes(filter: $attributeFilters) {
-            searchId
-            name
-            description {
-              value
-              language
-            }
-            textValue {
-              values
-              language
-            }
+            ...Attribute
           }
         }
       }

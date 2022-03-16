@@ -66,7 +66,6 @@ function getSortOptions(searchData): AgnosticSort {
 function getCategoryTree(
   params: FacetSearchResult<Facet>
 ): AgnosticCategoryTree {
-  console.log('Mocked: facetGetters.getCategoryTree');
   return {
     label: '',
     slug: '',

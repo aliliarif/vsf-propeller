@@ -1,13 +1,10 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartStartQuery from './cartStart';
+import { CartStartInput } from '../../types/GraphQL';
 
-type Variables = {
-  siteId: number;
-};
-
-export default async (context, searchParams, customQuery) => {
-  const variables: Variables = {
+export default async (context, params, customQuery?: CustomQuery) => {
+  const variables: CartStartInput = {
     siteId: context.config.siteId,
   };
 

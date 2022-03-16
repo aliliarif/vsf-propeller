@@ -55,19 +55,13 @@ const useUiHelpers = () => {
   };
 
   // eslint-disable-next-line
-  const changeItemsPerPage = (itemsPerPage) => {
-    console.warn('[VSF] please implement useUiHelpers.changeItemsPerPage.');
-  };
+  const changeItemsPerPage = (itemsPerPage) => {};
 
   // eslint-disable-next-line
-  const setTermForUrl = (term: string) => {
-    console.warn('[VSF] please implement useUiHelpers.changeSearchTerm.');
-  };
+  const setTermForUrl = (term: string) => {};
 
   // eslint-disable-next-line
   const isFacetColor = (facet): boolean => {
-    console.warn('[VSF] please implement useUiHelpers.isFacetColor.');
-
     return false;
   };
 

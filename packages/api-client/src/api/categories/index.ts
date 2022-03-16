@@ -1,12 +1,10 @@
 import gql from 'graphql-tag';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import categoriesQuery from './categories';
+import { CategoriesInput } from '../../types/GraphQL';
 
-type Variables = {
-  categoryId: number;
-};
-
-export default async (context, searchParams, customQuery) => {
-  const variables: Variables = {
+export default async (context, params, customQuery?: CustomQuery) => {
+  const variables: CategoriesInput = {
     categoryId: context.config.catalogueRoot,
   };
 
@@ -29,6 +27,7 @@ export default async (context, searchParams, customQuery) => {
     if (error.graphQLErrors) {
       console.log('Error in categories');
       console.log(error);
+      Logger.debug(error);
 
       return {
         ...error,
@@ -37,6 +36,7 @@ export default async (context, searchParams, customQuery) => {
       };
     }
 
+    Logger.error(error);
     throw error.networkError?.result || error;
   }
 };

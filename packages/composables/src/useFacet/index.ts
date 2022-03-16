@@ -105,10 +105,11 @@ const factoryParams = {
       categorySlug,
       textFilters: productParams.textFilters,
       sort: productParams.sort,
-      hasBundle,
     };
 
-    const { data } = await context.$propeller.api.products(productSearchParams);
+    const { data } = hasBundle
+      ? await context.$propeller.api.bundles(productSearchParams)
+      : await context.$propeller.api.products(productSearchParams);
 
     return {
       items: data?.category?.products?.items || [],

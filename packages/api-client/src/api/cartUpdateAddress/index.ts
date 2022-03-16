@@ -1,65 +1,17 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartUpdateAddressQuery from './cartUpdateAddress';
+import { CartUpdateAddressInput } from '../../types/GraphQL';
+import { CartUpdateAddressArguments } from '../../types/API';
 
-enum cartAddressEnum {
-  invoice,
-  delivery,
-}
-
-enum genderEnum {
-  M,
-  F,
-  U,
-}
-
-enum yesNoEnum {
-  Y,
-  N,
-}
-
-type CartUpdateAddressInput = {
-  cartId: string;
-  type: cartAddressEnum;
-  company?: string;
-  gender?: genderEnum;
-  firstName: string;
-  middleName?: string;
-  lastName: string;
-  street: string;
-  number: string;
-  numberExtension?: string;
-  postalCode: string;
-  city: string;
-  region?: string;
-  country?: string;
-  code?: string;
-  email?: string;
-  mobile?: string;
-  phone?: string;
-  url?: string;
-  icp?: yesNoEnum;
-  notes?: string;
-};
-type Variables = {
-  input: CartUpdateAddressInput;
-};
-
-// TODO: add types
-export default async (context, input: CartUpdateAddressInput, customQuery) => {
-  const defaultParams = {
-    firstName: '',
-    lastName: '',
-    street: '',
-    number: '',
-    postalCode: '',
-    city: '',
-    ...input,
-  };
-
-  const variables = {
+export default async (
+  context,
+  params: CartUpdateAddressArguments,
+  customQuery?: CustomQuery
+) => {
+  const variables: CartUpdateAddressInput = {
     input: {
-      ...defaultParams,
+      ...params,
     },
   };
 

@@ -1,29 +1,26 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartSetUserQuery from './cartSetUser';
+import { CartSetUserInput } from '../../types/GraphQL';
+import { CartSetUserArguments } from '../../types/API';
 
-type CartSetUserInput = {
-  cartId: string;
-  userId: number;
-};
-type Variables = {
-  input: CartSetUserInput;
-};
-
-// TODO: add types
-export default async (context, params, customQuery) => {
-  const variables: Variables = {
+export default async (
+  context,
+  params: CartSetUserArguments,
+  customQuery?: CustomQuery
+) => {
+  const variables: CartSetUserInput = {
     input: {
       cartId: params.cartId,
-      userId: params.userId
-    }
+      userId: params.userId,
+    },
   };
 
   const { cartSetUser } = context.extendQuery(customQuery, {
     cartSetUser: {
       query: cartSetUserQuery,
-      variables
-    }
+      variables,
+    },
   });
 
   try {
@@ -31,7 +28,7 @@ export default async (context, params, customQuery) => {
       mutation: gql`
         ${cartSetUser.query}
       `,
-      variables: cartSetUser.variables
+      variables: cartSetUser.variables,
     });
   } catch (error) {
     console.log('Error setting cart user');
@@ -45,7 +42,7 @@ export default async (context, params, customQuery) => {
       return {
         ...error,
         errors: error.graphQLErrors,
-        data: null
+        data: null,
       };
     }
     Logger.error(error);

@@ -1,20 +1,18 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import bundleQuery from './bundle';
+import { BundleDetailArguments } from '../../types/API';
+import { BundleDetailInput } from '../../types/GraphQL';
 
-// TODO: move this outside of this file (same type is used on products)
-type AttributeFilterInput = {
-  name: [string];
-};
-
-type Variables = {
-  bundleId: number;
-  attributeFilters?: AttributeFilterInput;
-};
-
-export default async (context, searchParams, customQuery) => {
-  const variables: Variables = {
-    bundleId: parseInt(searchParams.bundleId),
+export default async (
+  context,
+  params: BundleDetailArguments,
+  customQuery?: CustomQuery
+) => {
+  const variables: BundleDetailInput = {
+    bundleId: parseInt(params.bundleId),
+    siteId: context.config?.siteId || 1,
+    language: context.config?.siteLanguage || 'NL',
   };
 
   if (context.config.productAttributes)

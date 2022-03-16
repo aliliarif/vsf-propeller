@@ -1,7 +1,11 @@
 import gql from 'graphql-tag';
+import { ImageFragment } from './image.fragment';
+import { AttributeFragment } from './attribute.fragment';
 
-export const CART_FIELDS = gql`
-  fragment CartFields on Cart {
+export const CartFragment = gql`
+  ${ImageFragment}
+  ${AttributeFragment}
+  fragment Cart on Cart {
     cartId
     userId
     actionCode
@@ -36,34 +40,20 @@ export const CART_FIELDS = gql`
         sku
         status
         isOrderable
-        name {
+        name(language: $language) {
           language
           value
         }
         shortName
-        slug {
+        slug(language: $language) {
           language
           value
         }
-        images(siteId: 1) {
-          id
-          imageId
-          name
-          url(fillColor: "white", method: fill, height: 800, width: 800)
-          type
-          order
+        images(siteId: $siteId) {
+          ...Image
         }
         attributes(filter: $attributeFilters) {
-          searchId
-          name
-          description {
-            value
-            language
-          }
-          textValue {
-            values
-            language
-          }
+          ...Attribute
         }
         inventory {
           totalQuantity
@@ -93,32 +83,18 @@ export const CART_FIELDS = gql`
           }
           product {
             isOrderable
-            name {
+            name(language: $language) {
               language
               value
             }
             inventory {
               totalQuantity
             }
-            images(siteId: 1) {
-              id
-              imageId
-              name
-              url(fillColor: "white", method: fill, height: 800, width: 800)
-              type
-              order
+            images(siteId: $siteId) {
+              ...Image
             }
             attributes(filter: $attributeFilters) {
-              searchId
-              name
-              description {
-                value
-                language
-              }
-              textValue {
-                values
-                language
-              }
+              ...Attribute
             }
           }
         }

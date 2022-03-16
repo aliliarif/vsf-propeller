@@ -1,30 +1,22 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartAddBundleQuery from './cartAddBundle';
+import { CartAddBundleInput } from '../../types/GraphQL';
+import { CartAddBundleArguments } from '../../types/API';
 
-type cartBundleInput = {
-  cartId: string;
-  bundleId: number;
-  quantity: number;
-};
-
-type AttributeFilterInput = {
-  name: [string];
-};
-
-type Variables = {
-  input: cartBundleInput;
-  attributeFilters?: AttributeFilterInput;
-};
-
-// TODO: add types
-export default async (context, params, customQuery) => {
-  const variables: Variables = {
+export default async (
+  context,
+  params: CartAddBundleArguments,
+  customQuery?: CustomQuery
+) => {
+  const variables: CartAddBundleInput = {
     input: {
       cartId: params.cartId,
       bundleId: params.bundleId,
       quantity: params.quantity,
     },
+    siteId: context.config?.siteId || 1,
+    language: context.config?.siteLanguage || 'NL',
   };
 
   if (context.config.productAttributes)

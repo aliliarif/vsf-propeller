@@ -1,21 +1,13 @@
 import gql from 'graphql-tag';
-import { Logger } from '@vue-storefront/core';
+import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartQuery from './cart';
+import { CartInput } from '../../types/GraphQL';
 
-// TODO: move this outside of this file (same type is used on products)
-
-type AttributeFilterInput = {
-  name: [string];
-};
-
-type Variables = {
-  cartId: string;
-  attributeFilters?: AttributeFilterInput;
-};
-
-export default async (context, cartId, customQuery) => {
-  const variables: Variables = {
+export default async (context, cartId: string, customQuery?: CustomQuery) => {
+  const variables: CartInput = {
     cartId,
+    siteId: context.config?.siteId || 1,
+    language: context.config?.siteLanguage || 'NL',
   };
 
   if (context.config.productAttributes)
