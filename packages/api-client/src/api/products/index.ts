@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import productsQuery from './products';
 import { CustomQuery } from '@vue-storefront/core';
-import { ProductsInput } from '../../types/GraphQL';
+import { ProductsInput } from '../../types/Inputs';
 import { ProductsArguments } from '../../types/API';
 
 export default async (
@@ -13,13 +13,13 @@ export default async (
     slug: params.categorySlug,
     offset: params.offset <= 0 ? 12 : params.offset,
     page: params.page <= 0 ? 1 : params.page,
-    siteId: context.config?.siteId || 1,
+    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 
-  if (context.config.productAttributes)
+  if (context.config.productListAttributes)
     variables.attributeFilters = {
-      name: context.config.productAttributes,
+      name: context.config.productListAttributes,
     };
 
   if (params.textFilters) variables.textFilters = params.textFilters;

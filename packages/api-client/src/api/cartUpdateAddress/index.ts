@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartUpdateAddressQuery from './cartUpdateAddress';
-import { CartUpdateAddressInput } from '../../types/GraphQL';
+import { CartUpdateAddressInput } from '../../types/Inputs';
 import { CartUpdateAddressArguments } from '../../types/API';
 
 export default async (

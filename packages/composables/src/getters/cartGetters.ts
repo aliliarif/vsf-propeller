@@ -6,44 +6,43 @@ import {
   AgnosticDiscount,
   AgnosticAttribute,
 } from '@vue-storefront/core';
-import type { Cart, CartItem } from '@propeller-commerce/propeller-api';
+import type {
+  Cart,
+  CartBaseItem,
+  CartTaxLevel,
+} from '@propeller-commerce/propeller-api';
 
-// TODO: implement type CartItem[] for returnType and : Cart for variable
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItems(cart) {
+function getItems(cart: Cart): any {
   return cart?.items || [{}];
 }
 
-// TODO: implement CartItem type for item var
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemName(item): string {
+function getItemName(item: CartBaseItem): string {
   return item.product.name[0].value;
 }
 
-// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemImage(item): string {
-  return item.product.images[0]?.url || '';
+function getItemImage(item: CartBaseItem): string {
+  return item.product.images?.[0]?.url || '';
 }
 
-// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemPrice(item): AgnosticPrice {
+function getItemPrice(item: CartBaseItem): AgnosticPrice {
   return {
     regular: item.priceNet,
     // special: 10,
   };
 }
 
-// TODO: implement CartItem type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemQty(item): number {
+function getItemQty(item: CartBaseItem): number {
   return item.quantity;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemAttributes(
-  item: CartItem,
+  item: CartBaseItem,
   filterByAttributeName?: Array<string>
 ): Record<string, AgnosticAttribute | string> {
   return {
@@ -51,15 +50,13 @@ function getItemAttributes(
   };
 }
 
-// TODO: implement CartItem
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getItemSku(item): string {
+function getItemSku(item: CartBaseItem): string {
   return item.product.sku;
 }
 
-// TODO: implement Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotals(cart): AgnosticTotals {
+function getTotals(cart: Cart): AgnosticTotals {
   return {
     total: cart.total.totalNet,
     subtotal: cart.total.subTotalNet,
@@ -67,21 +64,18 @@ function getTotals(cart): AgnosticTotals {
   };
 }
 
-// TODO: implement Cart type and TaxLevels
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAppliedTaxLevels(cart) {
+function getAppliedTaxLevels(cart: Cart): CartTaxLevel[] {
   return cart?.taxLevels;
 }
 
-// TODO: implement cart:Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getShippingPrice(cart): number {
+function getShippingPrice(cart: Cart): number {
   return cart?.postageData?.postageNet || 0;
 }
 
-// TODO: add : Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getTotalItems(cart): number {
+function getTotalItems(cart: Cart): number {
   return cart?.items?.length || 0;
 }
 
@@ -95,8 +89,7 @@ function getCoupons(cart: Cart): AgnosticCoupon[] {
   return [];
 }
 
-// TODO: implement cart : Cart
-function getAppliedCoupon(cart): AgnosticCoupon | null {
+function getAppliedCoupon(cart: Cart): AgnosticCoupon | null {
   return cart?.actionCode
     ? {
         id: cart.actionCode,
@@ -107,9 +100,8 @@ function getAppliedCoupon(cart): AgnosticCoupon | null {
     : null;
 }
 
-// TODO: add : Cart type
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getDiscounts(cart): AgnosticDiscount[] {
+function getDiscounts(cart: Cart): AgnosticDiscount[] {
   return [
     {
       id: 'discount',
@@ -120,7 +112,7 @@ function getDiscounts(cart): AgnosticDiscount[] {
   ];
 }
 
-export const cartGetters: CartGetters<Cart, CartItem> = {
+export const cartGetters: CartGetters<Cart, CartBaseItem> = {
   getTotals,
   getAppliedTaxLevels,
   getShippingPrice,

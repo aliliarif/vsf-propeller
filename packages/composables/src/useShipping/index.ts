@@ -3,15 +3,10 @@ import {
   useShippingFactory,
   UseShippingParams,
 } from '@vue-storefront/core';
-import type { ShippingAddress } from '@propeller-commerce/propeller-api';
+import type { CartAddress as ShippingAddress } from '@propeller-commerce/propeller-api';
 import type { UseShippingAddParams as AddParams } from '../types';
 
-// TODO: TEMP
-// !Add proper types
-type AddParamsTemp = any;
-type ShippingAddressTemp = any;
-
-const params: UseShippingParams<ShippingAddressTemp, AddParamsTemp> = {
+const params: UseShippingParams<ShippingAddress, AddParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
     // console.log('[Propeller] loadShipping', { customQuery });
@@ -49,9 +44,11 @@ const params: UseShippingParams<ShippingAddressTemp, AddParamsTemp> = {
       ...shippingDetails,
     };
 
-    await context.$propeller.api.cartUpdateAddress(shippingData);
+    const { data } = await context.$propeller.api.cartUpdateAddress(
+      shippingData
+    );
 
-    return {};
+    return data;
   },
 };
 

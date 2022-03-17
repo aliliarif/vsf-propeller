@@ -4,7 +4,15 @@ import {
   AgnosticPrice,
   ProductGetters,
 } from '@vue-storefront/core';
-import type { Product, ProductFilter } from '@propeller-commerce/propeller-api';
+import type {
+  Product,
+  Bundle,
+  Crossupsell,
+  CrossupsellTypes,
+  Attribute,
+} from '@propeller-commerce/propeller-api';
+
+type ProductFilter = any;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getName(product: Product): string {
@@ -16,9 +24,8 @@ function getShortName(product: Product): string {
   return product?.shortName || '';
 }
 
-// TODO add product:Product
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getSlug(product): string {
+function getSlug(product: Product): string {
   return product?.slug?.[0].value || '';
 }
 
@@ -48,30 +55,27 @@ function getGallery(product: Product): AgnosticMediaGalleryItem[] {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCoverImage(product: Product): string {
-  return product?.images?.[0]?.url || '';
+  return product.images?.[0]?.url || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// TODO: rethink this
-// this returns productDetails and should also return product bundles/upsells etc.
 function getFiltered(products: Product[], filters: ProductFilter): Product[] {
   return products;
 }
 
-// TODO: add type : Product[] | Product,
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getAttributes(
   products,
   filterByAttributeName?: string[]
 ): Record<string, AgnosticAttribute | string> {
   const isSingleProduct = !Array.isArray(products);
-  const productList = isSingleProduct ? [products] : products; // TODO: add product type
+  const productList = isSingleProduct ? [products] : products;
 
   if (!products || !products?.attributes || productList.length === 0) {
     return {} as any;
   }
 
-  const formatAttributes = (product: any): AgnosticAttribute[] =>
+  const formatAttributes = (product: Product): AgnosticAttribute[] =>
     formatAttributeList(product.attributes).filter((attribute) =>
       filterByAttributeName
         ? filterByAttributeName.includes(attribute.name)
@@ -96,7 +100,7 @@ function getAttributes(
     .reduce(reduceToUniques, []);
 }
 
-const formatAttributeList = (attributes: Array<any>): AgnosticAttribute[] =>
+const formatAttributeList = (attributes: Attribute[]): AgnosticAttribute[] =>
   attributes.map((attr) => {
     return {
       name: attr.name,
@@ -120,10 +124,9 @@ function getCategoryIds(product: Product): string[] {
   return [];
 }
 
-// TODO: add type product: Product
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getId(product): string {
-  return product.classId;
+function getId(product: Product): string {
+  return product.classId.toString();
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -141,21 +144,21 @@ function getAverageRating(product: Product): number {
   return 0;
 }
 
-// TODO: add type product: Product
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getStatus(product): string {
-  return product?.status || '';
+function getStatus(product: Product): string {
+  return product.status;
 }
 
-// TODO: add type product: Product and return type BundleProducts
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getBundleProducts(product) {
+function getBundleProducts(product: Product): Bundle[] {
   return product?.bundles || [];
 }
 
-// TODO: add type product: Product, types: CrossupsellTypes and return type Crossupsells[]
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getCrossupsellProducts(product, types) {
+function getCrossupsellProducts(
+  product: Product,
+  types: CrossupsellTypes
+): Crossupsell[] {
   return (
     product?.crossupsells?.filter((crossupsell) =>
       types ? types.includes(crossupsell.type) : crossupsell
@@ -163,9 +166,8 @@ function getCrossupsellProducts(product, types) {
   );
 }
 
-// TODO: add type product: Product and return type Inventory
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getInventory(product) {
+function getInventory(product: Product): number {
   return product?.inventory?.totalQuantity || 0;
 }
 

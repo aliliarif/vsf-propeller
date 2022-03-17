@@ -1,18 +1,18 @@
 import gql from 'graphql-tag';
 import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartQuery from './cart';
-import { CartInput } from '../../types/GraphQL';
+import { CartInput } from '../../types/Inputs';
 
 export default async (context, cartId: string, customQuery?: CustomQuery) => {
   const variables: CartInput = {
     cartId,
-    siteId: context.config?.siteId || 1,
+    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 
-  if (context.config.productAttributes)
+  if (context.config.productListAttributes)
     variables.attributeFilters = {
-      name: context.config.productAttributes,
+      name: context.config.productListAttributes,
     };
 
   const { cart } = context.extendQuery(customQuery, {

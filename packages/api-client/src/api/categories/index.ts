@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { Logger, CustomQuery } from '@vue-storefront/core';
 import categoriesQuery from './categories';
-import { CategoriesInput } from '../../types/GraphQL';
+import { CategoriesInput } from '../../types/Inputs';
 
 export default async (context, params, customQuery?: CustomQuery) => {
   const variables: CategoriesInput = {

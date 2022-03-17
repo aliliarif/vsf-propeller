@@ -3,15 +3,10 @@ import {
   useBillingFactory,
   UseBillingParams,
 } from '@vue-storefront/core';
-import type { BillingAddress } from '@propeller-commerce/propeller-api';
+import type { CartAddress as BillingAddress } from '@propeller-commerce/propeller-api';
 import type { UseBillingAddParams as AddParams } from '../types';
 
-// TODO: TEMP
-// !Add proper types
-type AddParamsTemp = any;
-type BillingAddressTemp = any;
-
-const params: UseBillingParams<BillingAddressTemp, AddParamsTemp> = {
+const params: UseBillingParams<BillingAddress, AddParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
     console.log('[Propeller] loadBilling', { customQuery });
@@ -49,9 +44,11 @@ const params: UseBillingParams<BillingAddressTemp, AddParamsTemp> = {
       ...billingDetails,
     };
 
-    await context.$propeller.api.cartUpdateAddress(shippingData);
+    const { data } = await context.$propeller.api.cartUpdateAddress(
+      shippingData
+    );
 
-    return {};
+    return data;
   },
 };
 

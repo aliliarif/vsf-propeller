@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartStartQuery from './cartStart';
-import { CartStartInput } from '../../types/GraphQL';
+import { CartStartInput } from '../../types/Inputs';
 
 export default async (context, params, customQuery?: CustomQuery) => {
   const variables: CartStartInput = {

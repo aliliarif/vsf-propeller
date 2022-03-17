@@ -1,6 +1,6 @@
 import { apiClientFactory } from '@vue-storefront/core';
 import * as api from './api';
-import type { Endpoints } from './types';
+// import type { Endpoints } from './types';
 import type { Settings } from './types/settings';
 import fetch from 'cross-fetch';
 import { onError } from '@apollo/client/link/error';
@@ -74,7 +74,7 @@ function onCreate(settings: Settings) {
   };
 }
 
-const { createApiClient } = apiClientFactory<Settings, Endpoints>({
+const { createApiClient } = apiClientFactory<Settings, any>({
   onCreate,
   api,
 });

@@ -2835,10 +2835,10 @@
   resolved "https://registry.npmjs.org/@polka/url/-/url-1.0.0-next.21.tgz"
   integrity sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==
 
-"@propeller-commerce/propeller-mollie@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@propeller-commerce/propeller-mollie/-/propeller-mollie-0.0.17.tgz#b7580d633ab2ef6a398da2b0be4eac5e32665dcc"
-  integrity sha512-evYNTP/V0KZq7D61srk/gt4msgbnSltzhvb171P7vY+IYPPjJvDUVe4F7ZxNeWeSDmDvl6L8gs4SokTNCd6AWA==
+"@propeller-commerce/propeller-mollie@^0.0.24":
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/@propeller-commerce/propeller-mollie/-/propeller-mollie-0.0.24.tgz#4fbf3d0109c9656a78a709faeaf906c45a6b1806"
+  integrity sha512-xUEXlez1HXgac5Ye0cOKRPw8kVQkNaLk9grJ0c5GEUsZJ35RZCId6uAKbBWgHJBR8xU35G6dDIT4PxDPBOf7Ag==
   dependencies:
     "@mollie/api-client" "^3.5.1"
     apollo-cache-inmemory "^1.6.6"

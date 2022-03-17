@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import bundlesQuery from './bundles';
 import { CustomQuery } from '@vue-storefront/core';
-import { ProductsInput, YesNo } from '../../types/GraphQL';
+import { ProductsInput, YesNo } from '../../types/Inputs';
 import { ProductsArguments } from '../../types/API';
 
 export default async (
@@ -13,13 +13,13 @@ export default async (
     slug: params.categorySlug,
     offset: params.offset <= 0 ? 12 : params.offset,
     page: params.page <= 0 ? 1 : params.page,
-    siteId: context.config?.siteId || 1,
+    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 
-  if (context.config.productAttributes)
+  if (context.config.productListAttributes)
     variables.attributeFilters = {
-      name: context.config.productAttributes,
+      name: context.config.productListAttributes,
     };
 
   if (params.textFilters) variables.textFilters = params.textFilters;
@@ -35,8 +35,7 @@ export default async (
       variables,
     },
   });
-  console.log('FFWWE');
-  console.log(bundles);
+
   try {
     return await context.client.query({
       query: gql`

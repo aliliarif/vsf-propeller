@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import { Logger, CustomQuery } from '@vue-storefront/core';
 import bundleQuery from './bundle';
 import { BundleDetailArguments } from '../../types/API';
-import { BundleDetailInput } from '../../types/GraphQL';
+import { BundleDetailInput } from '../../types/Inputs';
 
 export default async (
   context,
@@ -11,13 +11,13 @@ export default async (
 ) => {
   const variables: BundleDetailInput = {
     bundleId: parseInt(params.bundleId),
-    siteId: context.config?.siteId || 1,
+    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 
-  if (context.config.productAttributes)
+  if (context.config.productListAttributes)
     variables.attributeFilters = {
-      name: context.config.productAttributes,
+      name: context.config.productListAttributes,
     };
 
   const { bundle } = context.extendQuery(customQuery, {

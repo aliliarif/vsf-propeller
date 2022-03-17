@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartDeleteItemQuery from './cartDeleteItem';
-import { CartDeleteItemInput } from '../../types/GraphQL';
+import { CartDeleteItemInput } from '../../types/Inputs';
 import { CartDeleteItemArguments } from '../../types/API';
 
 export default async (
@@ -14,13 +14,13 @@ export default async (
       cartId: params.cartId,
       itemId: params.itemId,
     },
-    siteId: context.config?.siteId || 1,
+    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 
-  if (context.config.productAttributes)
+  if (context.config.productListAttributes)
     variables.attributeFilters = {
-      name: context.config.productAttributes,
+      name: context.config.productListAttributes,
     };
 
   const { cartDeleteItem } = context.extendQuery(customQuery, {

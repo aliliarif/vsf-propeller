@@ -55,7 +55,7 @@ export default gql`
       price {
         ...ProductPrice
       }
-      attributes(filter: $attributeFilters) {
+      attributes(filter: { isPublic: true }) {
         ...Attribute
       }
       bundles {

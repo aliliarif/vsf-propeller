@@ -5,16 +5,16 @@ import {
 } from '@vue-storefront/core';
 import type {
   Cart,
-  CartItem,
+  CartBaseItem as CartItem,
   Product,
+  CartAddItemInput,
+  CartAddBundleInput,
 } from '@propeller-commerce/propeller-api';
 
-// !ASAP TODO: CHANGE THIS
-type CartItemTemp = any;
-type CartTemp = any;
+// TODO - merge bundle and product
 type ProductTemp = any;
 
-const params: UseCartFactoryParams<CartTemp, CartItemTemp, ProductTemp> = {
+const params: UseCartFactoryParams<Cart, CartItem, ProductTemp> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context, { customQuery }) => {
     // TODO: temp
@@ -62,7 +62,7 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, ProductTemp> = {
       const cartAddBundleInput = {
         cartId: existngCartId,
         bundleId: product.bundleId,
-        quantity: quantity,
+        quantity,
       };
 
       const cart = await context.$propeller.api.cartAddBundle(
@@ -75,7 +75,7 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, ProductTemp> = {
       const cartAddItemInput = {
         cartId: existngCartId,
         productId: product.classId,
-        quantity: quantity,
+        quantity,
       };
 
       const cart = await context.$propeller.api.cartAddItem(cartAddItemInput);
@@ -123,8 +123,11 @@ const params: UseCartFactoryParams<CartTemp, CartItemTemp, ProductTemp> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   clear: async (context: Context, { currentCart }) => {
-    console.log('Mocked: useCart.clear');
-    return {};
+    // TODO: temp
+    // get this from settings
+    const cartCookieName = 'propeller-vsf-cart';
+    context.$propeller.config.app.cookies.remove(cartCookieName);
+    return {} as unknown as Cart;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -8,21 +8,11 @@ import {
   AgnosticBreadcrumb,
   AgnosticFacet,
 } from '@vue-storefront/core';
-import type {
-  Facet,
-  FacetSearchCriteria,
-} from '@propeller-commerce/propeller-api';
-import {
-  buildFacets,
-  reduceForGroupedFacets,
-  // reduceForFacets,
-} from '../useFacet/_utils';
+
+import { buildFacets } from '../useFacet/_utils';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getAll(
-  params: FacetSearchResult<Facet>,
-  criteria?: FacetSearchCriteria
-): AgnosticFacet[] {
+function getAll(params, criteria?: string[]): AgnosticFacet[] {
   console.log('Mocked: facetGetters.getAll');
   return [
     {
@@ -63,9 +53,7 @@ function getSortOptions(searchData): AgnosticSort {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getCategoryTree(
-  params: FacetSearchResult<Facet>
-): AgnosticCategoryTree {
+function getCategoryTree(params): AgnosticCategoryTree {
   return {
     label: '',
     slug: '',
@@ -82,7 +70,6 @@ const getProducts = (searchData): any => {
   return searchData.data.items;
 };
 
-// TODO: searchData : FacetSearchResult<Facet>
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getPagination(searchData): AgnosticPagination {
   const totalPages = searchData?.data?.pages;
@@ -98,14 +85,12 @@ function getPagination(searchData): AgnosticPagination {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function getBreadcrumbs(
-  params: FacetSearchResult<Facet>
-): AgnosticBreadcrumb[] {
+function getBreadcrumbs(params): AgnosticBreadcrumb[] {
   console.log('Mocked: facetGetters.getBreadcrumbs');
   return [];
 }
 
-export const facetGetters: FacetsGetters<Facet, FacetSearchCriteria> = {
+export const facetGetters: FacetsGetters<any, string[]> = {
   getSortOptions,
   getGrouped,
   getAll,

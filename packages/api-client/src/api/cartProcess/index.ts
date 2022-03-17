@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { Logger, CustomQuery } from '@vue-storefront/core';
 import cartProcessQuery from './cartProcess';
-import { CartProcessInput } from '../../types/GraphQL';
+import { CartProcessInput } from '../../types/Inputs';
 import { CartProcessArguments } from '../../types/API';
 
 export default async (
@@ -12,7 +12,7 @@ export default async (
   const variables: CartProcessInput = {
     input: {
       cartId: params.cartId,
-      orderStatus: 'NEW',
+      orderStatus: 'UNFINISHED',
     },
   };
 

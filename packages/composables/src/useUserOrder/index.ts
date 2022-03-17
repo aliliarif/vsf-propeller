@@ -10,7 +10,7 @@ const params: UseUserOrderFactoryParams<Order, SearchParams> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   searchOrders: async (context: Context, params) => {
     console.log('Mocked: searchOrders');
-    return {};
+    return {} as unknown as Order;
   },
 };
 

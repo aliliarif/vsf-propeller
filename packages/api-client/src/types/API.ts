@@ -4,7 +4,7 @@ import {
   TextFilterInput,
   Gender,
   CartAddressType,
-} from './GraphQL';
+} from './Inputs';
 
 export type BundleDetailArguments = {
   bundleId: string;

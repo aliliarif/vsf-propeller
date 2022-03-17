@@ -4,21 +4,13 @@ export type Endpoints = TODO;
 
 export type BillingAddress = TODO;
 
-export type Cart = TODO;
-
 export type CartItem = TODO;
-
-export type Category = TODO;
 
 export type Coupon = TODO;
 
 export type Facet = TODO;
 
 export type FacetSearchCriteria = TODO;
-
-export type Order = TODO;
-
-export type OrderItem = TODO;
 
 export type PasswordResetResult = TODO;
 
@@ -27,8 +19,6 @@ export type ProductFilter = TODO;
 export type Review = TODO;
 
 export type ReviewItem = TODO;
-
-export type User = TODO;
 
 export type UserBillingAddress = TODO;
 
