@@ -103,7 +103,7 @@ export default {
         mollieIsTest: true,
         mollieRedirectUrl: '/checkout/thank-you',
         mollieWebhookUrl:
-          'https://b900-78-157-31-8.ngrok.io/mollie/notifications',
+          'https://bde8-78-157-31-8.ngrok.io/mollie/notifications',
       },
     ],
   ],

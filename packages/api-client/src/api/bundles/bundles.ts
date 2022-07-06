@@ -65,6 +65,10 @@ export default gql`
           }
         }
         items {
+          slug(language: $language) {
+            language
+            value
+          }
           ... on Product {
             bundles {
               id

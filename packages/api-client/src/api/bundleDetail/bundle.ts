@@ -3,18 +3,15 @@ import {
   ImageFragment,
   AttributeFragment,
   InventoryFragment,
+  ProductPriceFragment,
 } from '../../fragments';
 
 export default gql`
   ${ImageFragment}
   ${AttributeFragment}
   ${InventoryFragment}
-  query bundle(
-    $bundleId: Float!
-    $attributeFilters: AttributeFilterInput
-    $siteId: Int!
-    $language: String
-  ) {
+  ${ProductPriceFragment}
+  query bundle($bundleId: Float!, $siteId: Int!, $language: String) {
     bundle(bundleId: $bundleId) {
       id
       comboId
@@ -38,19 +35,47 @@ export default gql`
           originalGross
         }
         product {
+          id
+          classId
+          categoryId
+          sku
+          shortName
+          eanCode
+          manufacturer
+          manufacturerCode
+          supplier
+          supplierCode
+          taxCode
+          status
           isOrderable
-          name {
-            language
+          unit
+          name(language: $language) {
             value
+            language
+          }
+          slug(language: $language) {
+            value
+            language
+          }
+          description(language: $language) {
+            value
+            language
+          }
+          shortDescription(language: $language) {
+            value
+            language
+          }
+          price {
+            ...ProductPrice
+          }
+          attributes(filter: { isPublic: true }) {
+            ...Attribute
           }
           inventory {
             ...Inventory
           }
           images(siteId: $siteId) {
             ...Image
-          }
-          attributes(filter: $attributeFilters) {
-            ...Attribute
           }
         }
       }
