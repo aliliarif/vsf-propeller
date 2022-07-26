@@ -272,6 +272,8 @@ export type CartBaseItem = {
   totalPriceNet: Scalars['Float'];
   totalSum: Scalars['Float'];
   totalSumNet: Scalars['Float'];
+  discount: Scalars['Float'];
+  discountPercentage: Scalars['Float'];
 };
 
 export type CartBaseItemBundleArgs = {
