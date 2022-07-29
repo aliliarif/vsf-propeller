@@ -15,7 +15,6 @@ export default async (
       name: [],
       isPublic: true,
     },
-    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 

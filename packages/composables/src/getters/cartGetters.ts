@@ -24,7 +24,7 @@ function getItemName(item: CartBaseItem): string {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemImage(item: CartBaseItem): string {
-  return item.product.images?.[0]?.url || '';
+  return item.product.mediaImages?.items?.[0]?.imageVariants?.[0]?.url || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

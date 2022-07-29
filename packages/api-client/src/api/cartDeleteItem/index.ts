@@ -14,7 +14,6 @@ export default async (
       cartId: params.cartId,
       itemId: params.itemId,
     },
-    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 

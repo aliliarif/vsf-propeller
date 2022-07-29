@@ -11,7 +11,6 @@ export default async (
 ) => {
   const variables: BundleDetailInput = {
     bundleId: parseInt(params.bundleId),
-    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 

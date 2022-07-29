@@ -13,7 +13,6 @@ export default async (
     slug: params.categorySlug,
     offset: params.offset <= 0 ? 12 : params.offset,
     page: params.page <= 0 ? 1 : params.page,
-    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 

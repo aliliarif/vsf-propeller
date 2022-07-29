@@ -1,17 +1,17 @@
 import gql from 'graphql-tag';
 import {
-  ImageFragment,
+  MediaImagesFragment,
   AttributeFragment,
   InventoryFragment,
   ProductPriceFragment,
 } from '../../fragments';
 
 export default gql`
-  ${ImageFragment}
+  ${MediaImagesFragment}
   ${AttributeFragment}
   ${InventoryFragment}
   ${ProductPriceFragment}
-  query bundle($bundleId: Float!, $siteId: Int!, $language: String) {
+  query bundle($bundleId: Float!, $language: String) {
     bundle(bundleId: $bundleId) {
       id
       comboId
@@ -74,8 +74,8 @@ export default gql`
           inventory {
             ...Inventory
           }
-          images(siteId: $siteId) {
-            ...Image
+          mediaImages(search: { sort: ASC }) {
+            ...MediaImages
           }
         }
       }

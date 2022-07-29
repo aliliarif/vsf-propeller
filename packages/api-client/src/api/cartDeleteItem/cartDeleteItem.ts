@@ -6,7 +6,6 @@ export default gql`
   mutation cartDeleteItem(
     $input: CartDeleteItemInput!
     $attributeFilters: AttributeFilterInput
-    $siteId: Int!
     $language: String
   ) {
     cartDeleteItem(input: $input) {

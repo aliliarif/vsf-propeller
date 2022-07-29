@@ -40,13 +40,16 @@ function getPrice(product: Product): AgnosticPrice {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getGallery(product: Product): AgnosticMediaGalleryItem[] {
   const images = [];
+  const imageVariants = product?.mediaImages?.items || [];
 
   // eslint-disable-next-line no-restricted-syntax
-  for (const galleryItem of product.images) {
+  for (const galleryItem of imageVariants) {
     images.push({
-      small: galleryItem.url,
-      normal: galleryItem.url,
-      big: galleryItem.url,
+      small: galleryItem.imageVariants.find((image) => image.name === 'small')
+        .url,
+      normal: galleryItem.imageVariants.find((image) => image.name === 'normal')
+        .url,
+      big: galleryItem.imageVariants.find((image) => image.name === 'big').url,
     });
   }
 
@@ -55,7 +58,7 @@ function getGallery(product: Product): AgnosticMediaGalleryItem[] {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getCoverImage(product: Product): string {
-  return product?.images?.[0]?.url || '';
+  return product.mediaImages?.items?.[0]?.imageVariants?.[0]?.url || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -12,7 +12,6 @@ export default async (
   const variables: CartRemoveActionCodeInput = {
     cartId: input.cartId,
     actionCode: input.actionCode,
-    siteId: context.config.siteId,
     language: context.config?.siteLanguage || 'NL',
   };
 

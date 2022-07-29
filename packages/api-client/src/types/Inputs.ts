@@ -40,7 +40,7 @@ enum SortableFields {
 }
 
 type ImagesInput = {
-  siteId: number;
+  siteId?: number;
 };
 
 type LanguageInput = {

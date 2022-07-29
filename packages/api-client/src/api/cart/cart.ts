@@ -12,7 +12,6 @@ export default gql`
   query cart(
     $cartId: String!
     $attributeFilters: AttributeFilterInput
-    $siteId: Int!
     $language: String
   ) {
     cart(cartId: $cartId) {

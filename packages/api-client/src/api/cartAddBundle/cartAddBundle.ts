@@ -6,7 +6,6 @@ export default gql`
   mutation cartAddBundle(
     $input: CartAddBundleInput!
     $attributeFilters: AttributeFilterInput
-    $siteId: Int!
     $language: String
   ) {
     cartAddBundle(input: $input) {
