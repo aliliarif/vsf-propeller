@@ -131,7 +131,7 @@
             :canAddToCart="stock > 0"
             class="product__add-to-cart"
             @click="
-              addItem({ product: { bundleId: 52 }, quantity: parseInt(qty) })
+              addItem({ product: { bundleId: 76 }, quantity: parseInt(qty) })
             "
           />
         </div>
