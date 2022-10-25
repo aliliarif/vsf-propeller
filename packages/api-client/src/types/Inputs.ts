@@ -1,3 +1,5 @@
+import { CartPaymentDataInput, CartPostageDataInput } from './GraphQL';
+
 // TODO: Import types/enums from GraphQL.ts
 export enum CartAddressType {
   invoice,
@@ -92,6 +94,17 @@ type CartUpdateAddress = {
   url?: string;
   icp?: YesNo;
   notes?: string;
+};
+
+export type CartUpdate = {
+  cartId: string;
+  paymentData?: CartPaymentDataInput;
+  postageData?: CartPostageDataInput;
+  notes?: string;
+  reference?: string;
+  extra3?: string;
+  extra4?: string;
+  carrier?: string;
 };
 
 type CartUpdateItem = {
@@ -206,6 +219,13 @@ export interface CartRemoveActionCodeInput
 
 export interface CartUpdateAddressInput {
   input: CartUpdateAddress;
+}
+
+export interface CartUpdateInput
+  extends AttributeFilter,
+    ImagesInput,
+    LanguageInput {
+  input: CartUpdate;
 }
 
 export interface CartUpdateItemInput

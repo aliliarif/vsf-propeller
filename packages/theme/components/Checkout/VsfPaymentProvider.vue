@@ -28,21 +28,8 @@
 
 <script>
 import { SfButton, SfRadio } from '@storefront-ui/vue';
-import { ref } from '@nuxtjs/composition-api';
-// import createMollieClient, { Payment } from '@mollie/api-client';
-
-// import { useCko } from '../../checkout-com';
-
-// const {
-//   initForm,
-//   loadAvailableMethods,
-//   availableMethods,
-//   submitDisabled,
-//   storedPaymentInstruments,
-//   loadStoredPaymentInstruments,
-//   submitKlarnaForm,
-//   error,
-// } = useCko();
+import { ref, useContext } from '@nuxtjs/composition-api';
+import { useCart } from '@propeller-commerce/propeller';
 
 const SHIPPING_METHODS = [
   { label: 'Visa Debit', value: 'visa_debit' },
@@ -50,6 +37,7 @@ const SHIPPING_METHODS = [
   { label: 'VisaElectron', value: 'visa_electron' },
   { label: 'Cash on delivery', value: 'cash' },
   { label: 'Check', value: 'check' },
+  { label: 'IDEAL', value: 'IDEAL' },
 ];
 
 export default {
@@ -62,8 +50,19 @@ export default {
 
   setup(props, { emit }) {
     const selectedMethod = ref(null);
+    const context = useContext();
+    const { cart, load } = useCart();
 
     const selectMethod = (method) => {
+      const cartId = cart.value.cartId;
+      const cartUpdateData = {
+        cartId,
+        paymentData: {
+          method,
+        },
+      };
+      const cartUpdate = context.$vsf.$propeller.api.cartUpdate(cartUpdateData);
+
       selectedMethod.value = method;
       emit('status');
     };
@@ -72,6 +71,8 @@ export default {
       shippingMethods: SHIPPING_METHODS,
       selectedMethod,
       selectMethod,
+      cart,
+      load,
     };
   },
 };
