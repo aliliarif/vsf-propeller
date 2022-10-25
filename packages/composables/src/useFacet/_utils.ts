@@ -25,6 +25,9 @@ export const reduceForGroupedFacets = (facets, filters) => (prev, curr) => {
 };
 
 export const buildFacets = (searchData, reduceFn, criteria?: string[]) => {
+  // filters are constructed as
+  // {TYPE}:{ATTRIBUTE_ID}={ATTRIBUTE_VALUE}
+
   if (!searchData?.data?.availableFilters) {
     return [];
   }
@@ -37,10 +40,10 @@ export const buildFacets = (searchData, reduceFn, criteria?: string[]) => {
   return availableFilters
     .filter(({ isSearchable }) => isSearchable)
     .map((filter) => ({
-      id: filter.id,
+      id: filter.type + ':' + filter.id.toLowerCase(),
       label: filter.description,
-      count: 3,
-      type: 'attribute',
+      count: 1,
+      type: filter.type,
       attrName: 'filterKey',
       // value,
       selected: false,
